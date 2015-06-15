@@ -1,3 +1,6 @@
+## 0.0.3
+  - Provide better backend error messages
+
 ## 0.0.2
   - Fixed a bug where due to minification, locally stored data was version-specific
 
