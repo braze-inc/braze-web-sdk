@@ -1,3 +1,6 @@
+## 0.0.4
+  - Defend against NS_ERROR_FILE_CORRUPTED (corrupted browser SQLite database) and more generally against inability to use localStorage.
+
 ## 0.0.3
   - Provide better backend error messages
 
