@@ -1,5 +1,8 @@
+## 0.1.0
+  - Support in-app messages
+
 ## 0.0.5
-  - Fixed critical issue which caused browser tabs to become unresponsive with no network connection
+  - Fixed issue which could cause browser tabs to become unresponsive with no network connection
 
 ## 0.0.4
   - Defend against NS_ERROR_FILE_CORRUPTED (corrupted browser SQLite database) and more generally against inability to use localStorage.
