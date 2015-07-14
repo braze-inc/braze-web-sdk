@@ -1,3 +1,6 @@
+## 0.1.1
+  - Various minor improvements to SlideUp styling
+
 ## 0.1.0
   - Support in-app messages
 
