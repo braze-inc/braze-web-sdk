@@ -1,3 +1,7 @@
+## 0.1.2
+  - Introduce optional doNotLoadFontAwesome initialization option and additionally don't load FontAwesome if fontawesome.css or fontawesome.min.css are already on the page.
+  - More minor improvements to In-App Message styling
+
 ## 0.1.1
   - Various minor improvements to SlideUp styling
 
