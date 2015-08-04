@@ -1,3 +1,7 @@
+## 0.1.3
+  - Add support for more purchase currencies, allow lowercase currencies
+  - Use millisecond precision when logging events
+
 ## 0.1.2
   - Introduce optional doNotLoadFontAwesome initialization option and additionally don't load FontAwesome if fontawesome.css or fontawesome.min.css are already on the page.
   - More minor improvements to In-App Message styling
