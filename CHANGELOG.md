@@ -1,3 +1,7 @@
+## 0.1.4
+  - Fixed issue where SlideUp message clicks with a clickAction of URI were not being respected
+  - Fixed issue where Date custom attributes, custom event properties, and purchase properties were not being recognized as Dates by the Appboy platform
+
 ## 0.1.3
   - Add support for more purchase currencies, allow lowercase currencies
   - Use millisecond precision when logging events
