@@ -1,3 +1,6 @@
+## 0.1.5
+  - Correctly identify IE11
+  
 ## 0.1.4
   - Fixed issue where SlideUp message clicks with a clickAction of URI were not being respected
   - Fixed issue where Date custom attributes, custom event properties, and purchase properties were not being recognized as Dates by the Appboy platform
