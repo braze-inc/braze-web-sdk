@@ -1,6 +1,9 @@
+## 0.2.0
+  - Added Appboy news feed support
+
 ## 0.1.5
   - Correctly identify IE11
-  
+
 ## 0.1.4
   - Fixed issue where SlideUp message clicks with a clickAction of URI were not being respected
   - Fixed issue where Date custom attributes, custom event properties, and purchase properties were not being recognized as Dates by the Appboy platform
@@ -20,7 +23,7 @@
   - Support in-app messages
 
 ## 0.0.5
-  - Fixed issue which could cause browser tabs to become unresponsive with no network connection
+  - Fixed critical issue which caused browser tabs to become unresponsive with no network connection
 
 ## 0.0.4
   - Defend against NS_ERROR_FILE_CORRUPTED (corrupted browser SQLite database) and more generally against inability to use localStorage.
