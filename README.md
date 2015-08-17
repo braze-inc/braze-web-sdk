@@ -4,7 +4,7 @@
 
 Effective marketing automation is an essential part of successfully scaling and managing your business. Appboy empowers you to build better customer relationships through a seamless, multi-channel approach that addresses all aspects of the user life cycle Appboy helps you engage your users on an ongoing basis. Visit the following link for details and we'll have you up and running in no time!
 
-- [Read the full technical documentation](https://js.appboycdn.com/web-sdk/{{VERSION}}/doc/module-appboy.html)
+- [Read the full technical documentation](https://js.appboycdn.com/web-sdk/0.2/doc/module-appboy.html)
 
 This is a preview release. If you have any questions, please contant support@appboy.com. Feel free to file issues in this repository.
 
@@ -22,11 +22,11 @@ To integrate the Appboy Web SDK, put the following snippet inside the `<head>` s
 --->
 
 ```
-<link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/{{VERSION}}/appboy.min.css" />
+<link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/0.2/appboy.min.css" />
 <script type="text/javascript">
   +function(a,p,P,b,y) {
     (y = a.createElement(p)).type = 'text/javascript';
-    y.src = 'https://js.appboycdn.com/web-sdk/{{VERSION}}/appboy.min.js';
+    y.src = 'https://js.appboycdn.com/web-sdk/0.2/appboy.min.js';
     (c = a.getElementsByTagName(p)[0]).parentNode.insertBefore(y, c);
       y.onload = y.onreadystatechange = b;
     }(document, 'script', 'link', function() {
@@ -44,21 +44,21 @@ This will provide a global variable named appboy that you can use to send data t
 Alternately, you can use RequireJS or another AMD module-loader to load the Appboy Web SDK:
 
 ```
-require(['https://js.appboycdn.com/web-sdk/{{VERSION}}/appboy.min.js'], function(appboyModule) {
+require(['https://js.appboycdn.com/web-sdk/0.2/appboy.min.js'], function(appboyModule) {
   appboyModule.initialize('YOUR-API-KEY-HERE');
   appboyModule.display.automaticallyShowNewInAppMessages();
   appboyModule.openSession();
 });
 ```
 
-Note that you'll still need to load the css with `<link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/{{VERSION}}/appboy.min.css" />` in the `<head>` section of your page.
+Note that you'll still need to load the css with `<link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/0.2/appboy.min.css" />` in the `<head>` section of your page.
 
 ----------------------------------------
 
 If you don't intend to use Appboy's built-in UI capabilities (appboy.display), you can
 load a core version of the library with display capabilities stripped. However, you will need to implement your own UI
 for In-App Messaging, the News Feed, and Feedback. Note that our UI elements are fully customizable via css, so we
-generally recommend integration of the complete library instead. The core library is available at `https://js.appboycdn.com/web-sdk/{{VERSION}}/appboy.core.min.js`.
+generally recommend integration of the complete library instead. The core library is available at `https://js.appboycdn.com/web-sdk/0.2/appboy.core.min.js`.
 
 ----------------------------------------
 
