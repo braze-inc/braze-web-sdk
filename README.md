@@ -19,6 +19,18 @@ To integrate the Appboy Web SDK, put the following snippet inside the `<head>` s
   specifically, all the arguments to the snippet other than the onload callback (y) are only even params to reduce
   repetition and minimize snippet size.  The cheekiness in the parameter naming was straight-up stolen from
   Localytics' version of this snippet: http://docs.localytics.com/#Dev/Integrate/web-integration.html
+
+  Note that
+
+  if (y.addEventListener) {
+    y.addEventListener("load", b, false);
+  }
+  else if (y.readyState) {
+    y.onreadystatechange = b;
+  }
+
+  is IE8 support: https://msdn.microsoft.com/en-us/library/hh180173(v=vs.85).aspx - when we drop IE8 we can strip this
+  conditional out and just use the load listener.
 --->
 
 ```
@@ -28,12 +40,20 @@ To integrate the Appboy Web SDK, put the following snippet inside the `<head>` s
     (y = a.createElement(p)).type = 'text/javascript';
     y.src = 'https://js.appboycdn.com/web-sdk/0.2/appboy.min.js';
     (c = a.getElementsByTagName(p)[0]).parentNode.insertBefore(y, c);
-      y.onload = y.onreadystatechange = b;
-    }(document, 'script', 'link', function() {
+    if (y.addEventListener) {
+      y.addEventListener("load", b, false);
+    }
+    else if (y.readyState) {
+      y.onreadystatechange = b;
+    }
+  }(document, 'script', 'link', function() {
+    // appboy may be null on very old unsupported browsers
+    if (typeof(appboy) !== 'undefined') {
       appboy.initialize('YOUR-API-KEY-HERE');
       appboy.display.automaticallyShowNewInAppMessages();
       appboy.openSession();
-    });
+    }
+  });
 </script>
 ```
 
@@ -55,10 +75,10 @@ Note that you'll still need to load the css with `<link rel="stylesheet" href="h
 
 ----------------------------------------
 
-If you don't intend to use Appboy's built-in UI capabilities (appboy.display), you can
-load a core version of the library with display capabilities stripped. However, you will need to implement your own UI
-for In-App Messaging, the News Feed, and Feedback. Note that our UI elements are fully customizable via css, so we
-generally recommend integration of the complete library instead. The core library is available at `https://js.appboycdn.com/web-sdk/0.2/appboy.core.min.js`.
+If you don't intend to use Appboy's built-in UI capabilities (appboy.display), you can load a core version of the
+library with display capabilities stripped. However, you will need to implement your own UI for In-App Messaging, the
+News Feed, and Feedback. Note that our UI elements are fully customizable via css, so we generally recommend integration
+of the complete library instead. The core library is available at `https://js.appboycdn.com/web-sdk/0.2/appboy.core.min.js`.
 
 ----------------------------------------
 

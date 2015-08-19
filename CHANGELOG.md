@@ -1,3 +1,8 @@
+## 0.2.1
+  - Give the news feed a z-index just below bootstrap modal backdrops
+  - Support legacy Internet Explorer (complete IE9 support, generally functional IE8 support)
+  - Ignore in-app messages with an unknown type (prevents future message types from be inappropriately displayed on versions of the sdk which don't yet support them)
+
 ## 0.2.0
   - Added Appboy news feed support
 
