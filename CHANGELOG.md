@@ -1,3 +1,7 @@
+## 0.2.2
+  - Fix issue where already-cached news feed cards were not properly having impressions logged when the news feed was first shown
+  - Minor improvements to In-App Message styling
+
 ## 0.2.1
   - Give the news feed a z-index just below bootstrap modal backdrops
   - Support legacy Internet Explorer (complete IE9 support, generally functional IE8 support)
