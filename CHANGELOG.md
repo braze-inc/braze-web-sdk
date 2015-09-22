@@ -1,3 +1,8 @@
+## 0.2.3
+  - Remove the news feed z-index. If necessary, the z-index can be set manually via CSS: `.ab-feed { z-index: }`
+  - Prevent potential race condition which could cause news feed cards to not be marked as read for a short amount of time
+  - Introduce appboy.display.destroyFeed method to allow integrators to implement a toggle feed button or otherwise hide the feed from code
+
 ## 0.2.2
   - Fix issue where already-cached news feed cards were not properly having impressions logged when the news feed was first shown
   - Minor improvements to In-App Message styling
