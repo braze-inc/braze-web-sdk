@@ -6,7 +6,7 @@ Effective marketing automation is an essential part of successfully scaling and 
 
 - [Read the full technical documentation](https://js.appboycdn.com/web-sdk/0.2/doc/module-appboy.html)
 
-This is a preview release. If you have any questions, please contant support@appboy.com. Feel free to file issues in this repository.
+This is a preview release. If you have any questions, please contact support@appboy.com. Feel free to file issues in this repository.
 
 ## Getting Started
 
