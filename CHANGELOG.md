@@ -1,3 +1,6 @@
+## 0.2.4
+  - Fix an issue which was causing the in-app message refresh throttle not to persist beyond a single page load.
+
 ## 0.2.3
   - Remove the news feed z-index. If necessary, the z-index can be set manually via CSS: `.ab-feed { z-index: }`
   - Prevent potential race condition which could cause news feed cards to not be marked as read for a short amount of time
