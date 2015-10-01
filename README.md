@@ -6,8 +6,6 @@ Effective marketing automation is an essential part of successfully scaling and 
 
 - [Read the full technical documentation](https://js.appboycdn.com/web-sdk/1.0/doc/module-appboy.html)
 
-This is a preview release. If you have any questions, please contact support@appboy.com. Feel free to file issues in this repository.
-
 ## Getting Started
 
 To integrate the Appboy Web SDK, put the following snippet inside the `<head>` section of your page to load it dynamically:
@@ -98,3 +96,7 @@ The Web SDK is a standards-compliant Javascript library, and is built to support
 Appboy uses [Font Awesome](http://fortawesome.github.io/Font-Awesome/) 4.3.0 for in-app message icons. Check out the [cheat sheet](http://fortawesome.github.io/Font-Awesome/cheatsheet/) to browse available icons.
 
 ## [Changelog](https://github.com/Appboy/appboy-web-sdk/blob/master/CHANGELOG.md)
+
+## Questions?
+
+If you have questions, please contact [support@appboy.com](mailto:support@appboy.com). If you believe you are encountering a bug, feel free to file issues in this repository.
