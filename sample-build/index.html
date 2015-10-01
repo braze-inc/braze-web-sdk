@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/{{VERSION}}/appboy.min.css" />
+    <script type="text/javascript">
+      +function(a,p,P,b,y) {
+        {{INTERFACE_STUBBING_SNIPPET}}
+        (y = a.createElement(p)).type = 'text/javascript';
+        y.src = 'https://js.appboycdn.com/web-sdk/{{VERSION}}/appboy.min.js';
+        (c = a.getElementsByTagName(p)[0]).parentNode.insertBefore(y, c);
+        if (y.addEventListener) {
+          y.addEventListener("load", b, false);
+        } else if (y.readyState) {
+          y.onreadystatechange = b;
+        }
+      }(document, 'script', 'link', function() {
+        appboy.initialize('97a5e777-6996-4321-9c14-0b8652ab5c0b');
+        appboy.display.automaticallyShowNewInAppMessages();
+        appboy.openSession();
+      });
+    </script>
+  </head>
+  <body>
+    This is a bare-bones simple-as-it-gets sample integration of the appboy web sdk.
+  </body>
+</html>

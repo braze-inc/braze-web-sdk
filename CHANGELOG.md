@@ -1,3 +1,7 @@
+## 1.0.0
+  - Respect blacklisted custom events, attributes, and purchases
+  - Removed the setBio method on ab.User in accordance with the deprecation of that user property across the Appboy platform
+
 ## 0.2.4
   - Fix an issue which was causing the in-app message refresh throttle not to persist beyond a single page load.
 
