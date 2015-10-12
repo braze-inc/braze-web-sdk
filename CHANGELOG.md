@@ -1,3 +1,6 @@
+## 1.0.1
+  - The SDK now logs correctly to the console when enableLogging is true (or toggleAppboyLogging has been called) and no custom logger has been specified
+
 ## 1.0.0
   - Respect blacklisted custom events, attributes, and purchases
   - Removed the setBio method on ab.User in accordance with the deprecation of that user property across the Appboy platform
