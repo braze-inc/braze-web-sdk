@@ -1,3 +1,8 @@
+## 1.1
+  - News feed and in-app message links now open in the same tab
+  - Introduced appboy.logFeedDisplayed, which is called automatically when using appboy.display.showFeed
+  - Fixed a race condition which could cause events to be double-counted if the user had the site open in very many tabs at once
+
 ## 1.0.1
   - The SDK now logs correctly to the console when enableLogging is true (or toggleAppboyLogging has been called) and no custom logger has been specified
 
