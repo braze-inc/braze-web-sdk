@@ -52,6 +52,14 @@ To integrate the Appboy Web SDK, put the following snippet inside the `<head>` s
     appboy.initialize('YOUR-API-KEY-HERE');
     appboy.display.automaticallyShowNewInAppMessages();
     appboy.openSession();
+
+    /*
+     * By default, in-app messages are refreshed every 10 minutes as part of the openSession call. If you want them
+     * refreshed as part of every page load instead, uncomment this line - note that depending on your website's
+     * architecture and messaging strategy, this may cause users to receive messages very frequently as they navigate
+     * around the site, and therefore may not be desirable.
+     */
+    // appboy.requestInAppMessageRefresh();
   });
 </script>
 ```
@@ -70,7 +78,7 @@ require(['appboy'], function(appboyModule) {
 });
 ```
 
-**Be sure to replace "YOUR-API-KEY-HERE" with your API key!** Note that you'll still need to load the css with `<link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/1.1/appboy.min.css" />` in the `<head>` section of your page.
+**Be sure to replace "YOUR-API-KEY-HERE" with your API key!** Note that you'll still need to load the [css](https://js.appboycdn.com/web-sdk/1.1/appboy.min.css) (ideally self-hosted alongside the Javascript) in the `<head>` section of your page.
 
 ----------------------------------------
 

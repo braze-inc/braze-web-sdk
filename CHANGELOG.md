@@ -1,4 +1,7 @@
-## 1.1
+## 1.1.1
+  - Expanded browser detection to recognize more niche browsers - also fixed an issue which would cause some Android devices to be detected as Linux
+
+## 1.1.0
   - News feed and in-app message links now open in the same tab
   - Introduced appboy.logFeedDisplayed, which is called automatically when using appboy.display.showFeed
   - Fixed a race condition which could cause events to be double-counted if the user had the site open in very many tabs at once
