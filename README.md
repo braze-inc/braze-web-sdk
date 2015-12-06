@@ -1,4 +1,4 @@
-![Appboy Logo](https://github.com/Appboy/appboy-web-sdk/blob/master/Appboy_Logo_Smiley_Red.png)
+![Appboy Logo](https://github.com/Appboy/appboy-web-sdk/blob/master/Appboy_Logo_400x100.png)
 
 # Web SDK
 
