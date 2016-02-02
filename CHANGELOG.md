@@ -1,3 +1,11 @@
+## 1.2.0
+  - Supports web push (on browsers implementing the w3c spec, with or without payloads - i.e. Chrome, Firefox)
+  - Buttonless FullScreen and Modal messages now respect body click actions from the dashboard
+  - To reduce the datapoint impact of the high number of anonymous users on the web, in-app messages are no longer automatically refreshed for new, anonymous users on their first openSession call. You can override this behavior and force an in-app message refresh by manually calling appboy.requestInAppMessageRefresh.
+  - In-App Messages may now be dismissed with a click on the greyed-out background of the page. This behavior may be prevented by passing requireExplicitInAppMessageDismissal:true to appboy.initialize.
+  - Restyled the news feed for improved legibility with a wider variety of card content. **Note**: if you have existing news feed css customization this may be a breaking change.
+  - Introduced appboy.toggleFeed as a convenience method - it simply calls appboy.showFeed or appboy.destroyFeed based on whether there's currently a feed showing.
+
 ## 1.1.1
   - Expanded browser detection to recognize more niche browsers - also fixed an issue which would cause some Android devices to be detected as Linux
 
