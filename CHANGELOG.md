@@ -1,3 +1,7 @@
+## 1.2.1
+  - The service worker now reads Appboy's backend URL from IndexedDB, which allows web push to function for clients with custom Appboy endpoints.
+  - isPushBlocked now returns false when isPushSupported is false instead of erroring.
+
 ## 1.2.0
   - Supports web push (on browsers implementing the w3c spec, with or without payloads - i.e. Chrome, Firefox)
   - Buttonless FullScreen and Modal messages now respect body click actions from the dashboard
