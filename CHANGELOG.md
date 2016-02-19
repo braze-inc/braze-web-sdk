@@ -1,3 +1,7 @@
+## 1.2.2
+  - Fixed a javascript error that could occur when attempting to showFeed before the body has loaded
+  - Made in-app message buttons explicitly display:inline-block so that they still display correctly if the site is styling buttons as display:block
+
 ## 1.2.1
   - The service worker now reads Appboy's backend URL from IndexedDB, which allows web push to function for clients with custom Appboy endpoints.
   - isPushBlocked now returns false when isPushSupported is false instead of erroring.
