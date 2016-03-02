@@ -4,7 +4,7 @@
 
 Effective marketing automation is an essential part of successfully scaling and managing your business. Appboy empowers you to build better customer relationships through a seamless, multi-channel approach that addresses all aspects of the user life cycle Appboy helps you engage your users on an ongoing basis. Visit the following link for details and we'll have you up and running in no time!
 
-- [Read the full technical documentation](https://js.appboycdn.com/web-sdk/1.2/doc/module-appboy.html)
+- [Read the full technical documentation](https://js.appboycdn.com/web-sdk/1.3/doc/module-appboy.html)
 
 ## Getting Started
 
@@ -36,12 +36,12 @@ To integrate the Appboy Web SDK, put the following snippet inside the `<head>` s
 --->
 
 ```
-<link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/1.2/appboy.min.css" />
+<link rel="stylesheet" href="https://js.appboycdn.com/web-sdk/1.3/appboy.min.css" />
 <script type="text/javascript">
   +function(a,p,P,b,y) {
-    appboy={};for(var s="destroy toggleAppboyLogging setLogger openSession changeUser requestImmediateDataFlush requestFeedRefresh subscribeToFeedUpdates logCardImpressions logCardClick logFeedDisplayed requestInAppMessageRefresh logInAppMessageImpression logInAppMessageClick logInAppMessageButtonClick subscribeToNewInAppMessages removeSubscription removeAllSubscriptions logCustomEvent logPurchase isPushSupported isPushBlocked registerAppboyPushMessages unregisterAppboyPushMessages ab ab.User ab.User.Genders ab.User.NotificationSubscriptionTypes ab.User.prototype.getUserId ab.User.prototype.setFirstName ab.User.prototype.setLastName ab.User.prototype.setEmail ab.User.prototype.setGender ab.User.prototype.setDateOfBirth ab.User.prototype.setCountry ab.User.prototype.setHomeCity ab.User.prototype.setEmailNotificationSubscriptionType ab.User.prototype.setPushNotificationSubscriptionType ab.User.prototype.setPhoneNumber ab.User.prototype.setAvatarImageUrl ab.User.prototype.setLastKnownLocation ab.User.prototype.setUserAttribute ab.User.prototype.setCustomUserAttribute ab.User.prototype.addToCustomAttributeArray ab.User.prototype.removeFromCustomAttributeArray ab.User.prototype.incrementCustomUserAttribute ab.InAppMessage ab.InAppMessage.SlideFrom ab.InAppMessage.ClickAction ab.InAppMessage.DismissType ab.InAppMessage.prototype.subscribeToClickedEvent ab.InAppMessage.prototype.subscribeToDismissedEvent ab.InAppMessage.prototype.removeSubscription ab.InAppMessage.prototype.removeAllSubscriptions ab.InAppMessage.Button ab.InAppMessage.Button.prototype.subscribeToClickedEvent ab.InAppMessage.Button.prototype.removeSubscription ab.InAppMessage.Button.prototype.removeAllSubscriptions ab.SlideUpMessage ab.ModalMessage ab.FullScreenMessage ab.Feed ab.Feed.prototype.getUnreadCardCount ab.Card ab.ClassicCard ab.CaptionedImage ab.Banner display display.automaticallyShowNewInAppMessages display.showInAppMessage display.showFeed display.destroyFeed display.toggleFeed sharedLib".split(" "),i=0;i<s.length;i++){for(var k=appboy,l=s[i].split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=function(){}}appboy.initialize=function(){console&&console.log("Appboy cannot be loaded - this is usually due to strict corporate firewalls or ad blockers.")};appboy.getUser=function(){return new appboy.ab.User};appboy.getCachedFeed=function(){return new appboy.ab.Feed};
+    appboy={};for(var s="destroy toggleAppboyLogging setLogger openSession changeUser requestImmediateDataFlush requestFeedRefresh subscribeToFeedUpdates logCardImpressions logCardClick logFeedDisplayed requestInAppMessageRefresh logInAppMessageImpression logInAppMessageClick logInAppMessageButtonClick subscribeToNewInAppMessages removeSubscription removeAllSubscriptions logCustomEvent logPurchase isPushSupported isPushBlocked registerAppboyPushMessages unregisterAppboyPushMessages ab ab.User ab.User.Genders ab.User.NotificationSubscriptionTypes ab.User.prototype.getUserId ab.User.prototype.setFirstName ab.User.prototype.setLastName ab.User.prototype.setEmail ab.User.prototype.setGender ab.User.prototype.setDateOfBirth ab.User.prototype.setCountry ab.User.prototype.setHomeCity ab.User.prototype.setEmailNotificationSubscriptionType ab.User.prototype.setPushNotificationSubscriptionType ab.User.prototype.setPhoneNumber ab.User.prototype.setAvatarImageUrl ab.User.prototype.setLastKnownLocation ab.User.prototype.setUserAttribute ab.User.prototype.setCustomUserAttribute ab.User.prototype.addToCustomAttributeArray ab.User.prototype.removeFromCustomAttributeArray ab.User.prototype.incrementCustomUserAttribute ab.InAppMessage ab.InAppMessage.SlideFrom ab.InAppMessage.ClickAction ab.InAppMessage.DismissType ab.InAppMessage.prototype.subscribeToClickedEvent ab.InAppMessage.prototype.subscribeToDismissedEvent ab.InAppMessage.prototype.removeSubscription ab.InAppMessage.prototype.removeAllSubscriptions ab.InAppMessage.Button ab.InAppMessage.Button.prototype.subscribeToClickedEvent ab.InAppMessage.Button.prototype.removeSubscription ab.InAppMessage.Button.prototype.removeAllSubscriptions ab.SlideUpMessage ab.ModalMessage ab.FullScreenMessage ab.ControlMessage ab.Feed ab.Feed.prototype.getUnreadCardCount ab.Card ab.ClassicCard ab.CaptionedImage ab.Banner display display.automaticallyShowNewInAppMessages display.showInAppMessage display.showFeed display.destroyFeed display.toggleFeed sharedLib".split(" "),i=0;i<s.length;i++){for(var k=appboy,l=s[i].split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=function(){}}appboy.initialize=function(){console&&console.log("Appboy cannot be loaded - this is usually due to strict corporate firewalls or ad blockers.")};appboy.getUser=function(){return new appboy.ab.User};appboy.getCachedFeed=function(){return new appboy.ab.Feed};
     (y = a.createElement(p)).type = 'text/javascript';
-    y.src = 'https://js.appboycdn.com/web-sdk/1.2/appboy.min.js';
+    y.src = 'https://js.appboycdn.com/web-sdk/1.3/appboy.min.js';
     (c = a.getElementsByTagName(p)[0]).parentNode.insertBefore(y, c);
     if (y.addEventListener) {
       y.addEventListener("load", b, false);
@@ -51,6 +51,14 @@ To integrate the Appboy Web SDK, put the following snippet inside the `<head>` s
   }(document, 'script', 'link', function() {
     appboy.initialize('YOUR-API-KEY-HERE');
     appboy.display.automaticallyShowNewInAppMessages();
+
+    /*
+     * If you have a unique identifier for this user (e.g. they are logged into your site) it's a good idea to call
+     * changeUser here.
+     * See https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#.changeUser for more information.
+     */
+    // appboy.changeUser(userIdentifier);
+
     appboy.openSession();
 
     /*
@@ -69,7 +77,7 @@ To integrate the Appboy Web SDK, put the following snippet inside the `<head>` s
 
 ----------------------------------------
 
-Alternatively, you can use RequireJS or another AMD module-loader to load the Appboy Web SDK. In this scenario, we recommend hosting a copy of https://js.appboycdn.com/web-sdk/1.2/appboy.min.js alongside your other self-hosted Javascript resources, or utilizing your module-loader's packaging/optimization features to package the Appboy library inside of your other Javascript. This prevents the require call from failing when the library is blocked by strict corporate firewalls or ad blockers. If you opt for this route, please be sure to watch our Github repository at https://github.com/Appboy/appboy-web-sdk/releases in order to stay aware of critical bugfixes, releases, or other upgrades.
+Alternatively, you can use RequireJS or another AMD module-loader to load the Appboy Web SDK. In this scenario, we recommend hosting a copy of https://js.appboycdn.com/web-sdk/1.3/appboy.min.js alongside your other self-hosted Javascript resources, or utilizing your module-loader's packaging/optimization features to package the Appboy library inside of your other Javascript. This prevents the require call from failing when the library is blocked by strict corporate firewalls or ad blockers. If you opt for this route, please be sure to watch our Github repository at https://github.com/Appboy/appboy-web-sdk/releases in order to stay aware of critical bugfixes, releases, or other upgrades.
 
 ```
 require(['appboy'], function(appboyModule) {
@@ -79,20 +87,20 @@ require(['appboy'], function(appboyModule) {
 });
 ```
 
-**Be sure to replace "YOUR-API-KEY-HERE" with your API key!** Note that you'll still need to load the [css](https://js.appboycdn.com/web-sdk/1.2/appboy.min.css) (ideally self-hosted alongside the Javascript) in the `<head>` section of your page.
+**Be sure to replace "YOUR-API-KEY-HERE" with your API key!** Note that you'll still need to load the [css](https://js.appboycdn.com/web-sdk/1.3/appboy.min.css) (ideally self-hosted alongside the Javascript) in the `<head>` section of your page.
 
 ----------------------------------------
 
 If you don't intend to use Appboy's built-in UI capabilities (appboy.display), you can load a core version of the
 library with display capabilities stripped. However, you will need to implement your own UI for In-App Messaging, the
 News Feed, and Feedback. Note that our UI elements are fully customizable via css, so we generally recommend integration
-of the complete library instead. The core library is available at `https://js.appboycdn.com/web-sdk/1.2/appboy.core.min.js`.
+of the complete library instead. The core library is available at `https://js.appboycdn.com/web-sdk/1.3/appboy.core.min.js`.
 
-----------------------------------------
+## Debugging / Troubleshooting
 
-You can pass the option `enableLogging: true` to your initialize function, which will cause Appboy to log to the javascript console. This is useful for development but is visible to all users, so should remove this option or
-provide an alternate logger with {@link module:appboy.setLogger appboy.setLogger()} before you release your page
-to production.
+Pass the option `enableLogging: true` to your initialize function (`appboy.initialize('YOUR-API-KEY-HERE', {enableLogging: true});`) to cause Appboy to log to the javascript console. This is valuable for development but is visible to all users,
+so remove this option or provide an alternate logger with {@link module:appboy.setLogger appboy.setLogger()} before you
+release your page to production.
 
 ## Version Support
 

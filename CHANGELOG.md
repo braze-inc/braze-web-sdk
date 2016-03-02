@@ -1,3 +1,8 @@
+## 1.3
+  - Adds support for triggered in-app messages. **Note**: if you have customized in-app message handling utilizing appboy.subscribeToNewInAppMessages, this may be a **breaking change**. See the documentation for appboy.subscribeToNewInAppMessages for more details.
+  - All iOS devices will now report their OS as "iOS" instead of "iPhone/iPod" or "iPad"
+  - Fixed a bug where news feed cards weren't always immediately being marked as read during scrolling
+
 ## 1.2.2
   - Fixed a javascript error that could occur when attempting to showFeed before the body has loaded
   - Made in-app message buttons explicitly display:inline-block so that they still display correctly if the site is styling buttons as display:block
@@ -11,7 +16,7 @@
   - Buttonless FullScreen and Modal messages now respect body click actions from the dashboard
   - To reduce the datapoint impact of the high number of anonymous users on the web, in-app messages are no longer automatically refreshed for new, anonymous users on their first openSession call. You can override this behavior and force an in-app message refresh by manually calling appboy.requestInAppMessageRefresh.
   - In-App Messages may now be dismissed with a click on the greyed-out background of the page. This behavior may be prevented by passing requireExplicitInAppMessageDismissal:true to appboy.initialize.
-  - Restyled the news feed for improved legibility with a wider variety of card content. **Note**: if you have existing news feed css customization this may be a breaking change.
+  - Restyled the news feed for improved legibility with a wider variety of card content. **Note**: if you have existing news feed css customization this may be a **breaking change**.
   - Introduced appboy.toggleFeed as a convenience method - it simply calls appboy.showFeed or appboy.destroyFeed based on whether there's currently a feed showing.
 
 ## 1.1.1
