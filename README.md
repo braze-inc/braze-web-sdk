@@ -91,6 +91,16 @@ require(['appboy'], function(appboyModule) {
 
 ----------------------------------------
 
+If your site uses npm to manage its client-side javascript, we also publish the Web SDK as an npm package, available [here](https://www.npmjs.com/package/appboy-web-sdk). To install it, use
+
+```
+$ npm install --save-dev appboy-web-sdk
+```
+
+This will install the Web SDK files into `./node_modules/appboy-web-sdk/appboy.min.js`/`./node_modules/appboy-web-sdk/appboy.min.css` where you can reference them locally. Note that the Appboy Web SDK is meant to be used client-side in a web application and will not work if required into a Node.js server.
+
+----------------------------------------
+
 If you don't intend to use Appboy's built-in UI capabilities (appboy.display), you can load a core version of the
 library with display capabilities stripped. However, you will need to implement your own UI for In-App Messaging, the
 News Feed, and Feedback. Note that our UI elements are fully customizable via css, so we generally recommend integration

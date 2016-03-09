@@ -1,4 +1,7 @@
-## 1.3
+## 1.3.1
+  - Prevent Firefox from throwing an exception when in Private Browsing mode. This issue was introduced in 1.3.0.
+
+## 1.3.0
   - Adds support for triggered in-app messages. **Note**: if you have customized in-app message handling utilizing appboy.subscribeToNewInAppMessages, this may be a **breaking change**. See the documentation for appboy.subscribeToNewInAppMessages for more details.
   - All iOS devices will now report their OS as "iOS" instead of "iPhone/iPod" or "iPad"
   - Fixed a bug where news feed cards weren't always immediately being marked as read during scrolling
