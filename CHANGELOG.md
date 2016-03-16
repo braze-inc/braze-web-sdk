@@ -1,3 +1,8 @@
+## 1.3.2
+  - Added support for Appboy Feedback through the new appboy.submitFeedback method.
+  - In-App Messages now track click analytics even when the click action is "None."
+  - Prevent Mobile Safari in Private Browsing mode from throwing an exception. This issue was introduced in 1.3.0.
+
 ## 1.3.1
   - Prevent Firefox from throwing an exception when in Private Browsing mode. This issue was introduced in 1.3.0.
 
