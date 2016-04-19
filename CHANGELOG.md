@@ -1,3 +1,6 @@
+## 1.3.3
+  - Added a new `serviceWorkerLocation` initialization option. See JSDocs for more information.
+
 ## 1.3.2
   - Added support for Appboy Feedback through the new appboy.submitFeedback method.
   - In-App Messages now track click analytics even when the click action is "None."
