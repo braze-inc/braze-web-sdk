@@ -1,3 +1,11 @@
+## 1.4.0
+  - Added support for Safari push messages.
+  - If you version your website, you may now optionally pass the version to Appboy via the new `appVersion` initialization option.
+  - Fixed an issue which caused emoji in web push messages to be broken on Firefox.
+  - The News Feed now displays a timed-out message to users if the refresh fails (due to network or back end outages).
+  - Overhauled the browser detection code for improved reliability. Browser version will now be reported as part of the user's device information along with browser.
+  - Added ability to specify on a message-by-message basis whether in-app message clicks should open in a new tab or same tab.
+
 ## 1.3.3
   - Added a new `serviceWorkerLocation` initialization option. See JSDocs for more information.
 
