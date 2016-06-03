@@ -1,3 +1,6 @@
+## 1.4.1
+  - Added a more explicit error when attempting to call registerAppboyPushMessages on Safari without supplying a safariWebsitePushID.
+
 ## 1.4.0
   - Added support for Safari push messages.
   - If you version your website, you may now optionally pass the version to Appboy via the new `appVersion` initialization option.
