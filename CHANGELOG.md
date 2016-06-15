@@ -1,3 +1,6 @@
+## 1.4.2
+  - Added additional logging information for Safari push
+
 ## 1.4.1
   - Added a more explicit error when attempting to call registerAppboyPushMessages on Safari without supplying a safariWebsitePushID.
 
