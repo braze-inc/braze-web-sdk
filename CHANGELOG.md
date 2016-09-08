@@ -1,3 +1,10 @@
+## 1.5.0
+  - Added support for upgraded in-app messages including image-only messages, improved image sizing/cropping, text scrolling, text alignment, configurable orientation, and configurable frame color.
+  - Added support for in-app messages triggered on custom event properties, purchase properties, and in-app message clicks.
+  - Improved support for templated in-app messages.
+  - Added appboy.isPushGranted() method, useful for migrating existing push subscriptions from another third-party provider to Appboy.
+  - Added language localization - language is detected automatically from the browser or can be specified explicitly via the `language` initialization option.
+
 ## 1.4.2
   - Added additional logging information for Safari push
 
