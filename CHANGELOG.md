@@ -1,3 +1,6 @@
+## 1.5.1
+  - Fixed a rendering issue that could cause FullScreen in-app messages to appear partially off-screen on very short browser windows.
+
 ## 1.5.0
   - Added support for upgraded in-app messages including image-only messages, improved image sizing/cropping, text scrolling, text alignment, configurable orientation, and configurable frame color.
   - Added support for in-app messages triggered on custom event properties, purchase properties, and in-app message clicks.
