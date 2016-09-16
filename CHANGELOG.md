@@ -1,3 +1,7 @@
+## 1.6.0
+  - Improved ability to consistently identify users, devices, and sessions across subdomains by preferring domain-wide cookies for ID storage (over the previously-preferred localStorage)
+  - Fixed an edge-case that could cause SlideUp in-app messages to appear offscreen if many were triggered in rapid succession.
+
 ## 1.5.1
   - Fixed a rendering issue that could cause FullScreen in-app messages to appear partially off-screen on very short browser windows.
 
