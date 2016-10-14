@@ -1,3 +1,8 @@
+## 1.6.1
+  - Deprecated the `safariWebsitePushId` parameter to `appboy.registerAppboyPushMessages` and `appboy.isPushGranted` in favor of the new `safariWebsitePushId` option to `appboy.initialize`. If you implement Safari push, you should convert your integration to use the new initialization option - support for the parameters will be removed in a future release. This is not yet a breaking change.
+  - Polished Fullscreen in-app message display on desktop browsers to reduce unused whitespace when the content is small enough not to scroll.  
+  - Improved Modal in-app message layout to prevent text-view scrolling until necessary
+
 ## 1.6.0
   - Improved ability to consistently identify users, devices, and sessions across subdomains by preferring domain-wide cookies for ID storage (over the previously-preferred localStorage)
   - Fixed an edge-case that could cause SlideUp in-app messages to appear offscreen if many were triggered in rapid succession.
