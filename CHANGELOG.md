@@ -1,3 +1,8 @@
+## 1.6.6
+
+##### Fixed
+- Fixed a data-storage issue where a small number of users impacted by the issue fixed in 1.6.5 may record a new session on page load after upgrading to 1.6.5.
+
 ## 1.6.5
 
 ##### Fixed
