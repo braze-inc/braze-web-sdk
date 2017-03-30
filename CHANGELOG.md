@@ -1,3 +1,13 @@
+## 1.6.7
+
+##### Added
+- The Appboy Web SDK now supports HTML content in-app messages. For your security, these must be enabled by supplying the `enableHtmlInAppMessages` configuration option when calling `appboy.initialize`.
+
+##### Fixed
+- The News Feed css is now defensive against any global box-sizing css rules that may exist on your site, and handles classic card image styling more gracefully.
+- On mobile devices, Fullscreen in-app messages' close buttons are sized relative to the entire device - this ensures touchable targets on high-resolution phones.
+- Improved positioning of Modal in-app messages to ensure visibility and attractive positioning across all browsers.
+
 ## 1.6.6
 
 ##### Fixed
