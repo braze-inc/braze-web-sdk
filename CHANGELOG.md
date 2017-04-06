@@ -1,3 +1,8 @@
+## 1.6.8
+
+##### Fixed
+- Fixed "Notification is not defined" error when calling `appboy.isPushPermissionGranted`/`appboy.isPushBlocked` on Chrome versions prior to 46.
+
 ## 1.6.7
 
 ##### Added
