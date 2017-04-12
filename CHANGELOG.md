@@ -1,3 +1,7 @@
+## 1.6.9
+
+- Added support for `appboyBridge.web.registerAppboyPushMessages` to allow HTML in-app messages to request push permission from the user.
+
 ## 1.6.8
 
 ##### Fixed
