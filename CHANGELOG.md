@@ -1,3 +1,8 @@
+## 1.6.10
+
+##### Fixed
+- A bug in our documentation for soft push prompts could cause Control Group stats to fail. If you previously implemented soft push prompts, please refer to the latest version of our documentation: https://www.appboy.com/documentation/Web/#soft-push-prompts
+
 ## 1.6.9
 
 - Added support for `appboyBridge.web.registerAppboyPushMessages` to allow HTML in-app messages to request push permission from the user.
