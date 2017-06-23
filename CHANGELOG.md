@@ -1,3 +1,12 @@
+## 1.6.11
+
+##### Added
+- When you call `appboy.openSession`, if the user has previously granted the site permission to send push, Appboy will now automatically send the user's push token to Appboy backend. This will allow users to continue to receive push messages if they manually remove push permission and then subsequently manually reenable it - and will also cause user push tokens to automatically migrate to Appboy over time when moving to Appboy from a previously-integrated third-party push provider.
+
+##### Fixed
+- IMPORTANT: Due to a behavioral change in Chrome 59, to reliably receive notifications, you must update the service worker from https://js.appboycdn.com/web-sdk/1.6/service-worker.js.
+- `appboy.display.automaticallyShowNewInAppMessages()` may now be safely called multiple times on the same appboy instance.
+
 ## 1.6.10
 
 ##### Fixed
@@ -5,6 +14,7 @@
 
 ## 1.6.9
 
+##### Added
 - Added support for `appboyBridge.web.registerAppboyPushMessages` to allow HTML in-app messages to request push permission from the user.
 
 ## 1.6.8
