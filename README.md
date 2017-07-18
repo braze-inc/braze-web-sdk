@@ -68,7 +68,7 @@ To integrate the Appboy Web SDK, put the following snippet inside the `<head>` s
 
 ----------------------------------------
 
-Alternatively, you can use RequireJS or another AMD module-loader to load the Appboy Web SDK. In this scenario, we recommend hosting a copy of https://js.appboycdn.com/web-sdk/1.6/appboy.min.js alongside your other self-hosted Javascript resources, or utilizing your module-loader's packaging/optimization features to package the Appboy library inside of your other Javascript. This prevents the require call from failing when the library is blocked by strict corporate firewalls or ad blockers. If you opt for this route, please be sure to watch our Github repository at https://github.com/Appboy/appboy-web-sdk/releases in order to stay aware of critical bugfixes, releases, or other upgrades.
+Alternatively, you can use RequireJS or another AMD module-loader to load the Appboy Web SDK. In this scenario, we recommend hosting a copy of https://js.appboycdn.com/web-sdk/1.6/appboy.min.js alongside your other self-hosted JavaScript resources, or utilizing your module-loader's packaging/optimization features to package the Appboy library inside of your other JavaScript. This prevents the require call from failing when the library is blocked by strict corporate firewalls or ad blockers. If you opt for this route, please be sure to watch our Github repository at https://github.com/Appboy/appboy-web-sdk/releases in order to stay aware of critical bugfixes, releases, or other upgrades.
 
 ```
 require(['appboy'], function(appboyModule) {
@@ -78,7 +78,7 @@ require(['appboy'], function(appboyModule) {
 });
 ```
 
-**Be sure to replace "YOUR-API-KEY-HERE" with your API key!** Note that you'll still need to load the [css](https://js.appboycdn.com/web-sdk/1.6/appboy.min.css) (ideally self-hosted alongside the Javascript) in the `<head>` section of your page.
+**Be sure to replace "YOUR-API-KEY-HERE" with your API key!** Note that you'll still need to load the [css](https://js.appboycdn.com/web-sdk/1.6/appboy.min.css) (ideally self-hosted alongside the JavaScript) in the `<head>` section of your page.
 
 ----------------------------------------
 
@@ -105,7 +105,7 @@ release your page to production.
 
 ## Version Support
 
-The Web SDK is a standards-compliant Javascript library, and is built to support a wide array of browser environments. That said, there are a few older browsers which are known to cause errors. For the following browsers, please observe the following version support restrictions:
+The Web SDK is a standards-compliant JavaScript library, and is built to support a wide array of browser environments. That said, there are a few older browsers which are known to cause errors. For the following browsers, please observe the following version support restrictions:
 
 - Internet Explorer > 8
 - Opera > 11
