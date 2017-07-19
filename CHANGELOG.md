@@ -1,3 +1,12 @@
+## 1.6.12
+
+##### Added
+- Introduced `noCookies` option. By default, the Appboy SDK will store small amounts of data (user ids, session ids), in cookies. This is done to allow Appboy to recognize users and sessions across different subdomains of your site. If this presents a problem for you, pass `true` for this option to disable cookie storage and rely entirely on HTML 5 localStorage to identify users and sessions. The downside of this configuration is that you will be unable to recognize users across subdomains of your site.
+- Added user aliasing capability. Aliases can be used in the API and dashboard to identify users in addition to their ID.  See the [`addAlias method documentation`](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#addAlias) for more information.
+
+##### Fixed
+- Fixed issue in which the local cache of seen in-app messages and news feed cards was being cleared when the anonymous user was identified, allowing certain items to be retriggered or appear unread.
+
 ## 1.6.11
 
 ##### Added
