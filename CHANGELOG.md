@@ -1,3 +1,16 @@
+## 1.6.13
+
+##### Added
+- Contains service-worker support for Web Push notifications that require user interaction to be dismissed.
+
+##### Fixed
+- Improved time zone recognition on modern browsers to prevent possible ambiguity between different zones with similar UTC offsets.
+- Broadened detection of the Android OS to better recognize newer hardware and as-of-yet unreleased hardware on an ongoing basis.
+- Fixed data-formation error when pending additions or removals to a custom attribute array were re-enqueued following an Appboy backend outage or otherwise failed data flush.
+
+##### Changed
+- We now allow a value of 0 for the `minimumIntervalBetweenTriggerActionsInSeconds` option for `appboy.initialize`
+
 ## 1.6.12
 
 ##### Added

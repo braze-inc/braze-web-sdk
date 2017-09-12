@@ -97,6 +97,10 @@ library with display capabilities stripped. However, you will need to implement 
 News Feed, and Feedback. Note that our UI elements are fully customizable via css, so we generally recommend integration
 of the complete library instead. The core library is available at `https://js.appboycdn.com/web-sdk/1.6/appboy.core.min.js`.
 
+## Using a Custom Endpoint
+
+If Appboy has provided you with a custom, client-specific endpoint (for data isolation and reliability purposes), you should configure the SDK to use that endpoint through the `baseUrl` option to the initialize function, for example `appboy.initialize('YOUR-API-KEY-HERE', {baseUrl: 'https://example.appboy.eu/api/v3'})`
+
 ## Debugging / Troubleshooting
 
 Pass the option `enableLogging: true` to your initialize function (`appboy.initialize('YOUR-API-KEY-HERE', {enableLogging: true});`) to cause Appboy to log to the javascript console. This is valuable for development but is visible to all users,
