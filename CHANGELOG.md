@@ -1,3 +1,16 @@
+## 2.0.0
+
+##### Breaking
+- Appboy now automatically loads required CSS styles. You must remove all references to appboy.min.css from your site.
+- The `getUserId` method now takes a callback which it invokes with the userId, instead of returning a value directly. This is necessary to ensure the proper replaying of calls made to `appboy` before the SDK has fully loaded. Where before, you would do `var userId = appboy.getUser().getUserId();`, now do `appboy.getUser().getUserId(function(userId) { console.log(userId); })`  See the [`getUserId method documentation`](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#getUserId) for more information.
+- The `getDeviceId` method now takes a callback which it invokes with the deviceId, instead of returning a value directly. This is necessary to ensure the proper replaying of calls made to `appboy` before the SDK has fully loaded. See the [`getDeviceId method documentation`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#getDeviceId) for more information.
+
+##### Changed
+- [The default Appboy integration snippet](https://github.com/Appboy/appboy-web-sdk#getting-started) has been updated for best-practices compliance, resilience, and performance. Using this new snippet, calls may be made to `appboy` before the SDK has fully loaded, and will be replayed automatically when the SDK loads. We recommend that you update your site's integration to the new snippet for optimal behavior, but this is not a breaking change, and is not required.
+
+##### Added
+- If you are using a front-end packager such as [Browserify](http://browserify.org/) or [Webpack](https://webpack.github.io/), [the NPM integration instructions](https://github.com/Appboy/appboy-web-sdk#Alternative-NPM-installation) have been updated to meet your use-case.
+
 ## 1.6.14
 
 ##### Added
