@@ -1,3 +1,15 @@
+## 1.6.14
+
+##### Added
+- Added the user agent for the https://prerender.io/ crawler to the list of known web crawlers.
+- Added [`ab.User.setLanguage`](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#setLanguage) method to allow explicit control over the language you use in the Appboy dashboard to localize your messaging content.
+
+##### Fixed
+- Fixed array validation on pages where the Array type has been modified by other scripts.
+
+##### Changed
+- Marked the 'touchstart' listener in in-app messages as 'passive' for performance and PWA compliance.
+
 ## 1.6.13
 
 ##### Added
