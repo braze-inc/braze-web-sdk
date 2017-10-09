@@ -1,3 +1,8 @@
+## 2.0.1
+
+##### Fixed
+- Fixed automatic css loading when used in combination with the doNotLoadFontAwesome initialization option
+
 ## 2.0.0
 
 ##### Breaking
