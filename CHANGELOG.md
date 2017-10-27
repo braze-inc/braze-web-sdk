@@ -1,3 +1,8 @@
+## 2.0.2
+
+##### Fixed
+- Fixed an issue with our minification that would cause the Appboy Web SDK to leak polyfill functions into the global namespace.
+
 ## 2.0.1
 
 ##### Fixed
