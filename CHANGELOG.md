@@ -1,3 +1,8 @@
+## 2.0.3
+
+##### Fixed
+- Fixed a null reference error when replaying calls made using the new integration snippet on IE 11.
+
 ## 2.0.2
 
 ##### Fixed
@@ -6,7 +11,7 @@
 ## 2.0.1
 
 ##### Fixed
-- Fixed automatic css loading when used in combination with the doNotLoadFontAwesome initialization option
+- Fixed automatic css loading when used in combination with the doNotLoadFontAwesome initialization option.
 
 ## 2.0.0
 
