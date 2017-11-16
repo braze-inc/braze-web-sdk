@@ -1,3 +1,8 @@
+## 2.0.4
+
+##### Changed
+- Renamed documentation references from Appboy to Braze. This is not a breaking change.
+
 ## 2.0.3
 
 ##### Fixed
@@ -6,7 +11,7 @@
 ## 2.0.2
 
 ##### Fixed
-- Fixed an issue with our minification that would cause the Appboy Web SDK to leak polyfill functions into the global namespace.
+- Fixed an issue with our minification that would cause the Braze Web SDK to leak polyfill functions into the global namespace.
 
 ## 2.0.1
 
@@ -16,12 +21,12 @@
 ## 2.0.0
 
 ##### Breaking
-- Appboy now automatically loads required CSS styles. You must remove all references to appboy.min.css from your site.
+- Braze now automatically loads required CSS styles. You must remove all references to appboy.min.css from your site.
 - The `getUserId` method now takes a callback which it invokes with the userId, instead of returning a value directly. This is necessary to ensure the proper replaying of calls made to `appboy` before the SDK has fully loaded. Where before, you would do `var userId = appboy.getUser().getUserId();`, now do `appboy.getUser().getUserId(function(userId) { console.log(userId); })`  See the [`getUserId method documentation`](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#getUserId) for more information.
 - The `getDeviceId` method now takes a callback which it invokes with the deviceId, instead of returning a value directly. This is necessary to ensure the proper replaying of calls made to `appboy` before the SDK has fully loaded. See the [`getDeviceId method documentation`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#getDeviceId) for more information.
 
 ##### Changed
-- [The default Appboy integration snippet](https://github.com/Appboy/appboy-web-sdk#getting-started) has been updated for best-practices compliance, resilience, and performance. Using this new snippet, calls may be made to `appboy` before the SDK has fully loaded, and will be replayed automatically when the SDK loads. We recommend that you update your site's integration to the new snippet for optimal behavior, but this is not a breaking change, and is not required.
+- [The default Braze integration snippet](https://github.com/Appboy/appboy-web-sdk#getting-started) has been updated for best-practices compliance, resilience, and performance. Using this new snippet, calls may be made to `appboy` before the SDK has fully loaded, and will be replayed automatically when the SDK loads. We recommend that you update your site's integration to the new snippet for optimal behavior, but this is not a breaking change, and is not required.
 
 ##### Added
 - If you are using a front-end packager such as [Browserify](http://browserify.org/) or [Webpack](https://webpack.github.io/), [the NPM integration instructions](https://github.com/Appboy/appboy-web-sdk#Alternative-NPM-installation) have been updated to meet your use-case.
@@ -30,7 +35,7 @@
 
 ##### Added
 - Added the user agent for the https://prerender.io/ crawler to the list of known web crawlers.
-- Added [`ab.User.setLanguage`](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#setLanguage) method to allow explicit control over the language you use in the Appboy dashboard to localize your messaging content.
+- Added [`ab.User.setLanguage`](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#setLanguage) method to allow explicit control over the language you use in the Braze dashboard to localize your messaging content.
 
 ##### Fixed
 - Fixed array validation on pages where the Array type has been modified by other scripts.
@@ -46,7 +51,7 @@
 ##### Fixed
 - Improved time zone recognition on modern browsers to prevent possible ambiguity between different zones with similar UTC offsets.
 - Broadened detection of the Android OS to better recognize newer hardware and as-of-yet unreleased hardware on an ongoing basis.
-- Fixed data-formation error when pending additions or removals to a custom attribute array were re-enqueued following an Appboy backend outage or otherwise failed data flush.
+- Fixed data-formation error when pending additions or removals to a custom attribute array were re-enqueued following a Braze backend outage or otherwise failed data flush.
 
 ##### Changed
 - We now allow a value of 0 for the `minimumIntervalBetweenTriggerActionsInSeconds` option for `appboy.initialize`
@@ -54,7 +59,7 @@
 ## 1.6.12
 
 ##### Added
-- Introduced `noCookies` option. By default, the Appboy SDK will store small amounts of data (user ids, session ids), in cookies. This is done to allow Appboy to recognize users and sessions across different subdomains of your site. If this presents a problem for you, pass `true` for this option to disable cookie storage and rely entirely on HTML 5 localStorage to identify users and sessions. The downside of this configuration is that you will be unable to recognize users across subdomains of your site.
+- Introduced `noCookies` option. By default, the Braze SDK will store small amounts of data (user ids, session ids), in cookies. This is done to allow Braze to recognize users and sessions across different subdomains of your site. If this presents a problem for you, pass `true` for this option to disable cookie storage and rely entirely on HTML 5 localStorage to identify users and sessions. The downside of this configuration is that you will be unable to recognize users across subdomains of your site.
 - Added user aliasing capability. Aliases can be used in the API and dashboard to identify users in addition to their ID.  See the [`addAlias method documentation`](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#addAlias) for more information.
 
 ##### Fixed
@@ -63,16 +68,16 @@
 ## 1.6.11
 
 ##### Added
-- When you call `appboy.openSession`, if the user has previously granted the site permission to send push, Appboy will now automatically send the user's push token to Appboy backend. This will allow users to continue to receive push messages if they manually remove push permission and then subsequently manually reenable it - and will also cause user push tokens to automatically migrate to Appboy over time when moving to Appboy from a previously-integrated third-party push provider.
+- When you call `appboy.openSession`, if the user has previously granted the site permission to send push, Braze will now automatically send the user's push token to Braze backend. This will allow users to continue to receive push messages if they manually remove push permission and then subsequently manually reenable it - and will also cause user push tokens to automatically migrate to Braze over time when moving to Braze from a previously-integrated third-party push provider.
 
 ##### Fixed
 - IMPORTANT: Due to a behavioral change in Chrome 59, to reliably receive notifications, you must update the service worker from https://js.appboycdn.com/web-sdk/1.6/service-worker.js.
-- `appboy.display.automaticallyShowNewInAppMessages()` may now be safely called multiple times on the same appboy instance.
+- `appboy.display.automaticallyShowNewInAppMessages()` may now be safely called multiple times on the same `appboy` instance.
 
 ## 1.6.10
 
 ##### Fixed
-- A bug in our documentation for soft push prompts could cause Control Group stats to fail. If you previously implemented soft push prompts, please refer to the latest version of our documentation: https://www.appboy.com/documentation/Web/#soft-push-prompts
+- A bug in our documentation for soft push prompts could cause Control Group stats to fail. If you previously implemented soft push prompts, please refer to the latest version of our documentation: https://www.braze.com/documentation/Web/#soft-push-prompts
 
 ## 1.6.9
 
@@ -87,7 +92,7 @@
 ## 1.6.7
 
 ##### Added
-- The Appboy Web SDK now supports HTML content in-app messages. For your security, these must be enabled by supplying the `enableHtmlInAppMessages` configuration option when calling `appboy.initialize`.
+- The Braze Web SDK now supports HTML content in-app messages. For your security, these must be enabled by supplying the `enableHtmlInAppMessages` configuration option when calling `appboy.initialize`.
 
 ##### Fixed
 - The News Feed css is now defensive against any global box-sizing css rules that may exist on your site, and handles classic card image styling more gracefully.
@@ -107,7 +112,7 @@
 ## 1.6.4
 
 ##### Added
-- The Appboy Web SDK now ignores web crawler activity by default - this saves datapoints, makes analytics more accurate, and may improve page rank (this change can be reversed with the `allowCrawlerActivity` initialization option).
+- The Braze Web SDK now ignores web crawler activity by default - this saves datapoints, makes analytics more accurate, and may improve page rank (this change can be reversed with the `allowCrawlerActivity` initialization option).
 
 ##### Fixed
 - Fixed an issue where in-app messages triggered off of push clicks wouldn't fire because the push click happened before the in-app message configuration was synced to the device.
@@ -155,7 +160,7 @@
 - Added support for upgraded in-app messages including image-only messages, improved image sizing/cropping, text scrolling, text alignment, configurable orientation, and configurable frame color.
 - Added support for in-app messages triggered on custom event properties, purchase properties, and in-app message clicks.
 - Improved support for templated in-app messages.
-- Added appboy.isPushGranted() method, useful for migrating existing push subscriptions from another third-party provider to Appboy.
+- Added appboy.isPushGranted() method, useful for migrating existing push subscriptions from another third-party provider to Braze.
 - Added language localization - language is detected automatically from the browser or can be specified explicitly via the `language` initialization option.
 
 ## 1.4.2
@@ -172,7 +177,7 @@
 
 ##### Added
 - Added support for Safari push messages.
-- If you version your website, you may now optionally pass the version to Appboy via the new `appVersion` initialization option.
+- If you version your website, you may now optionally pass the version to Braze via the new `appVersion` initialization option.
 - The News Feed now displays a timed-out message to users if the refresh fails (due to network or back end outages).
 - Browser version will now be reported as part of the user's device information along with browser.
 - Added ability to specify on a message-by-message basis whether in-app message clicks should open in a new tab or same tab.
@@ -191,7 +196,7 @@
 ## 1.3.2
 
 ##### Added
-- Added support for Appboy Feedback through the new appboy.submitFeedback method.
+- Added support for Braze Feedback through the new appboy.submitFeedback method.
 
 ##### Fixed
 - In-App Messages now track click analytics even when the click action is "None."
@@ -225,7 +230,7 @@
 ## 1.2.1
 
 ##### Fixed
-- The service worker now reads Appboy's backend URL from IndexedDB, which allows web push to function for clients with custom Appboy endpoints.
+- The service worker now reads Braze's backend URL from IndexedDB, which allows web push to function for clients with custom Braze endpoints.
 - isPushBlocked now returns false when isPushSupported is false instead of erroring.
 
 ## 1.2.0
@@ -242,7 +247,7 @@
 
 ##### Changed
 - To reduce the datapoint impact of the high number of anonymous users on the web, in-app messages are no longer. automatically refreshed for new, anonymous users on their first openSession call. You can override this behavior and force an in-app message refresh by manually calling appboy.requestInAppMessageRefresh.
-- In-App Messages may now be dismissed with a click on the greyed-out background of the page. This behavior may be prevented by passing requireExplicitInAppMessageDismissal:true to appboy.initialize.
+- In-App Messages may now be dismissed with a click on the greyed-out background of the page. This behavior may be prevented by passing requireExplicitInAppMessageDismissal:true to `appboy.initialize`.
 
 ## 1.1.1
 
@@ -255,7 +260,7 @@
 ## 1.1.0
 
 ##### Added
-- Introduced appboy.logFeedDisplayed, which is called automatically when using appboy.display.showFeed.
+- Introduced `appboy.logFeedDisplayed`, which is called automatically when using `appboy.display.showFeed`.
 
 ##### Fixed
 - Fixed a race condition which could cause events to be double-counted if the user had the site open in very many tabs at once.
@@ -274,7 +279,7 @@
 - Respect blacklisted custom events, attributes, and purchases.
 
 ##### Removed
-- Removed the setBio method on ab.User in accordance with the deprecation of that user property across the Appboy platform.
+- Removed the setBio method on ab.User in accordance with the deprecation of that user property across the Braze platform.
 
 ## 0.2.4
 
@@ -284,7 +289,7 @@
 ## 0.2.3
 
 ##### Added
-- Introduce appboy.display.destroyFeed method to allow integrators to implement a toggle feed button or otherwise hide the feed from code.
+- Introduce `appboy.display.destroyFeed` method to allow integrators to implement a toggle feed button or otherwise hide the feed from code.
 
 ##### Fixed
 - Prevent potential race condition which could cause news feed cards to not be marked as read for a short amount of time.
@@ -314,7 +319,7 @@
 ## 0.2.0
 
 ##### Added
-- Added Appboy news feed support.
+- Added Braze news feed support.
 
 ## 0.1.5
 
@@ -325,7 +330,7 @@
 
 ##### Fixed
 - Fixed issue where SlideUp message clicks with a clickAction of URI were not being respected.
-- Fixed issue where Date custom attributes, custom event properties, and purchase properties were not being recognized as Dates by the Appboy platform.
+- Fixed issue where Date custom attributes, custom event properties, and purchase properties were not being recognized as Dates by the Braze platform.
 
 ## 0.1.3
 
