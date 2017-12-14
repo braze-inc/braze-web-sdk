@@ -1,3 +1,18 @@
+## 2.0.5
+
+##### Added
+- Added Location Tracking - See [`appboy.trackLocation()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#trackLocation) for more information.
+- `appboy.user.setGender` now supports more gender options. See the [`Genders` enum documentation](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#toc4) for more information.
+- Added [`appboy.stopWebTracking()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#stopWebTracking) and [`appboy.resumeWebTracking()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#resumeWebTracking) to allow user opt-outs.
+- Improved accessibility for in-app messages and news feed by focusing on elements where appropriate, allowing users to tab through various buttons, and adding labels where appropriate.
+
+##### Fixed
+- Fixed a bug that caused `appboy.display.automaticallyShowNewInAppMessages()` not to function correctly when called after calling `appboy.destroy()` and then calling `appboy.initialize()` a second time.
+- The `openSession` and `changeUser` methods now take a `messagingReadyCallback` that executes when the Braze Web SDK is ready to show messaging data to this user. This fixes a race condition where custom events could be logged before in-app messages had been fetched from the Braze backend and users would not see intended messaging.
+
+##### Changed
+- Deprecated the `submitFeedback` method. The feedback feature is disabled for new accounts, and will be removed in a future SDK release.
+
 ## 2.0.4
 
 ##### Changed
