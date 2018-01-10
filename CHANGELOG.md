@@ -1,3 +1,6 @@
+## 2.0.6
+- Fixed a javascript error introduced in 2.0.5 when logging in the service worker.
+
 ## 2.0.5
 
 ##### Added
