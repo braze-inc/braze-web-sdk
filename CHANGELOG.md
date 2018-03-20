@@ -1,3 +1,8 @@
+## 2.0.8
+
+##### Added
+- Added defensive guards against any possibility of sessions expiring in less than 1 second or of creating multiple session events in rapid succession if scripted in parallel across many open tabs.
+
 ## 2.0.7
 
 ##### Added
