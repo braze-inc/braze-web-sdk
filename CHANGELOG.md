@@ -1,36 +1,12 @@
-## 2.2.0
-
-##### Added
-- Introduced support for the upcoming Content Cards feature, which will eventually replace the existing News Feed feature and adds significant capability. This feature is currently in closed beta testing; if you're interested in joining the beta, please reach out to your Customer Success Manager or Account Manager.
-- Added support for web push on Accelerated Mobile Pages (AMP). See https://www.braze.com/documentation/Web/#amp-support for setup information.
+## 2.0.9
 
 ##### Fixed
-- Fixed an issue where in-app messages triggered on session start could potentially be templated with the old user's attributes.
-
-##### Removed
-- Removed `appboy.requestInAppMessageRefresh()` and support for legacy in-app messages - these were long-deprecated and have been supplanted by [triggered in-app messages](https://www.braze.com/documentation/Web/#in-app-messages-triggered).
-
-## 2.1.0
-
-#### Added
-- Added [`appboy.wipeData()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#wipeData) to allow deletion of locally stored SDK data. After calling this method, users will appear as a new anonymous user on a new device.
-
-##### Fixed
-- Improved push registration and unregistration
-  - [`appboy.registerAppboyPushMessages`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#registerAppboyPushMessages) will now set the user's subscription status to "OPTED_IN" only at times when they've just accepted the permission prompt.
-  - [`appboy.unregisterAppboyPushMessages`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#unregisterAppboyPushMessages) will now persist across sessions and user changes (until [`appboy.registerAppboyPushMessages`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#registerAppboyPushMessages) is called again).
-  - [`appboy.registerAppboyPushMessages`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#registerAppboyPushMessages) will cause push prompts to be shown shown more reliably in situations where the user has ignored them in the past. Logging around dismissing (as opposed to accepting or blocking) push prompts has been improved.
-- Fixed a bug with [`appboy.changeUser`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#changeUser) where `messagingReadyCallback` would not fire when the supplied `userId` was the current user.
-
-#### Changed
-- Updated from FontAwesome 4.3.0 to FontAwesome 4.7.0. Integrations that wish to maintain older versions should pass in `doNotLoadFontAwesome` as `true` during initialization and load their desired version.
-- The Braze SDK will automatically load FontAwesome unless `doNotLoadFontAwesome` is explicitly passed in as `true` during initialization, regardless of whether fontawesome.css or fontawesome.min.css are already on the page.
+- Prevent push received/clicked analytics from being sent to the Braze backend when `appboy.stopWebTracking` has been called.
 
 ## 2.0.8
 
 ##### Added
 - Added defensive guards against any possibility of sessions expiring in less than 1 second or of creating multiple session events in rapid succession if scripted in parallel across many open tabs.
-
 
 ## 2.0.7
 
