@@ -1,3 +1,20 @@
+## 2.2.1
+
+##### Fixed
+- Prevent push received/clicked analytics from being sent to the Braze backend when `appboy.stopWebTracking` has been called.
+
+## 2.2.0
+
+##### Added
+- Introduced support for the upcoming Content Cards feature, which will eventually replace the existing News Feed feature and adds significant capability. This feature is currently in closed beta testing; if you're interested in joining the beta, please reach out to your Customer Success Manager or Account Manager.
+- Added support for web push on Accelerated Mobile Pages (AMP). See https://www.braze.com/documentation/Web/#amp-support for setup information.
+
+##### Fixed
+- Fixed an issue where in-app messages triggered on session start could potentially be templated with the old user's attributes.
+
+##### Removed
+- Removed `appboy.requestInAppMessageRefresh()` and support for legacy in-app messages - these were long-deprecated and have been supplanted by [triggered in-app messages](https://www.braze.com/documentation/Web/#in-app-messages-triggered).
+
 ## 2.1.1
 
 ##### Fixed
@@ -28,6 +45,7 @@
 
 ##### Added
 - Added defensive guards against any possibility of sessions expiring in less than 1 second or of creating multiple session events in rapid succession if scripted in parallel across many open tabs.
+
 
 ## 2.0.7
 
