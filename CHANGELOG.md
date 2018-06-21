@@ -1,3 +1,16 @@
+## 2.2.2
+
+##### Added
+- Updated push token handling to automatically remove blocked users from the pushable audience on session start.
+
+##### Fixed
+- Fixed issue in the upcoming Content Cards feature where the `getUnviewedCardCount` method on `ab.ContentCards` could not be invoked properly.
+- Fixed a bug where the [`addAlias` method](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#addAlias) was returning an object instead of a boolean value.
+- Fixed issue which could prevent the upcoming Content Cards feature from syncing properly on IE 11 and Safari.
+
+##### Changed
+- Various user attribute methods now support setting null (`setFirstName`, `setLastName`, `setCountry`, `setHomeCity`, `setPhoneNumber`, `setEmail`, `setGender`, `setLanguage`, and `setDateOfBirth`) by passing in an explicit null value.
+
 ## 2.2.1
 
 ##### Fixed
@@ -22,7 +35,7 @@
 
 ## 2.1.0
 
-#### Added
+##### Added
 - Added [`appboy.wipeData()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#wipeData) to allow deletion of locally stored SDK data. After calling this method, users will appear as a new anonymous user on a new device.
 
 ##### Fixed
@@ -32,7 +45,7 @@
   - [`appboy.registerAppboyPushMessages`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#registerAppboyPushMessages) will cause push prompts to be shown shown more reliably in situations where the user has ignored them in the past. Logging around dismissing (as opposed to accepting or blocking) push prompts has been improved.
 - Fixed a bug with [`appboy.changeUser`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#changeUser) where `messagingReadyCallback` would not fire when the supplied `userId` was the current user.
 
-#### Changed
+##### Changed
 - Updated from FontAwesome 4.3.0 to FontAwesome 4.7.0. Integrations that wish to maintain older versions should pass in `doNotLoadFontAwesome` as `true` during initialization and load their desired version.
 - The Braze SDK will automatically load FontAwesome unless `doNotLoadFontAwesome` is explicitly passed in as `true` during initialization, regardless of whether fontawesome.css or fontawesome.min.css are already on the page.
 
