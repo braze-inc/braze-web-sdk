@@ -1,3 +1,21 @@
+## 2.2.3
+
+##### Added
+- Added support for tracking custom location attributes. See the [`ab.User.setCustomLocationAttribute`](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#setCustomLocationAttribute) documentation for more information.
+- When calling `appboy.registerAppboyPushMessages` with a `deniedCallback`, that `deniedCallback` will now be invoked (with a `temporary` parameter of `true`) for temporary denials, where the browser has automatically denied permission on behalf of the user after multiple ignored attempts to register for push, but will allow attempts again in the future - probably in about a week.
+- Added `appboyBridge.web.trackLocation()` in HTML in-app messages. This enables HTML in-app message soft location tracking prompts.
+
+##### Fixed
+- News Feed and Content Cards clicks and impressions will now be logged multiple times for a given card (if they in fact occur multiple times). Impressions will still only be logged for a given card once per viewing of the feed (regardless of how many times it scrolls in and out of view).
+- Improved logic around IndexedDB to better catch and log errors (e.g. security errors from disabled cookies on certain browsers).
+- Worked around [this Chrome Bug](https://bugs.chromium.org/p/chromium/issues/detail?id=811403) which could cause device detection to throw an exception on Linux systems with certain settings.
+- Fixed an issue where the messagingReadyCallback would not get fired if changeUser was called with an empty ID.
+
+##### Changed
+- Data will now be flushed to the Braze backend every three seconds when localStorage is not available.
+- Improved triggered in-app message re-eligibility logic to better handle templating failures.
+
+
 ## 2.2.2
 
 ##### Added
