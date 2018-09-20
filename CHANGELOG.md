@@ -1,3 +1,11 @@
+## 2.2.4
+
+##### Added
+- Added support for richer custom styling through CSS in in-app messages.
+
+##### Changed
+- Subtle visual polish to the News Feed and Content Cards
+
 ## 2.2.3
 
 ##### Added
@@ -7,8 +15,8 @@
 
 ##### Fixed
 - News Feed and Content Cards clicks and impressions will now be logged multiple times for a given card (if they in fact occur multiple times). Impressions will still only be logged for a given card once per viewing of the feed (regardless of how many times it scrolls in and out of view).
-- Improved logic around IndexedDB to better catch and log errors (e.g. security errors from disabled cookies on certain browsers).
-- Worked around [this Chrome Bug](https://bugs.chromium.org/p/chromium/issues/detail?id=811403) which could cause device detection to throw an exception on Linux systems with certain settings.
+- Improved logic around IndexedDB to better catch and log errors (prevents security errors with disabled cookies on certain browsers, or from Safari's "Intelligent Tracking Prevention" when integrated in an iFrame).
+- Worked around [this Chrome Bug](https://bugs.chromium.org/p/chromium/issues/detail?id=811403) which could cause device detection to throw "Unsupported time zone specified undefined" on Linux-based systems with certain settings.
 - Fixed an issue where the messagingReadyCallback would not get fired if changeUser was called with an empty ID.
 
 ##### Changed
