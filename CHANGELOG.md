@@ -1,3 +1,8 @@
+## 2.2.5
+
+##### Added
+- Added `devicePropertyWhitelist` property to the options for `appboy.initialize()`, which can be used to filter what device properties get collected.
+
 ## 2.2.4
 
 ##### Added
