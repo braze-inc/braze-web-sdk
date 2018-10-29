@@ -99,7 +99,7 @@ If you are using Google Tag Manager, you should use the following loading snippe
 <script type="text/javascript">
 +function(a,p,P,b,y) {
     (y = a.createElement(p)).type = 'text/javascript';
-    y.src = 'https://js.appboycdn.com/web-sdk/{{VERSION}}/appboy.min.js';
+    y.src = 'https://js.appboycdn.com/web-sdk/2.2/appboy.min.js';
     (c = a.getElementsByTagName(p)[0]).parentNode.insertBefore(y, c);
     if (y.addEventListener) {
       y.addEventListener("load", b, false);
