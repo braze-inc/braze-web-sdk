@@ -122,7 +122,7 @@ If you are using Google Tag Manager, you should use the following loading snippe
   });
 </script>
 ```
-All Braze activity on initial page view should be in this tag. Subsequent tags which fire after page load can then reference the SDK directly via window.appboy, for example: <script type="text/javascript">window.appboy.logCustomEvent("my event")</script>
+All Braze activity on initial page view should be in this tag. Subsequent tags which fire after page load can then reference the SDK directly via window.appboy, for example: ```<script type="text/javascript">window.appboy.logCustomEvent("my event")</script>```
 
 ## Core Library (no In-App Messages or News Feed)
 
