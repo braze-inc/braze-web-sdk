@@ -91,6 +91,39 @@ This will install the Web SDK files into your `bower_components` directory where
 </script>
 ```
 
+## Alternative Google Tag Manager installation
+
+If you are using Google Tag Manager, you should use the following loading snippet to initialize our SDK on page view:
+
+```
+<script type="text/javascript">
++function(a,p,P,b,y) {
+    (y = a.createElement(p)).type = 'text/javascript';
+    y.src = 'https://js.appboycdn.com/web-sdk/{{VERSION}}/appboy.min.js';
+    (c = a.getElementsByTagName(p)[0]).parentNode.insertBefore(y, c);
+    if (y.addEventListener) {
+      y.addEventListener("load", b, false);
+    } else if (y.readyState) {
+      y.onreadystatechange = b;
+    }
+  }(document, 'script', 'link', function() {
+    appboy.initialize('YOUR-API-KEY-HERE');
+    appboy.display.automaticallyShowNewInAppMessages();
+
+    /*
+     * If you have a unique identifier for this user (e.g. they are logged into your site) it's a good idea to call
+     * changeUser here.
+     * See https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#.changeUser for more information.
+     */
+    // appboy.changeUser(userIdentifier);
+
+    appboy.openSession();
+    window.appboy = appboy;
+  });
+</script>
+```
+All Braze activity on initial page view should be in this tag. Subsequent tags which fire after page load can then reference the SDK directly via window.appboy, for example: <script type="text/javascript">window.appboy.logCustomEvent("my event")</script>
+
 ## Core Library (no In-App Messages or News Feed)
 
 If you don't intend to use Braze's built-in UI capabilities (any [appboy.display](https://js.appboycdn.com/web-sdk/latest/doc/module-display.html) methods), you can load a core version of the
