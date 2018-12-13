@@ -1,3 +1,13 @@
+## 2.2.6
+
+##### Added
+- Added `clicked` property to content cards which returns true if this card has ever been clicked on this device.
+
+##### Changed
+- Improved in-app message triggering logic to fall back to lower priority messages when the Braze server aborts templating (e.g. from a Connected Content abort in the message body, or because the user is no longer in the correct Segment for the message)
+- Improved in-app message triggering logic to retry user personalization when communication with the Braze server fails due to network connectivity issues.
+- The Braze Web SDK now only stores cookies for the most recently-used API Key (app). This reduces cookie storage usage for domains that are configured against many Braze apps.
+
 ## 2.2.5
 
 ##### Added
