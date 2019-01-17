@@ -1,3 +1,11 @@
+## 2.2.7
+
+##### Added
+- HTML In-App Messages now emit an `ab.BridgeReady` event when the `appboyBridge` variable is available for use inside your HTML, allowing you to use `appboyBridge` immediately when an in-app message is shown. To utilize this event in your HTML In-App Messages, use `window.addEventListener('ab.BridgeReady', function() {/*Use appboyBridge here*/}, false);`.
+
+##### Changed
+- Changed usages of `Date.now()` to `new Date().valueOf()` to allow the Braze SDK to sit side-by-side with legacy 3rd party libraries that monkey-patched `Date.now()` before ECMASCRIPT 5 defined it.
+
 ## 2.2.6
 
 ##### Added
