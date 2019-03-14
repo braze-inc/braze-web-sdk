@@ -1,3 +1,11 @@
+## 2.3.0
+
+##### Added
+- Improved the look and feel of In-App Messages to adhere to the latest UX and UI best practices. Changes affect font sizes, padding, and responsiveness across all message types. Now supports button border styling.
+
+##### Fixed
+- This feature, which regressed in 2.1.0, has been restored: when you call `appboy.openSession`, if the user has previously granted the site permission to send push, Braze will now automatically send the user's push token to Braze backend. This will allow users to continue to receive push messages if they manually remove push permission and then subsequently manually reenable it - and will also cause user push tokens to automatically migrate to Braze over time when moving to Braze from a previously-integrated third-party push provider.
+
 ## 2.2.7
 
 ##### Added
