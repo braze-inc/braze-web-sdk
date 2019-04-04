@@ -1,3 +1,13 @@
+## 2.3.1
+
+##### Added
+- Introduced new `closeMessage` method on `ab.InAppMessage` objects to enable integrations to programmatically close messages if desired.
+- The Braze Web SDK now automatically enqueues trigger events that occur while triggers are being synced with the Braze backend, and replays them when the sync is complete. This fixes a race condition that could cause users to inadvertantly miss messages when trigger events occur directly after calling `openSession` or `changeUser`. This change obsoletes usage of the `messagingReadyCallback`, which is now deprecated (but will continue to function).
+
+##### Fixed
+- Fixed an issue which prevented tall `ab.HtmlMessage` objects from scrolling on iOS.
+- Fixed "Object doesn't support this action" error in Internet Explorer 11 or older when showing `ab.HtmlMessage` objects.
+
 ## 2.3.0
 
 ##### Added
