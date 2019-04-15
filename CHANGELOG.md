@@ -1,3 +1,7 @@
+## 2.3.2
+##### Added
+- Added support for an improved integration snippet which is capable of stubbing the interface before the SDK loads in Google Tag Manager.
+
 ## 2.3.1
 
 ##### Added
