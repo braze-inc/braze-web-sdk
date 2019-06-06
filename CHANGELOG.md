@@ -1,3 +1,9 @@
+## 2.3.3
+
+##### Fixed
+- Improved some In-App Message CSS styles to be more resilient against conflicts with any page-wide CSS.
+- Improved the resiliency of the code that allows body content to scroll again when modal or fullscreen in-app messages are dismissed.
+
 ## 2.3.2
 ##### Added
 - Added support for an improved integration snippet which is capable of stubbing the interface before the SDK loads in Google Tag Manager.
