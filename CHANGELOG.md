@@ -1,3 +1,6 @@
+## 2.3.4
+- Fix regression introduced in 2.3.3 that could prevent analytics from being logged from the service worker.
+
 ## 2.3.3
 
 ##### Fixed
