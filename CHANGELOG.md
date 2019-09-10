@@ -1,4 +1,32 @@
+## 2.4.0
+
+##### Breaking
+- Removed the Feedback feature and `appboy.submitFeedback` method from the SDK.
+
+##### Added
+- Improved browser detection to account for the Smart TV landscape.
+- Added logic to automatically renew push subscriptions when they are expired or older than 6 months.
+- Introduced a `contentSecurityNonce` initialization option for sites with a Content Security Policy. See the [`appboy.initialize`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#.initialize) documentation for more info.
+- Introduced a `disablePushTokenMaintenance` initialization option for sites that have users with Web Push permission granted, but do not wish to use Web Push with Braze. See the [`appboy.initialize`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#.initialize) documentation for more info.
+- Introduced a `manageServiceWorkerExternally` initialization option for sites that have their own service worker already. See the [`appboy.initialize`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#.initialize) documentation for more info.
+- Deprecated the `subscribeToNewInAppMessages` method in favor of the new [`subscribeToInAppMessage`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#.subscribeToInAppMessage) method, which has a simpler interface.
+
+##### Fixed
+- Improved support for In-App Messages on “notched” devices (for example, iPhone X, Pixel 3XL).
+- The logic that prevents the page behind a modal or fullscreen In-App Message from scrolling now functions correctly on iOS.
+- Fixed a caching bug that could cause In-App Messages, Content Cards, and News Feed Cards received by one instance of the Braze SDK to not be seen by another simultaneously running instance of the Braze SDK.
+- Fixed a bug that would cause redundant network activity for new users on their first session ever.
+- Fixed a bug that would cause push registration that occurs immediately on a user's first session to fail.
+- Introduced the `allowUserSuppliedJavascript` initialization option, which is an alias for the existing `enableHtmlInAppMessages` option, and disabled the ability to use `javascript:` URIs in In-App Message and Content Card click actions unless one of these options is provided.
+
+##### Changed
+- Improved the look and feel of Content Card dismissals and Content Card and News Feed animations to match the latest In-App Message styles.
+- The `baseUrl` configuration option for `appboy.initialize` is now more flexible in the values that it can accept.
+- Cookies set by the Braze Web SDK now expire after 1 year.
+
 ## 2.3.4
+
+##### Fixed
 - Fix regression introduced in 2.3.3 that could prevent analytics from being logged from the service worker.
 
 ## 2.3.3
@@ -8,6 +36,7 @@
 - Improved the resiliency of the code that allows body content to scroll again when modal or fullscreen in-app messages are dismissed.
 
 ## 2.3.2
+
 ##### Added
 - Added support for an improved integration snippet which is capable of stubbing the interface before the SDK loads in Google Tag Manager.
 
@@ -40,7 +69,7 @@
 ## 2.2.6
 
 ##### Added
-- Added `clicked` property to content cards which returns true if this card has ever been clicked on this device.
+- Added `clicked` property to Content Cards which returns true if this card has ever been clicked on this device.
 
 ##### Changed
 - Improved in-app message triggering logic to fall back to lower priority messages when the Braze server aborts templating (e.g. from a Connected Content abort in the message body, or because the user is no longer in the correct Segment for the message)
@@ -84,9 +113,9 @@
 - Updated push token handling to automatically remove blocked users from the pushable audience on session start.
 
 ##### Fixed
-- Fixed issue in the upcoming Content Cards feature where the `getUnviewedCardCount` method on `ab.ContentCards` could not be invoked properly.
+- Fixed issue in Content Cards where the `getUnviewedCardCount` method on `ab.ContentCards` could not be invoked properly.
 - Fixed a bug where the [`addAlias` method](https://js.appboycdn.com/web-sdk/latest/doc/ab.User.html#addAlias) was returning an object instead of a boolean value.
-- Fixed issue which could prevent the upcoming Content Cards feature from syncing properly on IE 11 and Safari.
+- Fixed issue which could prevent Content Cards from syncing properly on IE 11 and Safari.
 
 ##### Changed
 - Various user attribute methods now support setting null (`setFirstName`, `setLastName`, `setCountry`, `setHomeCity`, `setPhoneNumber`, `setEmail`, `setGender`, `setLanguage`, and `setDateOfBirth`) by passing in an explicit null value.
@@ -99,7 +128,7 @@
 ## 2.2.0
 
 ##### Added
-- Introduced support for the upcoming Content Cards feature, which will eventually replace the existing News Feed feature and adds significant capability. This feature is currently in closed beta testing; if you're interested in joining the beta, please reach out to your Customer Success Manager or Account Manager.
+- Introduced support for Content Cards, which will eventually replace the existing News Feed feature and adds significant capability.
 - Added support for web push on Accelerated Mobile Pages (AMP). See https://www.braze.com/documentation/Web/#amp-support for setup information.
 
 ##### Fixed
