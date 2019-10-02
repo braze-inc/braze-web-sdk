@@ -1,3 +1,16 @@
+## 2.4.1
+
+##### Added
+- Introduced a [`dismissCard`](https://js.appboycdn.com/web-sdk/latest/doc/ab.Card.html#dismissCard) method that can be used to dismiss a card programmatically.
+- Improved accessibility throughout the SDK:
+  - Used `<h1>` tags for headers and `<button>` tags for close buttons
+  - Added ARIA attributes
+  - Improved the experience when tabbing through elements
+  - We now restore the user's previously focused element after closing In-App Messages
+
+##### Fixed
+- Fixed a bug introduced in 2.4.0 that could cause a javascript error in integrations that only include the core library. This error would occur when a Content Card with a URL is received.
+
 ## 2.4.0
 
 ##### Breaking
