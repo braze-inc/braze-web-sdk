@@ -3,7 +3,7 @@
 ##### Added
 - Introduced a [`dismissCard`](https://js.appboycdn.com/web-sdk/latest/doc/ab.Card.html#dismissCard) method that can be used to dismiss a card programmatically.
 - Improved accessibility throughout the SDK:
-  - Used `<h1>` tags for headers and `<button>` tags for close buttons
+  - Used `h1` tags for headers and `button` tags for close buttons. PLEASE NOTE! If you have written Braze CSS customizations which rely on the tags being used previously (`div` and `span`, respectively), those CSS rules will require updating!
   - Added ARIA attributes
   - Improved the experience when tabbing through elements
   - We now restore the user's previously focused element after closing In-App Messages
