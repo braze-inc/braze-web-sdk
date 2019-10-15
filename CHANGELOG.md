@@ -1,12 +1,14 @@
-## 2.4.1
+## 2.4.2
 
-#### Breaking
-- Accessibility updates in this release have changed headers to use `h1` tags and close buttons to use `button` tags (instead of `div` and `span` respectively). As a result, any CSS customizations which rely upon `div` or `span` elements within `.ab-feed` or `.ab-in-app-message` should be updated to use classes instead.
+##### Fixed
+- Fixed a bug introduced in 2.4.1 that would focus inline feeds, causing the page to scroll when content cards are shown out of view.
+
+## 2.4.1
 
 ##### Added
 - Introduced a [`dismissCard`](https://js.appboycdn.com/web-sdk/latest/doc/ab.Card.html#dismissCard) method that can be used to dismiss a card programmatically.
 - Improved accessibility throughout the SDK:
-  - Used `h1` tags for headers and `button` tags for close buttons
+  - Used `<h1>` tags for headers and `<button>` tags for close buttons
   - Added ARIA attributes
   - Improved the experience when tabbing through elements
   - We now restore the user's previously focused element after closing In-App Messages
