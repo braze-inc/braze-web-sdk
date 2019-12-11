@@ -1,3 +1,10 @@
+## 2.4.3
+
+##### Fixed
+- Fixed a bug that would cause `appboy.registerAppboyPushMessages` to fail when called immediately on a user's first session.
+- Fixed an issue where using both the `manageServiceWorkerExternally` and `serviceWorkerLocation` initialization options would cause the SDK to not register for push if the provided service worker location was in a sub-directory.
+- Fixed an issue where `appboy.registerAppboyPushMessages` could throw an exception if an error occured while updating a previously registered service worker.
+
 ## 2.4.2
 
 ##### Fixed
