@@ -1,3 +1,24 @@
+## 2.5.0
+
+##### Added
+- Introduced support for upcoming HTML In-App Message templates.
+- Added [`appboyBridge.logClick()`](https://www.braze.com/docs/user_guide/message_building_by_channel/in-app_messages/customize/#javascript-bridge) to HTML In-App Messages.
+- Expanded browser detection to include UC Browser and newer versions of Microsoft Edge that are based on Chromium.
+- Added a new variant of the SDK that allows sites using RequireJS to load the SDK through another method, such as NPM or a `<script>` tag. See the [README](https://github.com/Appboy/appboy-web-sdk#alternative-no-amd-installation) for more information.
+- Added an optional callback to [`appboy.requestImmediateDataFlush`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#.requestImmediateDataFlush) that is invoked when the flush is complete.
+- Added Czech and Ukrainian language support for Braze UI elements.
+
+##### Changed
+- Decreased the size of the service worker by 20%.
+
+##### Fixed
+- Fixed an issue where refreshing Content Cards or News Feed while the feed is showing could cause multiple impressions to be logged for the same card.
+- Fixed a bug where calling `setEmail` with an email address containing capital letters could sometimes be incorrectly rejected.
+- Fixed a bug where refreshing Content Cards would incorrectly set the `clicked` attribute of the cards to `false`.
+- Fixed a bug where providing `serviceWorkerLocation` with an absolute URL containing a protocol and hostname would result in an error being logged when calling `appboy.registerAppboyPushMessages`.
+- Fixed an issue where calling `appboy.registerAppboyPushMessages` in recent versions of Firefox would not show the notification prompt.
+- Fixed a timing issue where creating a reference to `window.appboy` and then using that reference asynchronously could sometimes cause javascript errors when using the default integration snippet.
+
 ## 2.4.3
 
 ##### Fixed
@@ -12,10 +33,13 @@
 
 ## 2.4.1
 
+#### Breaking
+- Accessibility updates in this release have changed headers to use `h1` tags and close buttons to use `button` tags (instead of `div` and `span` respectively). As a result, any CSS customizations which rely upon `div` or `span` elements within `.ab-feed` or `.ab-in-app-message` should be updated to use classes instead.
+
 ##### Added
 - Introduced a [`dismissCard`](https://js.appboycdn.com/web-sdk/latest/doc/ab.Card.html#dismissCard) method that can be used to dismiss a card programmatically.
 - Improved accessibility throughout the SDK:
-  - Used `<h1>` tags for headers and `<button>` tags for close buttons
+  - Used `h1` tags for headers and `button` tags for close buttons
   - Added ARIA attributes
   - Improved the experience when tabbing through elements
   - We now restore the user's previously focused element after closing In-App Messages
