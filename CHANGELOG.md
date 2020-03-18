@@ -1,3 +1,8 @@
+## 2.5.1
+
+##### Fixed
+- Fixed an issue in Content Cards where `getUnviewedCardCount()` returns `undefined`. This issue was introduced in 2.5.0.
+
 ## 2.5.0
 
 ##### Added
