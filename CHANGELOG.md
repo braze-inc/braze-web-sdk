@@ -1,3 +1,11 @@
+## 2.5.2
+
+##### Fixed
+- Fixed an issue that could cause some prerender user agents to fail to be appropriately recognized as a web crawler.
+
+##### Changed
+- Data will now be flushed to the Braze backend every 3 seconds on Safari (down from 10 seconds) due to new privacy features that clear localStorage after 7 days of inactivity.
+
 ## 2.5.1
 
 ##### Fixed
