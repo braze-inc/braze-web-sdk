@@ -135,9 +135,9 @@ library with display capabilities stripped. However, you will need to implement 
 News Feed. Note that our UI elements are fully customizable via css, so we generally recommend integration
 of the complete library instead. The core library is available at `https://js.appboycdn.com/web-sdk/2.5/appboy.core.min.js`.
 
-# Using a Custom Endpoint
+# SDK Endpoint
 
-If Braze has provided you with a custom, client-specific endpoint (for data isolation and reliability purposes), you should configure the SDK to use that endpoint through the `baseUrl` option to the initialize function, for example `appboy.initialize('YOUR-API-KEY-HERE', {baseUrl: 'https://example.appboy.eu/api/v3'})`
+Be sure to use the correct [SDK endpoint](https://www.braze.com/docs/user_guide/administrative/access_braze/sdk_endpoints/) for your Braze cluster (EU-01, US-06 etc.). You can find your cluster by logging into the dashboard and checking the value in your browsers address bar e.g. `dashboard-06.braze.com`. You should configure the SDK to use that endpoint through the `baseUrl` option in the initialize function, for example `appboy.initialize('YOUR-API-KEY-HERE', {baseUrl: 'https://sdk.fra-01.braze.eu/api/v3'})`
 
 # Debugging / Troubleshooting
 
