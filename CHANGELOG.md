@@ -1,3 +1,17 @@
+## 2.6.0
+
+##### Added
+- Introduced new NPM packages under the `@braze` scope. The core and full versions of the SDK as well as the service worker are now published in their own packages, resulting in a drastically reduced install size compared to the `appboy-web-sdk` package. This is not a breaking change for existing NPM integrations and we will continue to publish the `appboy-web-sdk` package to maintain backwards compatibility. See the README for integration details.
+- Added [`appboyBridge.getUser().setLanguage(language)`](https://www.braze.com/docs/user_guide/message_building_by_channel/in-app_messages/customize/#javascript-bridge) to HTML In-App Messages.
+
+##### Changed
+- The new HTML In-App Message type now allows multiple clicks to be logged for a given message.
+
+##### Fixed
+- Made push-related methods more defensive against edge-cases where `Notification` is not defined.
+- Fixed an issue where unexpected backend responses could result in a javascript error.
+- Fixed an issue in recent versions of Safari where calling `appboy.registerAppboyPushMessages` would throw a javascript error if the user did not allow websites to ask for permission to send notifications.
+
 ## 2.5.2
 
 ##### Fixed
