@@ -1,3 +1,16 @@
+## 2.7.0
+
+##### Added
+- Added [`appboyBridge.getUser().addAlias(alias, label)`](https://www.braze.com/docs/user_guide/message_building_by_channel/in-app_messages/customize/#javascript-bridge) to HTML In-App Messages.
+
+##### Changed
+- The Braze Web SDK now uses [User-Agent Client Hints](https://wicg.github.io/ua-client-hints/#interface) for device detection when available. When using User-Agent Client Hints, browser version detection is limited to the significant version (e.g., 85 instead of 85.0.123.0). Note that this upgrade will be necessary to ensure accurate operating system detection in upcoming versions of Chromium-based browsers.
+- Cards received from the Content Cards test send feature of the Braze dashboard are no longer removed when the SDK receives an update to the user's Content Cards.
+
+##### Fixed
+- Removed code that could result in javascript errors in certain webpack configurations where the `global` object is not accessible by the SDK.
+- Fixed an issue where the `ab.Card` methods `removeAllSubscriptions`, `removeSubscription`, `subscribeToClickedEvent`, and `subscribeToDismissedEvent` were minified, resulting in `undefined` when called.
+
 ## 2.6.0
 
 ##### Added
