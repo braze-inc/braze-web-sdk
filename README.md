@@ -8,13 +8,13 @@ Effective marketing automation is an essential part of successfully scaling and 
 
 If your site uses npm to manage its client-side javascript, we publish the Web SDK as an npm package, available [here](https://www.npmjs.com/package/@braze/web-sdk).
 
-```shell
+```sh
 $ npm install --save @braze/web-sdk
 ```
 
 You can then require the lib like a standard Node.js module:
 
-```
+```js
 var appboy = require('@braze/web-sdk');
 appboy.initialize('YOUR-API-KEY-HERE');
 appboy.display.automaticallyShowNewInAppMessages();
@@ -23,7 +23,7 @@ appboy.openSession();
 
 If you're integrating web push, you should also install the Braze service worker:
 
-```shell
+```sh
 $ npm install --save @braze/service-worker
 ```
 
@@ -31,7 +31,7 @@ In your build process, copy `node_modules/@braze/service-worker/service-worker.j
 
 Alternatively, you can skip installing the service worker from NPM and download it from our CDN.
 
-```javascript
+```js
 // service-worker.js
 self.importScripts('https://js.appboycdn.com/web-sdk/2.7/service-worker.js');
 ```
@@ -52,7 +52,7 @@ If you don't use npm or you prefer not to load the SDK through a package manager
   inside build/public-docs/README.md
 --->
 
-```
+```html
 <script type="text/javascript">
   +function(a,p,P,b,y){a.appboy={};a.appboyQueue=[];for(var s="initialize destroy getDeviceId toggleAppboyLogging setLogger openSession changeUser requestImmediateDataFlush requestFeedRefresh subscribeToFeedUpdates requestContentCardsRefresh subscribeToContentCardsUpdates logCardImpressions logCardClick logCardDismissal logFeedDisplayed logContentCardsDisplayed logInAppMessageImpression logInAppMessageClick logInAppMessageButtonClick logInAppMessageHtmlClick subscribeToNewInAppMessages subscribeToInAppMessage removeSubscription removeAllSubscriptions logCustomEvent logPurchase isPushSupported isPushBlocked isPushGranted isPushPermissionGranted registerAppboyPushMessages unregisterAppboyPushMessages trackLocation stopWebTracking resumeWebTracking wipeData ab ab.DeviceProperties ab.User ab.User.Genders ab.User.NotificationSubscriptionTypes ab.User.prototype.getUserId ab.User.prototype.setFirstName ab.User.prototype.setLastName ab.User.prototype.setEmail ab.User.prototype.setGender ab.User.prototype.setDateOfBirth ab.User.prototype.setCountry ab.User.prototype.setHomeCity ab.User.prototype.setLanguage ab.User.prototype.setEmailNotificationSubscriptionType ab.User.prototype.setPushNotificationSubscriptionType ab.User.prototype.setPhoneNumber ab.User.prototype.setAvatarImageUrl ab.User.prototype.setLastKnownLocation ab.User.prototype.setUserAttribute ab.User.prototype.setCustomUserAttribute ab.User.prototype.addToCustomAttributeArray ab.User.prototype.removeFromCustomAttributeArray ab.User.prototype.incrementCustomUserAttribute ab.User.prototype.addAlias ab.User.prototype.setCustomLocationAttribute ab.InAppMessage ab.InAppMessage.SlideFrom ab.InAppMessage.ClickAction ab.InAppMessage.DismissType ab.InAppMessage.OpenTarget ab.InAppMessage.ImageStyle ab.InAppMessage.TextAlignment ab.InAppMessage.Orientation ab.InAppMessage.CropType ab.InAppMessage.prototype.subscribeToClickedEvent ab.InAppMessage.prototype.subscribeToDismissedEvent ab.InAppMessage.prototype.removeSubscription ab.InAppMessage.prototype.removeAllSubscriptions ab.InAppMessage.prototype.closeMessage ab.InAppMessage.Button ab.InAppMessage.Button.prototype.subscribeToClickedEvent ab.InAppMessage.Button.prototype.removeSubscription ab.InAppMessage.Button.prototype.removeAllSubscriptions ab.SlideUpMessage ab.ModalMessage ab.FullScreenMessage ab.HtmlMessage ab.ControlMessage ab.Feed ab.Feed.prototype.getUnreadCardCount ab.ContentCards ab.ContentCards.prototype.getUnviewedCardCount ab.Card ab.Card.prototype.subscribeToClickedEvent ab.Card.prototype.subscribeToDismissedEvent ab.Card.prototype.removeSubscription ab.Card.prototype.removeAllSubscriptions ab.Card.prototype.dismissCard ab.ClassicCard ab.CaptionedImage ab.Banner ab.ControlCard ab.WindowUtils display display.automaticallyShowNewInAppMessages display.showInAppMessage display.showFeed display.destroyFeed display.toggleFeed display.showContentCards display.hideContentCards display.toggleContentCards sharedLib".split(" "),i=0;i<s.length;i++){for(var m=s[i],k=a.appboy,l=m.split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=(new Function("return function "+m.replace(/\./g,"_")+"(){window.appboyQueue.push(arguments); return true}"))()}window.appboy.getUser=function(){return new window.appboy.ab.User};window.appboy.getCachedFeed=function(){return new window.appboy.ab.Feed};window.appboy.getCachedContentCards=function(){return new window.appboy.ab.ContentCards};(y=p.createElement(P)).type='text/javascript';
     y.src='https://js.appboycdn.com/web-sdk/2.7/appboy.min.js';
@@ -79,13 +79,13 @@ If you don't use npm or you prefer not to load the SDK through a package manager
 
 If you use Bower to manage your front-end packages, you can install the Web SDK with:
 
-```
+```sh
 $ bower install https://registry.npmjs.org/@braze/web-sdk/-/@braze/web-sdk-2.7.0.tgz
 ```
 
 This will install the Web SDK files into your `bower_components` directory where you can then reference them locally, by placing the following in the `<head>` section of your page:
 
-```
+```html
 <script type="text/javascript">
   +function(a,p,P,b,y){a.appboy={};a.appboyQueue=[];for(var s="initialize destroy getDeviceId toggleAppboyLogging setLogger openSession changeUser requestImmediateDataFlush requestFeedRefresh subscribeToFeedUpdates requestContentCardsRefresh subscribeToContentCardsUpdates logCardImpressions logCardClick logCardDismissal logFeedDisplayed logContentCardsDisplayed logInAppMessageImpression logInAppMessageClick logInAppMessageButtonClick logInAppMessageHtmlClick subscribeToNewInAppMessages subscribeToInAppMessage removeSubscription removeAllSubscriptions logCustomEvent logPurchase isPushSupported isPushBlocked isPushGranted isPushPermissionGranted registerAppboyPushMessages unregisterAppboyPushMessages trackLocation stopWebTracking resumeWebTracking wipeData ab ab.DeviceProperties ab.User ab.User.Genders ab.User.NotificationSubscriptionTypes ab.User.prototype.getUserId ab.User.prototype.setFirstName ab.User.prototype.setLastName ab.User.prototype.setEmail ab.User.prototype.setGender ab.User.prototype.setDateOfBirth ab.User.prototype.setCountry ab.User.prototype.setHomeCity ab.User.prototype.setLanguage ab.User.prototype.setEmailNotificationSubscriptionType ab.User.prototype.setPushNotificationSubscriptionType ab.User.prototype.setPhoneNumber ab.User.prototype.setAvatarImageUrl ab.User.prototype.setLastKnownLocation ab.User.prototype.setUserAttribute ab.User.prototype.setCustomUserAttribute ab.User.prototype.addToCustomAttributeArray ab.User.prototype.removeFromCustomAttributeArray ab.User.prototype.incrementCustomUserAttribute ab.User.prototype.addAlias ab.User.prototype.setCustomLocationAttribute ab.InAppMessage ab.InAppMessage.SlideFrom ab.InAppMessage.ClickAction ab.InAppMessage.DismissType ab.InAppMessage.OpenTarget ab.InAppMessage.ImageStyle ab.InAppMessage.TextAlignment ab.InAppMessage.Orientation ab.InAppMessage.CropType ab.InAppMessage.prototype.subscribeToClickedEvent ab.InAppMessage.prototype.subscribeToDismissedEvent ab.InAppMessage.prototype.removeSubscription ab.InAppMessage.prototype.removeAllSubscriptions ab.InAppMessage.prototype.closeMessage ab.InAppMessage.Button ab.InAppMessage.Button.prototype.subscribeToClickedEvent ab.InAppMessage.Button.prototype.removeSubscription ab.InAppMessage.Button.prototype.removeAllSubscriptions ab.SlideUpMessage ab.ModalMessage ab.FullScreenMessage ab.HtmlMessage ab.ControlMessage ab.Feed ab.Feed.prototype.getUnreadCardCount ab.ContentCards ab.ContentCards.prototype.getUnviewedCardCount ab.Card ab.Card.prototype.subscribeToClickedEvent ab.Card.prototype.subscribeToDismissedEvent ab.Card.prototype.removeSubscription ab.Card.prototype.removeAllSubscriptions ab.Card.prototype.dismissCard ab.ClassicCard ab.CaptionedImage ab.Banner ab.ControlCard ab.WindowUtils display display.automaticallyShowNewInAppMessages display.showInAppMessage display.showFeed display.destroyFeed display.toggleFeed display.showContentCards display.hideContentCards display.toggleContentCards sharedLib".split(" "),i=0;i<s.length;i++){for(var m=s[i],k=a.appboy,l=m.split("."),j=0;j<l.length-1;j++)k=k[l[j]];k[l[j]]=(new Function("return function "+m.replace(/\./g,"_")+"(){window.appboyQueue.push(arguments); return true}"))()}window.appboy.getUser=function(){return new window.appboy.ab.User};window.appboy.getCachedFeed=function(){return new window.appboy.ab.Feed};window.appboy.getCachedContentCards=function(){return new window.appboy.ab.ContentCards};(y=p.createElement(P)).type='text/javascript';
     y.src='bower_components/@braze/web-sdk-2.7.0/appboy.min.js';
@@ -102,7 +102,7 @@ This will install the Web SDK files into your `bower_components` directory where
 
 If you are using Google Tag Manager, you should use the following loading snippet to initialize our SDK on initial page load:
 
-```
+```html
 <script type="text/javascript">
 +function(a,p,P,b,y){a.appboy = {};a.appboyQueue = [];var s = ["initialize", "destroy", "getDeviceId", "toggleAppboyLogging", "setLogger", "openSession", "changeUser", "requestImmediateDataFlush", "requestFeedRefresh", "subscribeToFeedUpdates", "requestContentCardsRefresh", "subscribeToContentCardsUpdates", "logCardImpressions", "logCardClick", "logCardDismissal", "logFeedDisplayed", "logContentCardsDisplayed", "logInAppMessageImpression", "logInAppMessageClick", "logInAppMessageButtonClick", "logInAppMessageHtmlClick", "subscribeToNewInAppMessages", "subscribeToInAppMessage", "removeSubscription", "removeAllSubscriptions", "logCustomEvent", "logPurchase", "isPushSupported", "isPushBlocked", "isPushGranted", "isPushPermissionGranted", "registerAppboyPushMessages", "unregisterAppboyPushMessages", "trackLocation", "stopWebTracking", "resumeWebTracking", "wipeData", "ab", "ab.DeviceProperties", "ab.User", "ab.User.Genders", "ab.User.NotificationSubscriptionTypes", "ab.User.prototype.getUserId", "ab.User.prototype.setFirstName", "ab.User.prototype.setLastName", "ab.User.prototype.setEmail", "ab.User.prototype.setGender", "ab.User.prototype.setDateOfBirth", "ab.User.prototype.setCountry", "ab.User.prototype.setHomeCity", "ab.User.prototype.setLanguage", "ab.User.prototype.setEmailNotificationSubscriptionType", "ab.User.prototype.setPushNotificationSubscriptionType", "ab.User.prototype.setPhoneNumber", "ab.User.prototype.setAvatarImageUrl", "ab.User.prototype.setLastKnownLocation", "ab.User.prototype.setUserAttribute", "ab.User.prototype.setCustomUserAttribute", "ab.User.prototype.addToCustomAttributeArray", "ab.User.prototype.removeFromCustomAttributeArray", "ab.User.prototype.incrementCustomUserAttribute", "ab.User.prototype.addAlias", "ab.User.prototype.setCustomLocationAttribute", "ab.InAppMessage", "ab.InAppMessage.SlideFrom", "ab.InAppMessage.ClickAction", "ab.InAppMessage.DismissType", "ab.InAppMessage.OpenTarget", "ab.InAppMessage.ImageStyle", "ab.InAppMessage.TextAlignment", "ab.InAppMessage.Orientation", "ab.InAppMessage.CropType", "ab.InAppMessage.prototype.subscribeToClickedEvent", "ab.InAppMessage.prototype.subscribeToDismissedEvent", "ab.InAppMessage.prototype.removeSubscription", "ab.InAppMessage.prototype.removeAllSubscriptions", "ab.InAppMessage.prototype.closeMessage", "ab.InAppMessage.Button", "ab.InAppMessage.Button.prototype.subscribeToClickedEvent", "ab.InAppMessage.Button.prototype.removeSubscription", "ab.InAppMessage.Button.prototype.removeAllSubscriptions", "ab.SlideUpMessage", "ab.ModalMessage", "ab.FullScreenMessage", "ab.HtmlMessage", "ab.ControlMessage", "ab.Feed", "ab.Feed.prototype.getUnreadCardCount", "ab.ContentCards", "ab.ContentCards.prototype.getUnviewedCardCount", "ab.Card", "ab.Card.prototype.subscribeToClickedEvent", "ab.Card.prototype.subscribeToDismissedEvent", "ab.Card.prototype.removeSubscription", "ab.Card.prototype.removeAllSubscriptions", "ab.Card.prototype.dismissCard", "ab.ClassicCard", "ab.CaptionedImage", "ab.Banner", "ab.ControlCard", "ab.WindowUtils", "display", "display.automaticallyShowNewInAppMessages", "display.showInAppMessage", "display.showFeed", "display.destroyFeed", "display.toggleFeed", "display.showContentCards", "display.hideContentCards", "display.toggleContentCards", "sharedLib"];for (var i = 0; i < s.length; i++) {  var m = s[i];  var k = a.appboy;  var l = m.split(".");  for (var j = 0; j < l.length - 1; j++) {    k = k[l[j]];  }  k[l[j]] = new Function("return function " + m.replace(/\./g, "_") + "(){window.appboyQueue.push(arguments); return true}")();}window.appboy.getUser = function() { return new window.appboy.ab.User(); };window.appboy.getCachedFeed = function() { return new window.appboy.ab.Feed(); };window.appboy.getCachedContentCards = function() { return new window.appboy.ab.ContentCards(); };(y=p.createElement(P)).type='text/javascript';
   y.src='https://js.appboycdn.com/web-sdk/2.7/appboy.min.js';
@@ -129,7 +129,7 @@ All Braze activity on initial page view should be in this tag. Subsequent tags w
 
 Alternatively, you can use RequireJS or another AMD module-loader to load the Braze Web SDK. In this scenario, we recommend hosting a copy of https://js.appboycdn.com/web-sdk/2.7/appboy.min.js alongside your other self-hosted JavaScript resources, or utilizing your module-loader's packaging/optimization features to package the Braze library inside of your other JavaScript. This prevents the require call from failing when the library is blocked by strict corporate firewalls or ad blockers. If you opt for this route, please be sure to watch [our Github repository](https://github.com/Appboy/appboy-web-sdk/releases) ([or the release feed](https://github.com/Appboy/appboy-web-sdk/releases.atom)) to stay aware of critical bugfixes and upgrades.
 
-```
+```js
 require(['path/to/appboy'], function(appboy) {
   appboy.initialize('YOUR-API-KEY-HERE');
   appboy.display.automaticallyShowNewInAppMessages();
