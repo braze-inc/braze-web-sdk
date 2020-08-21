@@ -1,3 +1,26 @@
+## 3.0.1
+
+##### Fixed
+- Fixed incorrect type definitions for the `extras` property of Card and In-App Message classes.
+- Fixed a regression introduced in 2.5.0 where the functionality of the `manageServiceWorkerExternally` and `disablePushTokenMaintenance` initialization options were swapped.
+
+## 3.0.0
+
+##### ⚠️ Breaking
+- The Braze Web SDK now comes bundled with TypeScript definitions in the `@braze` NPM packages. The TypeScript defintions include documentation and autocomplete in IDEs that support it, even if your project does not use TypeScript.
+- The following breaking changes have been made to allow for a better TypeScript experience:
+  - The `ab` namespace has been removed. To migrate from previous integrations, you can simply find and replace all references to `appboy.ab` with `appboy`.
+  - `InAppMessage.Button` has been renamed to `InAppMessageButton`. To migrate from previous integrations, you can simply find and replace all references to `InAppMessage.Button` with `InAppMessageButton`.
+- Due to the above changes, the SDK loading snippet has been updated. If you integrate the Braze Web SDK using the CDN, you must [update the loading snippet](https://github.com/Appboy/appboy-web-sdk#Alternative-CDN-installation) when upgrading to 3.0.
+- The `baseUrl` option to [`appboy.initialize`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#initialize) is now required to initialize the SDK. If your integration did not already provide the `baseUrl` option, it should now be set to the previous default value of `sdk.iad-01.braze.com` (e.g, `appboy.initialize('YOUR-API-KEY', { baseUrl: 'sdk.iad-01.braze.com' });`).
+- Removed the `messagingReadyCallback` from `openSession` and `changeUser`. Since 2.3.1, the SDK handles events that occur during the asynchronous portion of these calls gracefully, and ensures internally that only the latest messaging will be triggered. Any code previously being invoked inside this callback may be safely placed directly after the openSession or changeUser call.
+
+##### Changed
+- The Braze Web SDK has brand new docs, which can be found [here](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html). Any URLs from the previous docs will redirect to the appropriate location.
+
+##### Fixed
+- Fixed an issue where browser version was incorrectly reported in Android Webview.
+
 ## 2.7.1
 
 ##### Fixed
