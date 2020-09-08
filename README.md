@@ -2,7 +2,7 @@
 
 Effective marketing automation is an essential part of successfully scaling and managing your business. Braze empowers you to build better customer relationships through a seamless, multi-channel approach that addresses all aspects of the user life cycle. Braze helps you engage your users on an ongoing basis. We'll have you up and running in no time!
 
-- [Read the full technical documentation](https://js.appboycdn.com/web-sdk/3.0/doc/interfaces/appboy.html)
+- [Read the full technical documentation](https://js.appboycdn.com/web-sdk/3.0/doc/modules/appboy.html)
 
 # Getting Started
 
@@ -72,7 +72,7 @@ If you don't use npm or you prefer not to load the SDK through a package manager
   /*
    * If you have a unique identifier for this user (e.g. they are logged into your site) it's a good idea to call
    * changeUser here.
-   * See https://js.appboycdn.com/web-sdk/latest/doc/interfaces/appboy.html#changeuser for more information.
+   * See https://js.appboycdn.com/web-sdk/3.0/doc/modules/appboy.html#changeuser for more information.
    */
   // appboy.changeUser(userIdentifier);
 
@@ -80,7 +80,7 @@ If you don't use npm or you prefer not to load the SDK through a package manager
 </script>
 ```
 
-**Be sure to replace "YOUR-API-KEY-HERE" with your API key!** This snippet will provide a global variable [`appboy`](https://js.appboycdn.com/web-sdk/latest/doc/interfaces/appboy.html) that you can use to send data to the Braze API.
+**Be sure to replace "YOUR-API-KEY-HERE" with your API key!** This snippet will provide a global variable [`appboy`](https://js.appboycdn.com/web-sdk/3.0/doc/modules/appboy.html) that you can use to send data to the Braze API.
 
 ## Alternative Bower installation
 
@@ -122,7 +122,7 @@ window.appboy.display.automaticallyShowNewInAppMessages();
 /*
   * If you have a unique identifier for this user (e.g. they are logged into your site) it's a good idea to call
   * changeUser here.
-  * See https://js.appboycdn.com/web-sdk/latest/doc/interfaces/appboy.html#changeuser for more information.
+  * See https://js.appboycdn.com/web-sdk/3.0/doc/modules/appboy.html#changeuser for more information.
   */
 // window.appboy.changeUser(userIdentifier);
 
@@ -152,7 +152,7 @@ If your site uses RequireJS or another AMD module-loader, but you prefer to load
 
 ## Core Library (no UI for In-App Messages or Content Cards)
 
-If you don't intend to use Braze's built-in UI capabilities (any [appboy.display](https://js.appboycdn.com/web-sdk/latest/doc/module-display.html) methods), you can load a core version of the
+If you don't intend to use Braze's built-in UI capabilities (any [appboy.display](https://js.appboycdn.com/web-sdk/3.0/doc/module-display.html) methods), you can load a core version of the
 library with display capabilities stripped. However, you will need to implement your own UI for In-App Messaging and Content Cards. Note that our UI elements are fully customizable via css, so we generally recommend integration
 of the complete library instead. The core library is available at `https://js.appboycdn.com/web-sdk/3.0/appboy.core.min.js` or on [npm](https://www.npmjs.com/package/@braze/web-sdk-core).
 
@@ -163,7 +163,7 @@ Be sure to use the correct [SDK endpoint](https://www.braze.com/docs/user_guide/
 # Debugging / Troubleshooting
 
 Pass the option `enableLogging: true` to the initialize function (`appboy.initialize('YOUR-API-KEY-HERE', { baseUrl: 'YOUR-SDK-ENDPOINT', enableLogging: true });`) to cause Braze to log to the javascript console. This is valuable for development but is visible to all users,
-so remove this option or [provide an alternate logger](https://js.appboycdn.com/web-sdk/latest/doc/interfaces/appboy.html#setlogger) before you
+so remove this option or [provide an alternate logger](https://js.appboycdn.com/web-sdk/3.0/doc/modules/appboy.html#setlogger) before you
 release your page to production.
 
 ## Version Support
