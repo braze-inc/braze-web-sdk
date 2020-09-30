@@ -1,3 +1,5 @@
+FIRST OF ALL WE NEED TO LEARN ABOUT THE BASICS OF USING WEBSITES AND NETWORKING SERVERS BEFORE ENROLLING IN ANY ORGANISATION.
+
 <img src="https://github.com/Appboy/appboy-web-sdk/blob/master/braze-logo.png" width="300" title="Braze Logo" />
 
 Effective marketing automation is an essential part of successfully scaling and managing your business. Braze empowers you to build better customer relationships through a seamless, multi-channel approach that addresses all aspects of the user life cycle. Braze helps you engage your users on an ongoing basis. We'll have you up and running in no time!
