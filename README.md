@@ -83,7 +83,6 @@ If you don't use npm or you prefer not to load the SDK through a package manager
 **Be sure to replace "YOUR-API-KEY-HERE" with your API key!** This snippet will provide a global variable [`appboy`](https://js.appboycdn.com/web-sdk/3.0/doc/modules/appboy.html) that you can use to send data to the Braze API.
 
 ## Alternative Bower installation
-
 If you use Bower to manage your front-end packages, you can install the Web SDK with:
 
 ```
