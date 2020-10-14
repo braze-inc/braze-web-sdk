@@ -1,3 +1,14 @@
+## 3.1.0
+
+##### Added
+- Added a [`devicePropertyAllowlist`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#initializationoptions.__type.devicepropertyallowlist) initialization option. This new initialization option has the same functionality as `devicePropertyWhitelist`, which is now deprecated and will be removed in a future release.
+
+##### Changed
+- Relaxed the email address validation used by the SDK in favor of the more accurate Braze backend validation. Valid addresses with unusual structures or international characters which were previously rejected will now be accepted.
+
+##### Fixed
+- Fixed an issue where the SDK was improperly handling session starts when switching between subdomains, causing a short delay in triggering in-app messages.
+
 ## 3.0.1
 
 ##### Fixed
