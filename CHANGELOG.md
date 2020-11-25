@@ -1,3 +1,8 @@
+## 3.1.1
+
+##### Fixed
+- Fixed an issue where a javascript error could be thrown when showing Content Cards or In-App Messages in certain environments where `this` is undefined.
+
 ## 3.1.0
 
 ##### Added
