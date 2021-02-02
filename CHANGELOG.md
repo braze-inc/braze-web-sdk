@@ -1,3 +1,12 @@
+## 3.1.2
+
+##### Fixed
+- Added default `alt` text to In-App Message and Content Card images to improve screen-reader experience.
+- Improved the display of different aspect ratios for `ClassicCard` images when using the built-in UI.
+- Fixed a regression introduced in 3.1.0 where the SDK would sometimes make multiple network requests when starting a new session.
+- Fixed an issue where globally-scoped `float` CSS caused certain elements of the built-in UI to display incorrectly.
+- Fixed an incorrect TypeScript definition for `DeviceProperties`.
+
 ## 3.1.1
 
 ##### Fixed
