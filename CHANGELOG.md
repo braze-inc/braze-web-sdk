@@ -1,3 +1,15 @@
+## 3.2.0
+
+##### Added
+- Added an optional `parentNode` parameter to [`appboy.display.hideContentCards`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.display.html#hidecontentcards) that allows you to specify a particular Content Cards feed to hide.
+
+##### Changed
+- Cookies set by the SDK are now renewed when a new session is started. This fixes an issue where the SDK would stop setting cookies that had been deleted or expired when identification information existed in localStorage, preventing cross-subdomain identification from functioning in certain circumstances.
+- Increased clickable area of all buttons in the built-in UI to be at least 45x45px to comply with mobile accessibility best-practices. This includes some minor changes to the Content Cards and News Feed UI to accommodate the larger buttons.
+
+##### Fixed
+- Fixed an issue where some network requests fail on websites using certain libraries that overwrite the native Promise object.
+
 ## 3.1.2
 
 ##### Fixed
