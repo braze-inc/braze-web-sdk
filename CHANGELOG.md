@@ -1,3 +1,23 @@
+## 3.3.0
+
+##### Added
+- Introduced support for new SDK Authentication feature.
+- Introduced an [`inAppMessageZIndex`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#initializationoptions.__type.inappmessagezindex) initialization option that allows you to easily customize the z-index of In-App Messages displayed by the built-in UI.
+- Added `successCallback` and `errorCallback` parameters to [`requestContentCardsRefresh`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#requestcontentcardsrefresh).
+- The SDK now logs deprecation warnings for deprecated methods and initialization options when logging is enabled.
+- Added support for `brazeBridge`, which has the same API as `appboyBridge`. `appboyBridge` is now deprecated but will continue to function.
+- Introduced support for the upcoming nested properties feature in [`appboy.logCustomEvent`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#logcustomevent) and [`appboy.logPurchase`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#logpurchase).
+
+##### Changed
+- Removed `appboyQueue` replay snippet from the `npm` publication of the SDK. This avoids possible race conditions when referencing the SDK simultaneously from `npm` and the CDN, and removes use of `eval` from the `npm` package
+- [`appboy.logCustomEvent`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#logcustomevent) and [`appboy.logPurchase`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#logpurchase) now impose a 50KB limit on custom properties. If the supplied properties are too large, the event is not logged.
+- Deprecated the [`trackLocation`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#tracklocation) method in favor of using the native Geolocation API and passing the location data to ['User.setLastKnownLocation`](https://js.appboycdn.com/web-sdk/latest/doc/classes/appboy.user.html#setlastknownlocation). See our [public docs](https://www.braze.com/docs/developer_guide/platform_integration_guides/web/analytics/location_tracking/) for more information.
+- Deprecated the [`enableHtmlInAppMessages`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#initializationoptions.__type.enablehtmlinappmessages) initialization option in favor of [`allowUserSuppliedJavascript`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#initializationoptions.__type.enablehtmlinappmessages). These options are functionally equivalent and no other changes are required.
+
+##### Fixed
+- Fixed incorrect typing for [`User.setCountry`](https://js.appboycdn.com/web-sdk/latest/doc/classes/appboy.user.html#setcountry).
+- Added missing `dismissed` property to TypeScript definition and docs for `Card` subclasses.
+
 ## 3.2.0
 
 ##### Added
