@@ -1,3 +1,19 @@
+## 3.4.0
+
+##### Added
+- Added [`User.addToSubscriptionGroup()`](https://js.appboycdn.com/web-sdk/latest/doc/classes/appboy.user.html#addtosubscriptiongroup) and [`User.removeFromSubscriptionGroup()`](https://js.appboycdn.com/web-sdk/latest/doc/classes/appboy.user.html#removefromsubscriptiongroup) to manage SMS/Email Subscription Groups.
+
+##### Changed
+- Cards with subclass [`ControlCard`](https://js.appboycdn.com/web-sdk/latest/doc/classes/appboy.controlcard.html) are no longer counted in [`Feed.getUnreadCardCount`](https://js.appboycdn.com/web-sdk/latest/doc/classes/appboy.feed.html#getunreadcardcount) or [`ContentCards.getUnviewedCardCount`](https://js.appboycdn.com/web-sdk/latest/doc/classes/appboy.contentcards.html#getunviewedcardcount).
+
+##### Fixed
+- Fixed an issue where globally-scoped CSS could cause the text and close button of In-App Messages to display incorrectly when using the built-in UI.
+- Fixed an accessibility issue with Content Cards where some feed children did not have the `article` role.
+- Fixed an issue where service worker network requests, including push click analytics, could not be made when SDK Authentication is enabled. If SDK Authentication is enabled and the service worker does not have a valid authentication signature, push click analytics will now be sent to the backend on the user's next session.
+- Fixed an issue where network requests that failed due to SDK Authentication errors did not use exponential backoff for retries.
+- Fixed an issue where iPads would be detected as Mac devices when using the "Request Desktop Site" iOS feature.
+- Fixed an issue where `aspectRatio` had an incorrect type in `Card` subclasses.
+
 ## 3.3.0
 
 ##### Added
