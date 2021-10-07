@@ -1,3 +1,8 @@
+## 3.4.1
+
+##### Fixed
+- Fixed an issue introduced in 3.3.0 where event timestamps could become incorrect when a network request fails and the event is placed back in the queue.
+
 ## 3.4.0
 
 ##### Added
