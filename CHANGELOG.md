@@ -1,3 +1,18 @@
+## 3.5.0
+
+##### Added
+- Added [`appboy.addSdkMetadata()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/appboy.html#addsdkmetadata) to allow self reporting of SDK Metadata fields via the [`appboy.BrazeSdkMetadata`](https://js.appboycdn.com/web-sdk/latest/doc/classes/appboy.brazesdkmetadata.html) enum.
+- Deprecated the [`appboy.stopWebTracking()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#stopWebTracking) method in favor of using [`appboy.disableSDK()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#disableSDK), which has the same functionality.
+- Deprecated the [`appboy.resumeWebTracking()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#resumeWebTracking) method in favor of using [`appboy.enableSDK()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#enableSDK), which has the same functionality.
+- Added getter method [`appboy.isDisabled()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#isDisabled) to determine if SDK has been disabled via [`appboy.disableSDK()`](https://js.appboycdn.com/web-sdk/latest/doc/module-appboy.html#disableSDK).
+- Accessibility improvements to in-app messages with scrollable text.
+
+##### Changed
+- Calling `changeUser()` with an SDK Authentication signature will now update the signature when it is called with the current user's ID.
+
+##### Fixed
+- Fixed an issue where removing the `ab-pause-scrolling` class was not sufficient to allow scrolling on touchscreen devices during the display of an in-app message.
+
 ## 3.4.1
 
 ##### Fixed
