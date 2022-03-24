@@ -1,3 +1,8 @@
+## 3.5.1
+
+##### Changed
+- Added Shopify to [`BrazeSdkMetadata`](https://js.appboycdn.com/web-sdk/latest/doc/classes/appboy.brazesdkmetadata.html)
+
 ## 3.5.0
 
 ##### Added
