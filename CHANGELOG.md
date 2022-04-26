@@ -1,3 +1,21 @@
+## 4.0.0
+
+##### ⚠️ Breaking
+- The `appboy-web-sdk`, `@braze/web-sdk-core`, and `@braze/web-sdk-no-amd` npm packages are deprecated in favor of the `@braze/web-sdk` package and will no longer receive updates.
+- The SDK's exported object has been renamed from `appboy` to `braze`. CDN users must update their loading snippet when upgrading to 4.0.
+- The file name for the bundled version of the SDK has changed to `braze.min.js`. CDN users must ensure that the URL points to this new file name when upgrading to 4.0.
+- The Braze Web SDK now supports importing individual features and methods as native ES Modules that can be tree-shaken. For example, if you only use In-App Messages with a custom UI, you can now import our `InAppMessage` classes and `subscribeToInAppMesssage()` and Javascript module bundlers such as webpack will remove any unused code. If you prefer to continue using a compiled version of the SDK, it can be found through our CDN.
+- The prefix for SDK logs has changed from `Appboy` to `Braze`. If you use the `Appboy` prefix as a filter in your logging tools, you should update it to include `Braze`.
+- As a result of the above changes, many of our method signatures have changed. See our [upgrade guide](https://github.com/braze-inc/braze-web-sdk/blob/master/upgrade-guide.md) for more information on how to migrate.
+- Dropped support for Internet Explorer.
+
+##### Changed
+- Updated default z-index of `InAppMessage` to 9001. This can be still be overwritten using the [inAppMessageZIndex](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#initializationoptions) initialization option.
+
+##### Added
+- Introduced support for the new Braze Actions feature. When displaying In-App Messages and Content Cards through our built-in UI, this feature requires no additional code.
+- Added [`braze.handleBrazeAction()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#handlebrazeaction) to handle Braze Action URLs when using a custom UI.
+
 ## 3.5.1
 
 ##### Changed
