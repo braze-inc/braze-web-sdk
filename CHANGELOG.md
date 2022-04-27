@@ -6,7 +6,7 @@
 - The file name for the bundled version of the SDK has changed to `braze.min.js`. CDN users must ensure that the URL points to this new file name when upgrading to 4.0.
 - The Braze Web SDK now supports importing individual features and methods as native ES Modules that can be tree-shaken. For example, if you only use In-App Messages with a custom UI, you can now import our `InAppMessage` classes and `subscribeToInAppMesssage()` and Javascript module bundlers such as webpack will remove any unused code. If you prefer to continue using a compiled version of the SDK, it can be found through our CDN.
 - The prefix for SDK logs has changed from `Appboy` to `Braze`. If you use the `Appboy` prefix as a filter in your logging tools, you should update it to include `Braze`.
-- As a result of the above changes, many of our method signatures have changed. See our [upgrade guide](https://github.com/braze-inc/braze-web-sdk/blob/master/upgrade-guide.md) for more information on how to migrate.
+- As a result of the above changes, many of our method signatures have changed. See our [upgrade guide](https://github.com/braze-inc/braze-web-sdk/blob/master/UPGRADE_GUIDE.md) for more information on how to migrate.
 - Dropped support for Internet Explorer.
 
 ##### Changed
