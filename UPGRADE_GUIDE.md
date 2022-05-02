@@ -57,13 +57,13 @@ For context, version `@braze/web-sdk@3.5` and `@braze/web-sdk-core@3.5` weigh in
 
 The following methods have been renamed:
 
-| Old (v3.x)                                   |       | New (v4.0)                                                                                                                                  |
-| -------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `appboy.registerAppboyPushMessages()`        | `-->` | [`requestPushPermission()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestpushpermission)                           |
-| `appboy.unregisterAppboyPushMessages()`      | `-->` | [`unregisterPush()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#unregisterpush)                                         |
-| `appboy.automaticallyShowNewInAppMessages()` | `-->` | [`automaticallyShowInAppMessages()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#automaticallyshowinappmessages) |
-| `appboy.toggleAppboyLogging()`               | `-->` | [`toggleLogging()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#togglelogging)                                           |
-| `appboy.display.*`                           | `-->` | The `appboy.display` namespace has been removed. To upgrade, find and replace all references to `appboy.display.` with `braze.`            |
+| Old (v3.x)                                   | New (v4.0)                                                                                                                          |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `appboy.registerAppboyPushMessages()`        | [`requestPushPermission()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestpushpermission)                   |
+| `appboy.unregisterAppboyPushMessages()`      | [`unregisterPush()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#unregisterpush)                                 |
+| `appboy.automaticallyShowNewInAppMessages()` | [`automaticallyShowInAppMessages()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#automaticallyshowinappmessages) |
+| `appboy.toggleAppboyLogging()`               | [`toggleLogging()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#togglelogging)                                   |
+| `appboy.display.*`                           | The `appboy.display` namespace has been removed. To upgrade, find and replace all references to `appboy.display.` with `braze.`     |
 
 #### Removed APIs
 

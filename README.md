@@ -29,7 +29,7 @@ so remove this option or [provide an alternate logger](https://js.appboycdn.com/
 
 ## Font Awesome
 
-Braze uses [Font Awesome](http://fortawesome.github.io/Font-Awesome/) 4.7.0 for in-app message icons. Check out the [cheat sheet](http://fortawesome.github.io/Font-Awesome/cheatsheet/) to browse available icons.
+Braze uses [Font Awesome](http://fortawesome.github.io/Font-Awesome/) 4.7.0 for in-app message icons. To disable loading Font Awesome, use the `doNotLoadFontAwesome` initialization option. Check out the [cheat sheet](http://fortawesome.github.io/Font-Awesome/cheatsheet/) to browse available icons.
 
 ## Questions?
 

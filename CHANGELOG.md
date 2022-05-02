@@ -1,6 +1,13 @@
+## 4.0.1
+
+##### Fixed
+- The `created` field is now set for `Card` objects when using Content Cards.
+- Added `"type": "module"` to the package.json so frameworks like Next.js recognize the SDK as an ES Module.
+
 ## 4.0.0
 
 ##### ⚠️ Breaking
+- See our [upgrade guide](https://github.com/braze-inc/braze-web-sdk/blob/master/UPGRADE_GUIDE.md) for more information on how to migrate from v3.
 - The `appboy-web-sdk`, `@braze/web-sdk-core`, and `@braze/web-sdk-no-amd` npm packages are deprecated in favor of the `@braze/web-sdk` package and will no longer receive updates.
 - The SDK's exported object has been renamed from `appboy` to `braze`. CDN users must update their loading snippet when upgrading to 4.0.
 - The file name for the bundled version of the SDK has changed to `braze.min.js`. CDN users must ensure that the URL points to this new file name when upgrading to 4.0.

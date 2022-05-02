@@ -6,8 +6,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report! 
-        
+        Thanks for taking the time to fill out this bug report!
+
         :warning: Please consider contacting [Braze Support](https://www.braze.com/docs/support_contact) for in-depth troubleshooting and to avoid leaking private information to our public Github issues.
   - type: input
     id: sdk_version
@@ -55,7 +55,7 @@ body:
           ```
           import braze from "@braze/web-sdk"
           braze.subscribeToInAppMessage(function(inAppMessage) {
-            braze.display.showInAppMessage(inAppMessage);
+            braze.showInAppMessage(inAppMessage);
           });
           ```
     validations:
