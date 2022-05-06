@@ -1,3 +1,11 @@
+## 4.0.2
+
+##### Changed
+- Cookies set by the Braze Web SDK now expire after 400 days per the recommendation of the [HTTP Working Group's draft RFC 6265](https://httpwg.org/http-extensions/draft-ietf-httpbis-rfc6265bis.html#section-4.1.2.2)
+
+##### Fixed
+- Removed usages of the nullish coalescing operator for better compatibility with various webpack configurations.
+
 ## 4.0.1
 
 ##### Fixed
