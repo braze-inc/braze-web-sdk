@@ -1,3 +1,9 @@
+## 4.0.3
+
+##### Fixed
+- Fixed an issue introduced in 4.0.0 where Safari push did not work unless the full `baseUrl` (e.g. `https://sdk.iad-01.braze.com/api/v3`) was specified in the initialization options.
+- The SDK will now ignore In-App Messages containing a push prompt Braze Action for users who have already registered for push or whose browser does not support push.
+
 ## 4.0.2
 
 ##### Changed
