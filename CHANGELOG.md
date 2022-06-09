@@ -1,3 +1,11 @@
+## 4.0.4
+
+##### Changed
+- Deprecated and changed the obsolete [logContentCardsDisplayed](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcontentcardsdisplayed) method to a no-op. Card impressions should be logged using [logCardImpressions](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcardimpressions).
+
+##### Fixed
+- Fixed an issue introduced in 4.0.0 that prevented control in-app message impressions from being logged.
+
 ## 4.0.3
 
 ##### Fixed

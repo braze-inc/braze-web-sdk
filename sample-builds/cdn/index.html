@@ -11,12 +11,12 @@
         y.async=1;(b=p.getElementsByTagName(P)[0]).parentNode.insertBefore(y,b)
       }(window,document,'script');
 
-      // See https://js.appboycdn.com/web-sdk/4.0/doc/module-appboy.html#initialize for options
+      // See https://js.appboycdn.com/web-sdk/4.0/doc/modules/braze.html#initialize for initialization options
       braze.initialize('e491231d-c4ae-466d-8f7f-ba8ad308f12a', {
         enableLogging: true,
-        baseUrl: 'https://sdk.iad-01.braze.com/api/v3',
+        baseUrl: 'sdk.iad-01.braze.com',
         // Warning: Using the serviceWorkerLocation option limits the scope of push notifications on your site. See
-        // https://js.appboycdn.com/web-sdk/4.0/doc/module-appboy.html#initialize for more details.
+        // https://js.appboycdn.com/web-sdk/4.0/doc/modules/braze.html#initialize for more details.
         // If in doubt, omit this option and use the default location of /service-worker.js
         serviceWorkerLocation: document.location.pathname.replace('index.html', 'service-worker.js'),
         safariWebsitePushId: 'web.com.braze.sample-build'
