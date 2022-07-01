@@ -1,3 +1,8 @@
+## 4.0.5
+
+##### Fixed
+- Fixed an issue introduced in 4.0.0 that prevented the SDK from running with certain rollup.js configurations.
+
 ## 4.0.4
 
 ##### Changed

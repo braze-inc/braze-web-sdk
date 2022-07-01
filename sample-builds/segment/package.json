@@ -1,9 +1,11 @@
 {
-  "name": "braze-webpack-sample",
+  "name": "segment-integration-sample",
   "version": "0.1.0",
   "private": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "dependencies": {
-    "@braze/web-sdk": "4.0.5",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
