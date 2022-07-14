@@ -1,3 +1,8 @@
+## 4.0.6
+
+##### Fixed
+- Fixed an issue introduced in 4.0.0 that incorrectly failed to display valid IAMs with an unknown Braze Action type error.
+
 ## 4.0.5
 
 ##### Fixed
