@@ -1,3 +1,11 @@
+## 4.1.0
+
+##### Added
+- Added a method [`braze.logContentCardImpressions()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcontentcardimpressions) to log that the user saw the given Content Cards. This method is equivalent to calling [`braze.logCardImpressions()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcardimpressions) with parameter `forContentCards = true`.
+
+##### Fixed
+- Fixed an issue where calling `unregisterPush()` when the user is already unregistered would fail to execute the success callback function.
+
 ## 4.0.6
 
 ##### Fixed

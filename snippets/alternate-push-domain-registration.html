@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Opt-In for Push</title>
+    <script src="https://js.appboycdn.com/web-sdk/4.1/braze.min.js"></script>
+  </head>
+  <body>
+    <button id="opt-in">Opt In For Push</button>
+    <script>
+      // initialize Braze
+      braze.initialize("YOUR-API-KEY", {
+        baseUrl: "YOUR-SDK-BASE-URL",
+        enableLogging: true
+      });
+      // parse the `external_id` from the URL parameters
+      const external_id =
+        (
+          location.search
+            .substring(1)
+            .split("&")
+            .find(param => param.startsWith("external_id=")) || ""
+        ).split("=")[1] || "";
+      if (external_id) {
+        braze.changeUser(external_id);
+      }
+      braze.automaticallyShowInAppMessages();
+      braze.openSession();
+
+      // when the user click's our Opt In button, prompt for permission
+      document.getElementById("opt-in").onclick = function() {
+        braze.requestPushPermission(
+          () => {
+            window.alert(`You are registered for push!`);
+            window.close();
+          },
+          () => {
+            window.alert(`Something went wrong.`);
+          }
+        );
+      };
+    </script>
+  </body>
+</html>

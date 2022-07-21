@@ -1,0 +1,25 @@
+<script src="https://js.appboycdn.com/web-sdk/4.1/braze.min.js"></script>
+<script>
+  // initialize Braze
+  braze.initialize("YOUR-API-KEY", {
+    baseUrl: "YOUR-SDK-BASE-URL",
+    enableLogging: true
+  });
+
+  // listen for a request from our insecure page
+  window.addEventListener("message", event => {
+    if (event.origin === "http://insecure.com") {
+      // when they ask for push status, retrieve from Braze SDK
+      if (event.data.type === "get_push_status") {
+        // send the parent window (insecure.com) the results
+        window.top.postMessage(
+          {
+            type: "set_push_status",
+            isPushPermissionGranted: braze.isPushPermissionGranted()
+          },
+          event.origin
+        );
+      }
+    }
+  });
+</script>
