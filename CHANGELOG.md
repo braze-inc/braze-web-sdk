@@ -1,3 +1,8 @@
+## 4.2.0
+
+##### Added
+- Added support for Content Cards to evaluate Retry-After headers.
+
 ## 4.1.0
 
 ##### Added
