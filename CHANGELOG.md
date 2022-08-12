@@ -1,3 +1,8 @@
+## 4.2.1
+
+##### Fixed
+- Fixed an issue introduced in 4.0.3, where IAM displays could sometimes fail due to an internal race condition.
+
 ## 4.2.0
 
 ##### Added
