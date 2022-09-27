@@ -1,3 +1,9 @@
+## 4.3.0
+
+##### Added
+- Added [`brazeBridge.changeUser(id: string, sdkAuthSignature?: string)`](https://www.braze.com/docs/user_guide/message_building_by_channel/in-app_messages/customize/html_in-app_messages/#bridge) to HTML In-App Messages.
+- Added the ability to include a custom pathname in the `baseUrl` [initialization option](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#initializationoptions).
+
 ## 4.2.1
 
 ##### Fixed
