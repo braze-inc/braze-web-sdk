@@ -1,3 +1,15 @@
+## 4.4.0
+
+##### Added
+- Added support for the upcoming feature, Feature Flags.
+- A message is now logged if an IAM is triggered but not displayed because neither `automaticallyShowInAppMessages()` nor `subscribeToInAppMessage()` were called.
+
+##### Changed
+- IndexedDB connections now close after a transaction has been completed.
+
+##### Fixed
+- Fixed an issue introduced in 4.0.0 where In-App Message closing animations did not work as expected.
+
 ## 4.3.0
 
 ##### Added
