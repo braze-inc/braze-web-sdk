@@ -1071,7 +1071,7 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@braze/web-sdk@4.4.0":
+"@braze/web-sdk@4.5.0":
   version "4.0.3"
   resolved "https://registry.npmjs.org/@braze/web-sdk/-/web-sdk-4.0.3.tgz#7f078562967f4f1d0265c7448f68510eaf3dc1ff"
   integrity sha512-9KQkXlMJMHo9rCuam4RkwEmKDl5cJ07w1hdUiayYQPcEFxXBr52pV0iG7Wig7qIZkMickIKyQhomIXZDw1U8tA==

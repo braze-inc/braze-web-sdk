@@ -1,3 +1,12 @@
+## 4.5.0
+
+##### Added
+- Added `isControl` property to [`ContentCard`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.card.html) base model, to easily determine whether the card is a control card.
+- Added `isControl` property to [`InAppMessage`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.inappmessage.html) base model, to easily determine whether the message is a control in-app-message.
+
+##### Changed
+- Improved the reliability of in-app message impression logging in edge cases.
+
 ## 4.4.0
 
 ##### Added
