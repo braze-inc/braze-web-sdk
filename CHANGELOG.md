@@ -1,3 +1,8 @@
+## 4.5.1
+
+##### Fixed
+- Fixed an issue where sites with globally-scoped `svg` and `img` CSS caused certain elements of the built-in UI to display incorrectly.
+
 ## 4.5.0
 
 ##### Added
