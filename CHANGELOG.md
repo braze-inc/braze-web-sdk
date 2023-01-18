@@ -1,3 +1,12 @@
+## 4.6.0
+
+##### Added
+- Added a method [`braze.logContentCardClick()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcontentcardclick) to log that the user clicked on the given Content Card. This method is equivalent to calling [`braze.logCardClick()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcardclick) with parameter `forContentCards = true`.
+- Added support for the upcoming Braze Feature Flags product.
+
+##### Changed
+- Improved the check for duplicate in-app messages at display time.
+
 ## 4.5.1
 
 ##### Fixed
@@ -15,7 +24,6 @@
 ## 4.4.0
 
 ##### Added
-- Added support for the upcoming feature, Feature Flags.
 - A message is now logged if an IAM is triggered but not displayed because neither `automaticallyShowInAppMessages()` nor `subscribeToInAppMessage()` were called.
 
 ##### Changed
