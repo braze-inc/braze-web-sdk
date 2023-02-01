@@ -1,3 +1,8 @@
+## 4.6.1
+
+##### Fixed
+- Improved the type definition of [`FeatureFlag.properties`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.featureflag.html).
+
 ## 4.6.0
 
 ##### Added
