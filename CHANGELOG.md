@@ -1,3 +1,8 @@
+## 4.6.2
+
+##### Changed
+- Removed legacy email capture CSS. This is not a breaking change, as all existing web email capture campaigns have been migrated to the new universal email capture type on the Braze backend. This change results in ~1KB size reduction for those using the built-in In-App Message UI.
+
 ## 4.6.1
 
 ##### Fixed
