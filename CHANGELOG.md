@@ -1,3 +1,8 @@
+## 4.6.3
+
+##### Fixed
+- Fixed an issue preventing Feature Flags refreshes when SDK Authentication errors occur.
+
 ## 4.6.2
 
 ##### Changed
