@@ -1,3 +1,14 @@
+## 4.7.0
+
+##### Added
+- [`User.setCustomUserAttribute`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.user.html#setcustomuserattribute) now accepts nested custom attributes and arrays of objects.
+  - Adds a `merge` parameter that specifies whether the value should be merged with the existing value on the backend. If `false` (default), any existing attribute will be overwritten. If `true`, existing objects and arrays of objects will be merged. To update an array of objects, follow the guidelines in our [public docs](https://www.braze.com/docs/user_guide/data_and_analytics/custom_data/custom_attributes/array_of_objects/#usage-examples).
+
+##### Fixed
+- Fixed an issue where [`requestPushPermission`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestpushpermission) did not call the `deniedCallback` if the SDK encountered certain errors when registering push.
+- Fixed an issue where `requestPushPermission` did not log a message if push is not supported on the user's browser.
+- Fixed an incorrect typing in `subscribeToSdkAuthenticationFailures`.
+
 ## 4.6.3
 
 ##### Fixed
