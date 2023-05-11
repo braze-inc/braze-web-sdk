@@ -1,3 +1,9 @@
+## 4.7.1
+
+##### Fixed
+- Improved the type definition of [`Card.extras`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.card.html).
+- Fixed a regression introduced in 4.0.0 where the `manageServiceWorkerExternally` and `disablePushTokenMaintenance` initialization options could not work as expected.
+
 ## 4.7.0
 
 ##### Added
