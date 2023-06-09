@@ -1,3 +1,8 @@
+## 4.7.2
+
+##### Fixed
+- Fixed a regression with the noCookies option which caused some localStorage keys to be persisted in cookie storage.
+
 ## 4.7.1
 
 ##### Fixed
