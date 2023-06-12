@@ -1,3 +1,17 @@
+## 4.8.0
+
+##### Changed
+- The [`subscribeToFeatureFlagsUpdates`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsupdates) callback will now always be called first with the currently cached feature flags, and when feature flag updates are available.
+
+##### Fixed
+- Fixed the return type for [`subscribeToContentCardsUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetocontentcardsupdates).
+- Fixed the return type for [`subscribeToFeatureFlagsUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsupdates).
+- Improved type definitions in Card, InAppMessage and InAppMessageButton classes:
+  - Fixed return types for [`Card.subscribeToClickedEvent()`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.card.html#subscribetoclickedevent) and [`Card.subscribeToDismissedEvent()`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.card.html#subscribetodismissedevent).
+  - Fixed return types for [`InAppMessage.subscribeToClickedEvent()`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.inappmessage.html#subscribetoclickedevent) and [`InAppMessage.subscribeToDismissedEvent()`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.inappmessage.html#subscribetodismissedevent).
+  - Fixed return type for [`InAppMessageButton.subscribeToClickedEvent()`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.inappmessagebutton.html#subscribetoclickedevent).
+  - Fixed type definition of [`InAppMessage.extras`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.inappmessage.html#extras).
+
 ## 4.7.2
 
 ##### Fixed
