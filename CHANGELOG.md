@@ -1,3 +1,9 @@
+## 4.8.1
+
+##### Fixed
+- Fixed an issue where content cards were sometimes not marked as read upon card impression.
+- Improved the typings for the `isControl` field on In-App Message and Card classes.
+
 ## 4.8.0
 
 ##### Changed
