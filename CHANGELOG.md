@@ -1,3 +1,9 @@
+## 4.8.2
+
+##### Fixed
+- Fixed an issue where slow / failed image loading prevents subsequent in-app messages from displaying.
+- Fixed a regression introduced in 4.8.0 where push notifications failed to display in Safari versions <= 15.
+
 ## 4.8.1
 
 ##### Fixed
