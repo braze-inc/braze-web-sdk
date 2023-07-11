@@ -1,3 +1,8 @@
+## 4.8.3
+
+##### Fixed
+- Fixed an issue where `manageServiceWorkerExternally` initialization option failed to register service-worker when trying to register from a path higher than the service-worker location.
+
 ## 4.8.2
 
 ##### Fixed
