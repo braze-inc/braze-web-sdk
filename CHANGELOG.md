@@ -1,3 +1,21 @@
+## 4.9.0
+
+##### Added
+- Introduced a new [`ImageOnly`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.imageonly.html) Card subclass, which has the same functionality as the [`Banner`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.banner.html) class.
+- Added a new `ab-image-only` CSS class to `Banner` and `ImageOnly` cards when displayed through the built-in UI. New CSS customizations should target this class. The `ab-banner` classname will remain on both card types until the `Banner` class is removed in a future release.
+- Introduced two new methods [`deferInAppMessage()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#deferinappmessage) and [`getDeferredInAppMessage()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getdeferredinappmessage) that can be used together to delay the display of an in-app message for a future pageload. 
+  - [`deferInAppMessage()`] method defers the given in-app message. 
+  - The deferred in-app message can be retrieved by calling the  [`getDeferredInAppMessage`] method.
+
+##### Changed
+- Deprecated the [`Banner`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.banner.html) class.
+
+##### Fixed
+- Fixed an issue where in-app messages with images would fail to display when a parent node is supplied to `showInAppMessage()` and the parent node has not been attached to the DOM before the display callback is invoked.
+- Fixed an issue where the callbacks passed to `requestContentCardsRefresh()` were sometimes not triggered when this call was queued behind another `requestContentCardsRefresh()` or `subscribeToContentCardsUpdates()` request.
+- Fixed an issue where `dismissCard()` did not work as expected on cached content cards.
+- Fixed an issue where calling `destroy()` soonafter `wipeData()` incorrectly created a device ID cookie.
+
 ## 4.8.3
 
 ##### Fixed
