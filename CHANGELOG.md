@@ -1,3 +1,12 @@
+## 4.10.0
+
+##### Added
+- Added a new `appVersionNumber` initialization option for [targeting via numerical comparison](https://www.braze.com/docs/user_guide/engagement_tools/campaigns/ideas_and_strategies/new_features/).
+
+##### Changed
+- The SDK now ensures that cached messages for user (content cards, deferred in-app message, and feature flags) are cleared upon `changeUser()`.
+- [`getDeviceId`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getdeviceid) and [`getUserId`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.user.html#getuserid) now return results directly. Their callback parameters are deprecated and will be removed in a future major version.
+
 ## 4.9.0
 
 ##### Added
