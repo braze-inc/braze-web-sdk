@@ -1,3 +1,21 @@
+## 5.0.1
+
+##### Fixed
+- Fixed a bug where toggling `noCookies` initialization option from true to false did not create all the necessary cookies.
+- Fixed an issue where user attributes could not be nulled out by setting a specific null value.
+
+## 5.0.0
+
+##### ⚠️ Breaking
+- The [`subscribeToFeatureFlagsUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsupdates) callback will now always be called, regardless of refresh success/failure. If there is a failure in receiving updates, the callback will be called with currently cached feature flags.
+- The [`getFeatureFlag()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getfeatureflag) method now returns a null if the feature flag does not exist, or if feature flags are disabled.
+- Removed `logContentCardsDisplayed()` method that was previously deprecated in 4.0.4.
+- Removed the deprecated initialization option `enableHtmlInAppMessages`. This should be replaced with the `allowUserSuppliedJavascript` option instead.
+- Removed `Banner` class that was previously deprecated in 4.9.0 in favor of [`ImageOnly`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.imageonly.html).
+- Removed `ab-banner` CSS classname as part of `Banner` class removal. CSS customizations should instead target the `ab-image-only` class.
+- The SDK no longer throws runtime errors anywhere. If Braze methods are called prior to initialization, a warning will be logged to the console instead.
+- The SDK no longer adds default Braze in-app message styles to custom HTML in-app messages. These styles were previously used by legacy in-app message types.
+
 ## 4.10.1
 
 ##### Fixed
@@ -6,7 +24,7 @@
 ## 4.10.0
 
 ##### Added
-- Added a new `appVersionNumber` initialization option for [targeting via numerical comparison](https://www.braze.com/docs/user_guide/engagement_tools/campaigns/ideas_and_strategies/new_features/).
+- Added a new [`appVersionNumber`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#initializationoptions) initialization option for [targeting via numerical comparison](https://www.braze.com/docs/user_guide/engagement_tools/campaigns/ideas_and_strategies/new_features/).
 
 ##### Changed
 - The SDK now ensures that cached messages for user (content cards, deferred in-app message, and feature flags) are cleared upon `changeUser()`.
