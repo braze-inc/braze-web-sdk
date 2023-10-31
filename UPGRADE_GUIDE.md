@@ -1,31 +1,5 @@
 # Upgrade Guide
 
-## V4 to V5
-
-Version 5 of the Braze Web SDK (`@braze/web-sdk`) includes a few functional improvements and removal of previously deprecated APIs, thus improving the bundle size.
-
-### V5 Breaking Changes
-
-#### Behavioral Changes
-
-- The [`subscribeToFeatureFlagsUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsupdates) callback will now always be called, regardless of refresh success/failure. If there is a failure in receiving updates, the callback will be called with currently cached feature flags.
-- The [`getFeatureFlag()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getfeatureflag) method now returns `null` if the feature flag does not exist.
-- The SDK no longer throws runtime errors anywhere. If Braze methods are called prior to initialization, a warning will be logged to the console instead.
-- The SDK no longer adds default Braze in-app message styles to custom HTML in-app messages. These styles were previously used by legacy in-app message types.
-
-#### Removed APIs
-
-The following methods and properties have been removed:
-
-| API                                                                                   | Details                                                                                                                                                                                                                                                                                                        |
-| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `braze.logContentCardsDisplayed()`                                                              | Obsolete, no-op method that has been deprecated since 4.0.4.                                                                                                                                                                                                                                                                      |
-| `enableHtmlInAppMessages` initialization option                                                      | Deprecated since 3.3.0 in favor of [`allowUserSuppliedJavascript`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#initializationoptions) option which has the same functionality                                                                                                                                                         |
-| `braze.Banner` class                               | Deprecated since 4.9.0 in favor of [`braze.ImageOnly`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.imageonly.html) with the same functionality                                                                                                     |
-| `ab-banner` CSS classname                                                           | This is part of `braze.Banner` class removal. CSS customizations should instead target `ab-image-only` CSS class.                                                                                                                                                                                                                                                                                          |
-
----
-
 ## V3 to V4
 
 - [Tree-Shaking Benefits](#tree-shaking)
