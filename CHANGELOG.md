@@ -1,3 +1,12 @@
+## 5.1.0
+
+##### Changed
+- The [`subscribeToFeatureFlagsUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsupdates) callback will be triggered first with cached feature flags only if this cache is from the current session.
+
+##### Fixed
+- Fixed an issue where in-app messages failed to render a transparent background when using color-scheme.
+- Fixed an issue where impressions for a given feature flag ID were limited to once-per-user instead of once-per-session.
+
 ## 5.0.1
 
 ##### Fixed
@@ -15,6 +24,11 @@
 - Removed `ab-banner` CSS classname as part of `Banner` class removal. CSS customizations should instead target the `ab-image-only` class.
 - The SDK no longer throws runtime errors anywhere. If Braze methods are called prior to initialization, a warning will be logged to the console instead.
 - The SDK no longer adds default Braze in-app message styles to custom HTML in-app messages. These styles were previously used by legacy in-app message types.
+
+## 4.10.2
+
+##### Fixed
+- Fixed a CSS templating issue in the npm version of the SDK introduced in 4.10.1 that caused in-app messages to display without the expected styles when using Braze built-in UI. 
 
 ## 4.10.1
 
