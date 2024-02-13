@@ -1,3 +1,8 @@
+## 5.1.1
+
+##### Fixed
+- Fixed an issue where content cards sync request count persisted across users causing requests to be incorrectly rate limited.
+
 ## 5.1.0
 
 ##### Changed
