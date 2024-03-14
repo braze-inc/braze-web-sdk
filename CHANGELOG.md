@@ -1,3 +1,17 @@
+## 5.2.0
+
+##### Added
+- Added a [`deviceId`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#initializationoptions) initialization option. This can be used to set device ID of the user that would be used after initialization.
+
+##### Changed
+- The SDK will now persist and send the user's alias in all backend requests if it has been set, until the user is identified via an external ID. This alias will no longer be sent in requests once the user is identified and is not compatible with SDK authentication.
+- The SDK will now check for existing permissions before requesting push permissions.
+
+##### Fixed
+- Fixed an issue where `unregisterPush()` failed to invoke the `successCallback()` function in some cases where the user has already unsubscribed to push.
+- Fixed an issue where characters `|` and `:` were not supported in the `userId`.
+- Fixed an issue where HTML In-App Messages that used module script tags were not supported.
+
 ## 5.1.1
 
 ##### Fixed

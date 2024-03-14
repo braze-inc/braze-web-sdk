@@ -13,7 +13,7 @@ function App() {
       enableLogging: true,
       baseUrl: "sdk.iad-01.braze.com",
       // Warning: Using the serviceWorkerLocation option limits the scope of push notifications on your site. See
-      // https://js.appboycdn.com/web-sdk/5.1/doc/module-appboy.html#initialize for more details.
+      // https://js.appboycdn.com/web-sdk/5.2/doc/module-appboy.html#initialize for more details.
       // If in doubt, omit this option and use the default location of /service-worker.js
       serviceWorkerLocation: "/service-worker.js",
       safariWebsitePushId: "web.com.braze.sample-build"
