@@ -1,3 +1,14 @@
+## 5.3.0
+
+##### Added
+- Added the following methods to the `FeatureFlag` class to support the upcoming expansion of feature flag property types:
+  - [`getJsonProperty()`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.featureflag.html#getjsonproperty)
+  - [`getImageProperty()`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.featureflag.html#getimageproperty)
+  - [`getTimestampProperty()`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.featureflag.html#gettimestampproperty)
+
+##### Fixed
+- Fixed an issue where `e.preventDefault()` could be called on events that were not cancelable.
+
 ## 5.2.0
 
 ##### Added
@@ -48,7 +59,7 @@
 ## 4.10.2
 
 ##### Fixed
-- Fixed a CSS templating issue in the npm version of the SDK introduced in 4.10.1 that caused in-app messages to display without the expected styles when using Braze built-in UI. 
+- Fixed a CSS templating issue in the npm version of the SDK introduced in 4.10.1 that caused in-app messages to display without the expected styles when using Braze built-in UI.
 
 ## 4.10.1
 
@@ -69,8 +80,8 @@
 ##### Added
 - Introduced a new [`ImageOnly`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.imageonly.html) Card subclass, which has the same functionality as the [`Banner`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.banner.html) class.
 - Added a new `ab-image-only` CSS class to `Banner` and `ImageOnly` cards when displayed through the built-in UI. New CSS customizations should target this class. The `ab-banner` classname will remain on both card types until the `Banner` class is removed in a future release.
-- Introduced two new methods [`deferInAppMessage()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#deferinappmessage) and [`getDeferredInAppMessage()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getdeferredinappmessage) that can be used together to delay the display of an in-app message for a future pageload. 
-  - [`deferInAppMessage()`] method defers the given in-app message. 
+- Introduced two new methods [`deferInAppMessage()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#deferinappmessage) and [`getDeferredInAppMessage()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getdeferredinappmessage) that can be used together to delay the display of an in-app message for a future pageload.
+  - [`deferInAppMessage()`] method defers the given in-app message.
   - The deferred in-app message can be retrieved by calling the  [`getDeferredInAppMessage`] method.
 
 ##### Changed
