@@ -1,3 +1,8 @@
+## 5.3.1
+
+##### Fixed
+- Fixed an issue where a custom `serviceWorkerLocation` was not used when calling `unregisterPush`.
+
 ## 5.3.0
 
 ##### Added
