@@ -1,3 +1,8 @@
+## 5.3.2
+
+##### Fixed
+- Fixed a regression introduced in 5.2.0 that could cause HTML In-App Messages to render incorrectly when an external script is loaded synchronously.
+
 ## 5.3.1
 
 ##### Fixed
