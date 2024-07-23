@@ -1,3 +1,11 @@
+## 5.4.0
+
+##### Added
+- Added support for right-to-left languages to the built-in UI for In-App Messages and Content Cards.
+- Introduced a new initialization option [`serviceWorkerScope`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#initializationoptions) that can be used to override the default scope of the service worker.
+- Added a method [`braze.isInitialized()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#isinitialized) that returns whether the SDK has been initialized.
+- Added a new custom event named `braze.initialized` that is dispatched on the `window` object when the Braze initialization completes.
+
 ## 5.3.2
 
 ##### Fixed
