@@ -1,3 +1,8 @@
+## 5.5.0
+
+##### Changed
+- The SDK now rate limits Content Cards impressions to correspond to expected human behavior.
+
 ## 5.4.0
 
 ##### Added
