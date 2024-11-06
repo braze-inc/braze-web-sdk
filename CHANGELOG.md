@@ -1,3 +1,12 @@
+## 5.6.0
+
+##### Added
+- Added support for the Banners campaign type.
+
+##### Fixed
+- Fixed an issue where the SDK could erroneously request a triggers refresh even if no session is started.
+- Fixed an issue where `ControlMessage` instances would allow multiple impressions.
+
 ## 5.5.0
 
 ##### Changed
