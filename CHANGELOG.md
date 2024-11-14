@@ -1,3 +1,8 @@
+## 5.6.1
+
+##### Fixed
+- Fixed an issue where the Tizen operating system was not accurately reported in device properties.
+
 ## 5.6.0
 
 ##### Added
