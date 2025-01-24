@@ -1,3 +1,14 @@
+## 5.7.0
+
+##### Added
+- Added a method [`User.setLineId`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.user.html#setlineid) used to set the user's [LINE](https://www.braze.com/docs/user_guide/message_building_by_channel/line) User ID.
+
+##### Fixed
+- Fixed an issue where the chevron icon pointed in the wrong direction on SlideUp in-app messages when using RTL languages.
+
+##### Changed
+- The SDK now respects the `retry-after` header returned by the Braze platform when determining how long to wait before retrying a request.
+
 ## 5.6.1
 
 ##### Fixed
