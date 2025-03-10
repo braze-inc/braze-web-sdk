@@ -1,3 +1,12 @@
+## 5.8.0
+
+##### Changed
+- The [`insertBanner`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#insertbanner) method now accepts a `null` or `undefined` banner argument.
+- [`requestBannersRefresh`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestbannersrefresh) now waits for the initial response from the backend and tries again if Banners are enabled.
+
+##### Fixed
+- Fixed a race condition causing "not enabled" messages to be logged for Banners and Feature Flags methods on the user's first session.
+
 ## 5.7.0
 
 ##### Added
