@@ -1,3 +1,8 @@
+## 5.8.1
+
+##### Fixed
+- Fixed an issue with the npm version of the Web SDK that prevented Banner clicks from being logged.
+
 ## 5.8.0
 
 ##### Changed
