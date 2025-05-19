@@ -1,3 +1,11 @@
+## 5.9.0
+
+##### Added
+- Added `brazeBridge.setBannerHeight()` to allow Banners to resize dynamically.
+
+##### Fixed
+- Fixed an edge case with retry logic for Feature Flags, Content Cards and Banners network requests.
+
 ## 5.8.1
 
 ##### Fixed
