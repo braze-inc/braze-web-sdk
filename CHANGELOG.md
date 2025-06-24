@@ -1,3 +1,8 @@
+## 5.9.1
+
+##### Fixed
+- Fixed an issue where rate limit state persisted across users and sessions causing requests to be incorrectly rate limited at session start.
+
 ## 5.9.0
 
 ##### Added
