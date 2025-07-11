@@ -1,3 +1,38 @@
+## 6.0.0
+
+##### ⚠️ Breaking
+- Removed the [`Banner.html`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.banner.html) property, [`logBannerClick`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logbannerclick), and [`logBannerImpressions`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logbannerimpressions) methods. Instead, use [`insertBanner`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#insertbanner) which automatically handles impression and click tracking.
+- Removed support for the legacy News Feed feature.
+This includes removal of the [`Feed`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.feed.html) class, and the following associated methods:
+  - [`destroyFeed()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#destroyfeed)
+  - [`getCachedFeed()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getcachedfeed)
+  - [`logFeedDisplayed()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logfeeddisplayed)
+  - [`requestFeedRefresh()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestfeedrefresh)
+  - [`showFeed()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#showfeed)
+  - [`subscribeToFeedUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeedupdates)
+  - [`toggleFeed()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#togglefeed)
+  - [`logCardClick()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcardclick) (replaced by [`logContentCardClick()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcontentcardclick))
+  - [`logCardImpressions()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcontentcardimpressions) (replaced by [`logContentCardImpressions()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcontentcardimpressions))
+-  The `created` and `categories` fields that were used by legacy News Feed cards have been removed from [`Card`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.card.html) subclasses.
+  - The `linkText` field was also removed from the [`ImageOnly`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.imageonly.html) Card subclass and its constructor.
+- Clarified definitions and updated types to note that certain SDK methods explicitly return `undefined` when the SDK is not initialized, aligning the typings with actual runtime behavior. This could introduce new TypeScript errors in projects that relied on the previous (incomplete) typings.
+- The images of In-App Messages with `cropType` of `CENTER_CROP` (e.g. `FullScreenMessage` by default) are now rendered via an `<img>` tag instead of `<span>` for improved accessibility. This may break existing CSS customizations for the `.ab-center-cropped-img` class or its children.
+
+##### Added
+- Added `imageAltText` and `language` fields to the following classes:
+  - Cards: [`CaptionedImage`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.captionedimage.html), [`ImageOnly`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.imageonly.html), and [`ClassicCard`]
+  - In-App Messages: [`ModalMessage`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.modalmessage.html), [`FullScreenMessage`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.fullscreenmessage.html), and [`SlideUpMessage`](https://js.appboycdn.com/web-sdk/latest/doc/classes/braze.slideupmessage.html)
+- When available, the default UI will use these fields to set the alternate text of images and the `lang` attribute, respectively, of In-App Messages and Cards.
+- Improved the accessibility of In-App Messages and Content Cards when displayed by the default UI.
+
+##### Changed
+- Any new session susbcriptions now immediately invoke the callback if a new session has already started.
+
+##### Fixed
+- Subscription methods now correctly trigger refreshes when `openSession()` is called, even if `changeUser()` was called first.
+- Fixed an issue where Banners could display with a small amount of whitespace at the bottom.
+- Fixed an issue where the `messageExtras` field was missing from the type definitions of InAppMessage classes.
+
 ## 5.9.1
 
 ##### Fixed
