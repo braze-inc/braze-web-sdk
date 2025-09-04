@@ -1,3 +1,15 @@
+## 6.1.0
+
+##### Added
+- Added support for [`Banner`](https://js.appboycdn.com/web-sdk-develop/latest/doc/classes/braze.banner.html) properties.
+
+##### Changed
+- The default client-side rate limiting value for Banners refresh has been increased. For more information on SDK rate limiting, please refer to the [Braze Developer Guide](https://www.braze.com/docs/developer_guide/sdk_integration/rate_limits#braze-sdk-rate-limits)
+
+##### Fixed
+- Fixed an issue where Banner serialization keys were inconsistent between SDK versions, which could cause Banners to display incorrectly until the first Banners refresh after a version upgrade.
+- Fixed an issue where PetalBot and Meta web crawlers were not properly detected.
+
 ## 6.0.0
 
 ##### ⚠️ Breaking

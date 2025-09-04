@@ -1,5 +1,31 @@
 # Upgrade Guide
 
+## V5 to V6
+
+Version 6 of the Braze Web SDK (`@braze/web-sdk`) removes the legacy News Feed feature and deprecated banner APIs, introduces stricter typings, and makes small rendering changes for improved accessibility.
+
+### V6 Breaking Changes
+
+#### Behavioral Changes
+
+- The [`insertBanner()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#insertbanner) method now automatically tracks impressions and clicks. The separate `Banner.html`, `logBannerClick()`, and `logBannerImpressions()` APIs have been removed.
+- The images in In-App Messages with `cropType: CENTER_CROP` (e.g. `FullScreenMessage`) are now rendered using an `<img>` tag instead of a `<span>`. This improves accessibility but may require updating CSS customizations that target `.ab-center-cropped-img`.
+- TypeScript typings now reflect that some methods return `undefined` when the SDK has not been initialized. This can surface new TypeScript compile-time errors if your code assumed a value. Add guards/optional chaining, or refine types where needed.
+
+#### Removed APIs
+
+The following methods and properties have been removed:
+
+| API                                                                                   | Details                                                                                                                                                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `braze.Banner.html` / `braze.logBannerClick()` / `braze.logBannerImpressions()`                                                            |   Replaced by [`insertBanner()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#insertbanner), which handles rendering, impressions, and clicks.                                                                                                                                                                                                                                                         |
+| Legacy News Feed (`braze.Feed class`)                                                      | Fully removed, along with: `destroyFeed()`, `getCachedFeed()`, `logFeedDisplayed()`, `requestFeedRefresh()`, `showFeed()`, `subscribeToFeedUpdates()`, `toggleFeed`().                                                                                                                                                      |
+| `logCardClick()` / `logCardImpressions()`                              | Use [`logContentCardClick()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcontentcardclick) and [`logContentCardImpressions()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logcontentcardimpressions) instead.                                                                                                |
+| `Card.created` and `Card.categories`                                                           | Fields used by legacy News Feed and removed from `Card` subclasses.
+| `ImageOnly.linkText` (and constructor param)                                                           | Unused and removed.
+
+---
+
 ## V4 to V5
 
 Version 5 of the Braze Web SDK (`@braze/web-sdk`) includes a few functional improvements and removal of previously deprecated APIs, thus improving the bundle size.
