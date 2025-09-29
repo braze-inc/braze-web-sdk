@@ -1,3 +1,8 @@
+## 6.2.0
+
+##### Added
+- Updated platform detection for the `Coolita` and `WhaleTV` Smart TV platforms, which are now classified as `Other Smart TV`.
+
 ## 6.1.0
 
 ##### Added
