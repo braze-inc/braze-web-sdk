@@ -4,7 +4,7 @@
 </p>
 
 
-# Braze Web SDK [![latest](https://img.shields.io/github/v/tag/braze-inc/braze-web-sdk?label=latest%20release&color=300266)](https://github.com/braze-inc/braze-web-sdk/releases) [![Static Badge](https://img.shields.io/badge/TSDoc-801ed7)](https://js.appboycdn.com/web-sdk/6.2/doc/modules/braze.html) ![lighthouse score](.github/assets/lighthouse-score.svg)
+# Braze Web SDK [![latest](https://img.shields.io/github/v/tag/braze-inc/braze-web-sdk?label=latest%20release&color=300266)](https://github.com/braze-inc/braze-web-sdk/releases) [![Static Badge](https://img.shields.io/badge/TSDoc-801ed7)](https://js.appboycdn.com/web-sdk/6.3/doc/modules/braze.html) ![lighthouse score](.github/assets/lighthouse-score.svg)
 
 - [Braze User Guide](https://www.braze.com/docs/user_guide/introduction/ "Braze User Guide")
 - [Braze Developer Guide](https://www.braze.com/docs/developer_guide/sdk_integration/?sdktab=web "Braze Developer Guide")
@@ -32,9 +32,9 @@ braze.changeUser('Jane Doe');
 
 | Name | Description | npm | CDN URL
 | ---- | ----------- | --- | -------
-| Full | Full SDK with UI. When using the npm version, Javascript bundlers will remove any unused code including the UI. | `@braze/web-sdk` | https://js.appboycdn.com/web-sdk/6.2/braze.min.js
-| Core | Contains the SDK without UI. You will need to implement your own UI for In-App Messaging and Content Cards when using this version of the SDK. Our UI elements are fully customizable via css, so we generally recommend integration of the full library instead. | N/A | https://js.appboycdn.com/web-sdk/6.2/braze.core.min.js
-| No-AMD | Contains the full SDK without AMD support. This is useful if your site uses RequireJS or another AMD module-loader, but you prefer to load the SDK through the CDN. | N/A | https://js.appboycdn.com/web-sdk/6.2/braze.no-amd.min.js
+| Full | Full SDK with UI. When using the npm version, Javascript bundlers will remove any unused code including the UI. | `@braze/web-sdk` | https://js.appboycdn.com/web-sdk/6.3/braze.min.js
+| Core | Contains the SDK without UI. You will need to implement your own UI for In-App Messaging and Content Cards when using this version of the SDK. Our UI elements are fully customizable via css, so we generally recommend integration of the full library instead. | N/A | https://js.appboycdn.com/web-sdk/6.3/braze.core.min.js
+| No-AMD | Contains the full SDK without AMD support. This is useful if your site uses RequireJS or another AMD module-loader, but you prefer to load the SDK through the CDN. | N/A | https://js.appboycdn.com/web-sdk/6.3/braze.no-amd.min.js
 
 ## Supported Browsers
 
@@ -53,7 +53,7 @@ braze.changeUser('Jane Doe');
 # Debugging / Troubleshooting
 
 Pass the option `enableLogging: true` to the initialize function (`braze.initialize('YOUR-API-KEY-HERE', { baseUrl: 'YOUR-SDK-ENDPOINT', enableLogging: true });`) to cause Braze to log to the javascript console. This is valuable for development but is visible to all users,
-so remove this option or [provide an alternate logger](https://js.appboycdn.com/web-sdk/6.2/doc/modules/braze.html#setlogger) before you release your page to production.
+so remove this option or [provide an alternate logger](https://js.appboycdn.com/web-sdk/6.3/doc/modules/braze.html#setlogger) before you release your page to production.
 
 ## Font Awesome
 

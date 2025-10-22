@@ -1,1 +1,1 @@
-https://js.appboycdn.com/web-sdk/6.2/braze.no-amd.min.js
+https://js.appboycdn.com/web-sdk/6.3/braze.no-amd.min.js

@@ -1,3 +1,10 @@
+## 6.3.0
+
+##### Added
+- Exposed `NotificationSubscriptionTypes` in `brazeBridge`.
+- Added support for detection of ChatGPT Atlas browser.
+- Improved crawler bot detection.
+
 ## 6.2.0
 
 ##### Added
