@@ -1,3 +1,8 @@
+## 6.3.1
+
+##### Fixed
+- Fixed an issue where banner impressions were not cleared from local storage when a new session was opened.
+
 ## 6.3.0
 
 ##### Added
