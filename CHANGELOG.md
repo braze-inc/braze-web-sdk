@@ -1,3 +1,11 @@
+## 6.4.0
+
+##### Added
+- Added methods [`braze.logBannerImpressions()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logbannerimpressions) and [`braze.logBannerClick()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logbannerclick) to allow integrators to manually log both the banner impression and click events. These methods should only be called if you're bypassing [`insertBanner`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#insertbanner) and building custom UI for banners similar to other channels.
+
+##### Fixed
+- Fixed an issue where In-App Messages for the previous user were still displayed after changing users.
+
 ## 6.3.1
 
 ##### Fixed
