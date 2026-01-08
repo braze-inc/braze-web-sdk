@@ -1,3 +1,11 @@
+## 6.5.0
+
+##### Added
+- Added the `Banner.html` property to support manually injecting HTML for cases where [`insertBanner`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#insertbanner) is not appropriate.
+
+##### Fixed
+- Improved request retry timing to prefer server-configurable values for resiliency and consistency with other Braze SDKs
+
 ## 6.4.0
 
 ##### Added
