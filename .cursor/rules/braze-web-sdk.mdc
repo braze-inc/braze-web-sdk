@@ -1,0 +1,1079 @@
+---
+description: Apply Braze Web SDK patterns when writing integration code to ensure correct initialization, event tracking, push setup, and feature usage
+globs: **/*.{ts,tsx,js,jsx,html,css}
+alwaysApply: false
+---
+
+# Braze Web SDK Integration Guidelines
+
+This file provides the patterns, conventions, and API reference for integrating the [Braze Web SDK](https://www.braze.com/docs/developer_guide/sdk_integration/?sdktab=web) (`@braze/web-sdk` v6.5.0) into web applications. Every code example and pattern is sourced from this repository's sample builds, snippets, and documentation.
+
+## Context
+
+- This repository contains **sample integrations and documentation**, not the SDK source code
+- The SDK is consumed from npm (`@braze/web-sdk`) or CDN (`https://js.appboycdn.com/web-sdk/6.5/braze.min.js`)
+- Sample apps use React 18 + TypeScript + Create React App
+- The SDK ships with built-in TypeScript definitions and supports ES module tree-shaking
+
+## Requirements
+
+- ALWAYS call `automaticallyShowInAppMessages()` or `subscribeToInAppMessage()` BEFORE `openSession()` — session-start triggered messages will silently fail otherwise
+- ALWAYS call `subscribeToContentCardsUpdates()` BEFORE `openSession()` if you want Content Cards to auto-refresh on session start
+- ALWAYS provide `baseUrl` in `initialize()` options — it has been required since v3.0.0
+- ALWAYS use optional chaining (`?.`) when calling methods on `getUser()` — it returns `undefined` when the SDK is not initialized
+- NEVER use `enableHtmlInAppMessages` — it is removed; use `allowUserSuppliedJavascript: true` instead
+- NEVER use `logCardClick()` or `logCardImpressions()` — they are removed; use `logContentCardClick()` and `logContentCardImpressions()` instead
+- NEVER reference the legacy News Feed APIs (`Feed`, `showFeed`, `toggleFeed`, etc.) — they were fully removed in v6
+- Use `enableLogging: true` during development but ALWAYS remove it before production deployment
+- For migration details between major versions, refer to `UPGRADE_GUIDE.md` in this repository
+
+## Repository Structure
+
+```
+braze-web-sdk/
+├── sample-builds/
+│   ├── cdn/              # CDN script tag integration sample
+│   ├── npm/              # NPM + React + Webpack integration sample
+│   ├── segment/          # Segment analytics integration sample
+│   └── google-tag-manager/ # GTM integration sample
+├── snippets/             # Code snippets used by braze.com/docs
+│   ├── loading-snippet.js
+│   ├── service-worker-skip-waiting.js
+│   ├── alternate-push-domain-registration.html
+│   ├── alternate-push-domain-status.html
+│   └── no-amd-library.js
+├── context7.json         # Context7 MCP configuration
+├── CHANGELOG.md          # Version history (0.0.0 → 6.5.0)
+├── UPGRADE_GUIDE.md      # Migration guides (v2→v3 through v5→v6)
+└── README.md             # Quickstart and library overview
+```
+
+## SDK Libraries and Distribution
+
+The SDK ships in three variants depending on your integration method:
+
+| Variant | Description | npm Package | CDN URL |
+|---------|-------------|-------------|---------|
+| Full | Complete SDK with built-in UI for in-app messages and content cards. Bundlers tree-shake unused code automatically. | `@braze/web-sdk` | `https://js.appboycdn.com/web-sdk/6.5/braze.min.js` |
+| Core | SDK without UI components. Use this only if you need a fully custom UI for in-app messages and content cards. | N/A | `https://js.appboycdn.com/web-sdk/6.5/braze.core.min.js` |
+| No-AMD | Full SDK without AMD module support. Use this if your site uses RequireJS but you want to load the SDK via CDN. | N/A | `https://js.appboycdn.com/web-sdk/6.5/braze.no-amd.min.js` |
+
+Supported browsers: Chrome, Edge, Opera (Chromium-based), Firefox, and Safari. Internet Explorer is NOT supported (dropped in v4.0.0).
+
+## Installation
+
+### NPM Installation
+
+Install the package and import the methods you need. Named imports enable tree-shaking so your bundler only includes the features you actually use:
+
+```bash
+npm install --save @braze/web-sdk
+# or
+yarn add @braze/web-sdk
+```
+
+Use named imports to enable tree-shaking, which can reduce the Braze portion of your bundle to as little as ~0.9 kB (analytics only) up to ~12.7 kB (full in-app message UI):
+
+```typescript
+import { initialize, openSession, automaticallyShowInAppMessages, getUser } from "@braze/web-sdk";
+```
+
+Alternatively, import the entire SDK namespace if you prefer a single object:
+
+```typescript
+import * as braze from "@braze/web-sdk";
+```
+
+### CDN Installation
+
+For sites that don't use a JavaScript bundler, load the SDK via a script tag. The recommended approach is the async loading snippet, which creates stub functions on `window.braze` so you can call SDK methods immediately without waiting for the script to finish loading. Queued calls are replayed automatically once the SDK loads. See `snippets/loading-snippet.js` for the full snippet and `sample-builds/cdn/index.html` for a complete working example.
+
+You can also load the SDK directly with a simple script tag, but this blocks rendering until the script loads:
+
+```html
+<script src="https://js.appboycdn.com/web-sdk/6.5/braze.min.js"></script>
+```
+
+### Sample Build Dependencies
+
+The npm sample build (`sample-builds/npm/package.json`) demonstrates a minimal React + TypeScript integration:
+
+```json
+{
+  "dependencies": {
+    "@braze/web-sdk": "6.5.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.4.2"
+  }
+}
+```
+
+## Initialization
+
+### Required Initialization Sequence
+
+The order of these calls is critical. Registering subscriptions after `openSession()` means you will miss session-start triggered messages and auto-refresh behavior:
+
+1. `initialize()` — configure the SDK with your API key and options
+2. `automaticallyShowInAppMessages()` — register for in-app message display
+3. `subscribeToContentCardsUpdates()` — register for content card updates (if using)
+4. `subscribeToFeatureFlagsUpdates()` — register for feature flag updates (if using)
+5. `openSession()` — start the user session and trigger data sync
+
+### initialize() Function
+
+The `initialize()` function configures the SDK. It takes your API key (from the Braze dashboard under Settings > API Keys) and an options object. The `baseUrl` option is your SDK endpoint, also found in the dashboard:
+
+```typescript
+braze.initialize(apiKey: string, options: InitializationOptions): void
+```
+
+### NPM Initialization Example
+
+This React component from `sample-builds/npm/src/App.tsx` shows the standard initialization pattern. The SDK is initialized inside a `useEffect` hook so it runs once on mount, follows the correct call order, and sets a custom attribute to confirm the integration is working:
+
+```typescript
+import { useEffect } from "react";
+import {
+  initialize,
+  automaticallyShowInAppMessages,
+  openSession,
+  getUser
+} from "@braze/web-sdk";
+
+function App() {
+  useEffect(() => {
+    initialize("YOUR-API-KEY-HERE", {
+      enableLogging: true,
+      baseUrl: "sdk.iad-01.braze.com",
+      serviceWorkerLocation: "/service-worker.js",
+      safariWebsitePushId: "web.com.braze.sample-build"
+    });
+    automaticallyShowInAppMessages();
+    openSession();
+    getUser()?.setCustomUserAttribute("visited sample-build", new Date());
+  }, []);
+  // ...
+}
+```
+
+### CDN Initialization Example
+
+This pattern from `sample-builds/cdn/index.html` shows the equivalent initialization using the global `braze` object created by the CDN loading snippet. Notice that the `serviceWorkerLocation` is computed relative to the current page path so it works regardless of where `index.html` is hosted:
+
+```javascript
+braze.initialize('YOUR-API-KEY-HERE', {
+  enableLogging: true,
+  baseUrl: 'sdk.iad-01.braze.com',
+  serviceWorkerLocation: document.location.pathname.replace('index.html', 'service-worker.js'),
+  safariWebsitePushId: 'web.com.braze.sample-build'
+});
+braze.automaticallyShowInAppMessages();
+braze.openSession();
+braze.getUser().setCustomUserAttribute('visited sample-build', new Date());
+```
+
+### Alternate Domain Initialization
+
+When push notifications must be registered on a different domain (e.g., an HTTPS subdomain for a site that also serves HTTP pages), initialize the SDK on that alternate domain and parse the user's external ID from URL parameters. This pattern is from `snippets/alternate-push-domain-registration.html`:
+
+```javascript
+braze.initialize("YOUR-API-KEY", {
+  baseUrl: "YOUR-SDK-BASE-URL",
+  enableLogging: true
+});
+const external_id = (
+  location.search.substring(1).split("&")
+    .find(param => param.startsWith("external_id=")) || ""
+).split("=")[1] || "";
+if (external_id) {
+  braze.changeUser(external_id);
+}
+braze.automaticallyShowInAppMessages();
+braze.openSession();
+```
+
+## Configuration Options
+
+### InitializationOptions Reference
+
+All options are passed as the second argument to `initialize()`. Only `baseUrl` is required — all other options have sensible defaults:
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `baseUrl` | `string` | **Required** | SDK endpoint (e.g., `"sdk.iad-01.braze.com"`) |
+| `enableLogging` | `boolean` | `false` | Enable console debug logging |
+| `serviceWorkerLocation` | `string` | `"/service-worker.js"` | Path to service worker file |
+| `serviceWorkerScope` | `string` | — | Override the default scope of the service worker |
+| `safariWebsitePushId` | `string` | — | Safari website push ID (e.g., `"web.com.example.domain"`) |
+| `sessionTimeoutInSeconds` | `number` | `1800` (30 min) | Session timeout duration |
+| `enableSdkAuthentication` | `boolean` | `false` | Enable SDK authentication with JWT signatures |
+| `allowCrawlerActivity` | `boolean` | `false` | Log web crawler activity (bots are ignored by default) |
+| `allowUserSuppliedJavascript` | `boolean` | `false` | Allow user-supplied JS in HTML in-app messages |
+| `appVersion` | `string` | — | App version string for dashboard segmentation |
+| `appVersionNumber` | `string` | — | Numeric version string (e.g., `"1.2.3.4"`) for numerical comparison |
+| `deviceId` | `string` | — | Override the auto-generated device ID |
+| `devicePropertyAllowlist` | `string[]` | — | Restrict which device properties the SDK collects |
+| `disablePushTokenMaintenance` | `boolean` | `false` | Disable automatic push token sync on session start |
+| `doNotLoadFontAwesome` | `boolean` | `false` | Prevent loading Font Awesome 4.7.0 for IAM icons |
+| `inAppMessageZIndex` | `number` | `9001` | CSS z-index for in-app message overlays |
+| `localization` | `string` | — | ISO 639-1 language code for SDK UI elements |
+| `manageServiceWorkerExternally` | `boolean` | `false` | Set to `true` if you register your own service worker |
+| `minimumIntervalBetweenTriggerActionsInSeconds` | `number` | `30` | Min seconds between triggered in-app message actions |
+| `noCookies` | `boolean` | `false` | Rely entirely on localStorage (disables cross-subdomain identification) |
+| `openCardsInNewTab` | `boolean` | `false` | Open content card links in a new tab |
+| `openInAppMessagesInNewTab` | `boolean` | `false` | Open in-app message links in a new tab |
+| `requireExplicitInAppMessageDismissal` | `boolean` | `false` | Prevent dismiss via escape key or background click |
+| `contentSecurityNonce` | `string` | — | CSP nonce for SDK-injected scripts and styles |
+
+## User Management
+
+### Identifying Users
+
+Call `changeUser()` when a user logs in or is identified. This ends the current session, starts a new one for the specified user, and clears cached messages (content cards, deferred in-app messages, feature flags). The optional second argument is a JWT signature for SDK authentication:
+
+```typescript
+braze.changeUser(userId: string, sdkAuthSignature?: string): void
+```
+
+### Getting the User Object
+
+The `getUser()` method returns a `User` object that provides setter methods for all user attributes. It returns `undefined` if the SDK has not been initialized, so always use optional chaining:
+
+```typescript
+const user = braze.getUser(); // returns User | undefined
+```
+
+### Standard User Attributes
+
+Use the `User` object's setter methods to update standard profile attributes. Each method accepts the appropriate type or `null` to clear the value:
+
+```typescript
+const user = braze.getUser();
+user?.setEmail("user@example.com");
+user?.setFirstName("Jane");
+user?.setLastName("Doe");
+user?.setCountry("US");
+user?.setHomeCity("New York");
+user?.setPhoneNumber("+15551234567");
+user?.setGender(braze.User.Genders.FEMALE);
+user?.setDateOfBirth(1990, 6, 15);
+user?.setLanguage("en");
+user?.setLineId("line-user-id");
+user?.setLastKnownLocation(40.7128, -74.0060, 10);
+```
+
+### Custom User Attributes
+
+Custom attributes allow you to store arbitrary data on user profiles. The `setCustomUserAttribute()` method accepts strings, numbers, booleans, dates, nested objects (v4.7.0+), and arrays of objects. Attribute keys have a max length of 255 characters:
+
+```typescript
+user?.setCustomUserAttribute("plan_tier", "premium");
+user?.setCustomUserAttribute("login_count", 42);
+user?.setCustomUserAttribute("is_verified", true);
+user?.setCustomUserAttribute("signup_date", new Date());
+
+// Nested objects store structured data on the profile (v4.7.0+)
+user?.setCustomUserAttribute("address", { city: "NYC", zip: "10001" });
+
+// Pass true as the third argument to merge with existing object values
+// instead of replacing them
+user?.setCustomUserAttribute("preferences", { theme: "dark" }, true);
+```
+
+Additional attribute operations let you increment numeric values and manage string arrays:
+
+```typescript
+// Increment a numeric attribute by the given amount
+user?.incrementCustomUserAttribute("login_count", 1);
+
+// Add and remove values from a string array attribute
+user?.addToCustomAttributeArray("favorite_colors", "blue");
+user?.removeFromCustomAttributeArray("favorite_colors", "red");
+
+// Set a custom location attribute with latitude and longitude
+user?.setCustomLocationAttribute("office", 40.7128, -74.0060);
+```
+
+### User Aliases
+
+Aliases provide an alternative identifier for users. They consist of a value and a label, and can be used in the API and dashboard to identify users in addition to their external ID:
+
+```typescript
+user?.addAlias("my_alias", "my_label");
+```
+
+### Subscription Management
+
+Manage a user's membership in SMS/Email subscription groups and control their notification subscription status. The subscription type values are `"opted_in"`, `"subscribed"`, and `"unsubscribed"`:
+
+```typescript
+// Add or remove a user from a subscription group
+user?.addToSubscriptionGroup("subscription-group-id");
+user?.removeFromSubscriptionGroup("subscription-group-id");
+
+// Set notification subscription preferences
+user?.setEmailNotificationSubscriptionType(braze.User.NotificationSubscriptionTypes.OPTED_IN);
+user?.setPushNotificationSubscriptionType(braze.User.NotificationSubscriptionTypes.SUBSCRIBED);
+```
+
+### User ID and Enums
+
+Retrieve the current user's ID, which returns `null` for anonymous users or `undefined` if the SDK is not initialized:
+
+```typescript
+const userId = user?.getUserId(); // returns string | null | undefined
+```
+
+The `User.Genders` enum provides values for the `setGender()` method:
+
+```typescript
+braze.User.Genders.FEMALE            // "f"
+braze.User.Genders.MALE              // "m"
+braze.User.Genders.OTHER             // "o"
+braze.User.Genders.NOT_APPLICABLE    // "n"
+braze.User.Genders.PREFER_NOT_TO_SAY // "p"
+braze.User.Genders.UNKNOWN           // "u"
+```
+
+## Analytics
+
+### Custom Events
+
+Log custom events to track specific user actions in your app. Events can include an optional properties object (nested values and arrays of objects are supported since v3.3.0). The properties object has a 50 KB size limit. Returns `undefined` if the SDK is not initialized:
+
+```typescript
+braze.logCustomEvent(eventName: string, properties?: object): boolean | undefined
+```
+
+Example — log a simple event and a richer event with properties:
+
+```typescript
+braze.logCustomEvent("send me push");
+braze.logCustomEvent("product_viewed", {
+  product_id: "SKU_123",
+  category: "Electronics",
+  price: 29.99
+});
+```
+
+### Purchases
+
+Log purchase events to track revenue. The `productId` and `price` are required; `currency` defaults to `"USD"`, and `quantity` defaults to `1`. Properties follow the same 50 KB limit as custom events:
+
+```typescript
+braze.logPurchase(
+  productId: string,
+  price: number,
+  currency?: string,
+  quantity?: number,
+  properties?: object
+): boolean | undefined
+```
+
+Example — log a purchase with a coupon code property:
+
+```typescript
+braze.logPurchase("product_123", 9.99, "USD", 1, {
+  coupon: "SAVE10"
+});
+```
+
+### Data Flushing
+
+The SDK queues analytics data and flushes it to the backend periodically (every 10 seconds, or every 3 seconds on Safari due to Intelligent Tracking Prevention). Call `requestImmediateDataFlush()` to force an immediate flush — use this before critical navigations or when you need to ensure data is sent right away:
+
+```typescript
+braze.requestImmediateDataFlush(): void
+```
+
+## Push Notifications
+
+### Checking Push Support
+
+Before prompting a user for push permission, check whether their browser supports push, whether they've already granted permission, or whether they've blocked it. These methods return synchronous boolean values:
+
+```typescript
+braze.isPushSupported(): boolean        // true if the browser supports web push
+braze.isPushPermissionGranted(): boolean // true if the user has already granted permission
+braze.isPushBlocked(): boolean          // true if the user has blocked push
+```
+
+### Requesting Permission
+
+Prompt the user for push notification permission. The `successCallback` fires when the user accepts, and the `deniedCallback` fires when they deny. The `deniedCallback` receives `temporary: true` when the browser auto-denied on behalf of the user after multiple ignored prompts:
+
+```typescript
+braze.requestPushPermission(
+  successCallback?: () => void,
+  deniedCallback?: (temporary?: boolean) => void
+): void
+```
+
+This npm example from `sample-builds/npm/src/App.tsx` demonstrates dynamically importing push-related methods to minimize initial bundle size. The `webpackExports` magic comment tells webpack to only include these three exports in the dynamic chunk:
+
+```typescript
+const handleRegisterPushClick = async () => {
+  const {
+    requestPushPermission,
+    logCustomEvent,
+    requestImmediateDataFlush
+  } = await import(
+    /* webpackExports: ["requestPushPermission", "logCustomEvent", "requestImmediateDataFlush"] */
+    "@braze/web-sdk"
+  );
+  requestPushPermission(() => {
+    logCustomEvent("send me push");
+    requestImmediateDataFlush();
+  });
+};
+```
+
+The equivalent CDN pattern from `sample-builds/cdn/index.html` is simpler since there is no tree-shaking — just call the methods on the global `braze` object directly:
+
+```javascript
+braze.requestPushPermission(function() {
+  braze.logCustomEvent('send me push');
+  braze.requestImmediateDataFlush();
+});
+```
+
+For alternate-domain push registration (from `snippets/alternate-push-domain-registration.html`), attach the permission request to a button click and provide both success and error callbacks:
+
+```javascript
+document.getElementById("opt-in").onclick = function() {
+  braze.requestPushPermission(
+    () => { window.alert("You are registered for push!"); window.close(); },
+    () => { window.alert("Something went wrong."); }
+  );
+};
+```
+
+### Unregistering Push
+
+Remove a user's push registration. The unregistration persists across sessions until `requestPushPermission()` is called again:
+
+```typescript
+braze.unregisterPush(successCallback?: () => void, errorCallback?: () => void): void
+```
+
+### Service Worker Setup
+
+Every push integration requires a service worker file. Create `service-worker.js` in your public/root directory (the same directory as your `index.html`). This one-line file imports Braze's push handling logic:
+
+```javascript
+self.importScripts("https://js.appboycdn.com/web-sdk/6.5/service-worker.js");
+```
+
+If your service worker needs to skip the waiting phase (e.g., to immediately take control after installation), use this pattern from `snippets/service-worker-skip-waiting.js`. The `stopImmediatePropagation()` call prevents the default install handler from running before the Braze service worker loads:
+
+```javascript
+self.addEventListener("install", event => {
+  event.stopImmediatePropagation();
+});
+self.importScripts("https://js.appboycdn.com/web-sdk/6.5/service-worker.js");
+```
+
+### Push Status via postMessage (Alternate Domain)
+
+When you need to check a user's push permission status from a different (e.g., insecure) domain, embed a hidden iframe pointing to your secure push domain and communicate via `postMessage`. This pattern from `snippets/alternate-push-domain-status.html` initializes the SDK on the secure domain and responds to status queries from the parent window:
+
+```javascript
+braze.initialize("YOUR-API-KEY", {
+  baseUrl: "YOUR-SDK-BASE-URL",
+  enableLogging: true
+});
+window.addEventListener("message", event => {
+  if (event.origin === "http://insecure.com") {
+    if (event.data.type === "get_push_status") {
+      window.top.postMessage({
+        type: "set_push_status",
+        isPushPermissionGranted: braze.isPushPermissionGranted()
+      }, event.origin);
+    }
+  }
+});
+```
+
+### Push Configuration Options
+
+These initialization options control push notification behavior:
+
+- `serviceWorkerLocation` — Path to service worker (default: `/service-worker.js`). Setting this to a subdirectory limits the scope of push notifications to that directory.
+- `serviceWorkerScope` — Override the default scope of the service worker registration.
+- `safariWebsitePushId` — Required for Safari push support (e.g., `"web.com.braze.sample-build"`).
+- `manageServiceWorkerExternally` — Set to `true` if your site already manages its own service worker and you don't want the SDK to register one.
+- `disablePushTokenMaintenance` — Set to `true` to prevent the SDK from automatically syncing push tokens on session start.
+
+## In-App Messages
+
+### Automatic Display
+
+Call `automaticallyShowInAppMessages()` to let the SDK handle displaying in-app messages using its built-in UI. This returns a subscription ID that can be passed to `removeSubscription()` if you need to stop auto-display later. This must be called before `openSession()`:
+
+```typescript
+braze.automaticallyShowInAppMessages(): string | undefined
+```
+
+### Manual Subscription
+
+If you want to control when and how in-app messages are shown (e.g., to implement a custom UI), subscribe to incoming messages instead of using automatic display. Your callback receives the `InAppMessage` object and you decide whether and when to show it:
+
+```typescript
+braze.subscribeToInAppMessage(
+  callback: (inAppMessage: InAppMessage) => void
+): string | undefined
+```
+
+### Showing, Deferring, and Retrieving Messages
+
+These methods give you programmatic control over in-app message display. Use `showInAppMessage()` to render a message in the built-in UI (optionally inside a specific parent node). Use `deferInAppMessage()` to save a message for display on a future page load, and `getDeferredInAppMessage()` to retrieve it:
+
+```typescript
+braze.showInAppMessage(inAppMessage: InAppMessage, parentNode?: HTMLElement): void
+braze.deferInAppMessage(inAppMessage: InAppMessage): boolean | undefined
+braze.getDeferredInAppMessage(): InAppMessage | null | undefined
+```
+
+### In-App Message Types
+
+The SDK includes five message classes, each suited to a different visual format:
+
+- `InAppMessage` — Base class with shared properties and methods
+- `FullScreenMessage` — Full-screen overlay, ideal for high-priority announcements
+- `ModalMessage` — Centered modal dialog with optional image and buttons
+- `SlideUpMessage` — Non-intrusive notification that slides up from the bottom of the screen
+- `HtmlMessage` — Fully custom HTML content (requires `allowUserSuppliedJavascript: true` in initialization options)
+- `ControlMessage` — A/B testing control variant that is never displayed; used to measure the impact of showing vs. not showing a message
+
+### InAppMessage Instance Methods
+
+Every in-app message instance provides methods to programmatically close it, subscribe to user interactions, and clean up subscriptions:
+
+```typescript
+inAppMessage.closeMessage(): void
+inAppMessage.subscribeToClickedEvent(callback): string
+inAppMessage.subscribeToDismissedEvent(callback): string
+inAppMessage.removeSubscription(subscriptionId): void
+inAppMessage.removeAllSubscriptions(): void
+```
+
+### Logging In-App Message Analytics
+
+When implementing a custom UI (not using `automaticallyShowInAppMessages()`), you must manually log impressions, clicks, and button clicks so Braze can track message performance:
+
+```typescript
+braze.logInAppMessageImpression(inAppMessage): void
+braze.logInAppMessageClick(inAppMessage): void
+braze.logInAppMessageButtonClick(inAppMessage, button): void
+braze.logInAppMessageHtmlClick(inAppMessage): void
+```
+
+### In-App Message Enums
+
+These enums on the `InAppMessage` class control rendering and behavior options. Reference them when constructing or inspecting in-app messages:
+
+```typescript
+InAppMessage.SlideFrom     // Direction the slide-up animates from
+InAppMessage.ClickAction   // What happens when the message body is clicked
+InAppMessage.DismissType   // How the message can be dismissed
+InAppMessage.OpenTarget    // Whether links open in the same or new tab
+InAppMessage.ImageStyle    // How the image is rendered
+InAppMessage.Orientation   // Portrait or landscape
+InAppMessage.TextAlignment // Text alignment within the message
+InAppMessage.CropType      // How images are cropped (CENTER_CROP uses <img> tags in v6+)
+```
+
+## Content Cards
+
+### Subscribing to Updates
+
+Register a callback to receive Content Card updates. The callback fires whenever the SDK receives new cards from the backend. Call this before `openSession()` to auto-refresh on session start:
+
+```typescript
+braze.subscribeToContentCardsUpdates(
+  callback: (contentCards: ContentCards) => void
+): string | undefined
+```
+
+### Refreshing and Caching
+
+Manually trigger a Content Cards refresh from the backend, or retrieve the last set of cards received. The `requestContentCardsRefresh()` method accepts optional callbacks to know when the refresh succeeds or fails:
+
+```typescript
+braze.requestContentCardsRefresh(
+  successCallback?: () => void,
+  errorCallback?: () => void
+): void
+
+braze.getCachedContentCards(): ContentCards | undefined
+```
+
+### Built-in UI
+
+The SDK includes a built-in Content Cards feed UI. Use these methods to show, hide, or toggle the feed. Optionally pass a `parentNode` to render the feed inside a specific DOM element instead of the default full-page overlay:
+
+```typescript
+braze.showContentCards(parentNode?: HTMLElement): void
+braze.hideContentCards(parentNode?: HTMLElement): void
+braze.toggleContentCards(parentNode?: HTMLElement): void
+```
+
+### Content Card Types
+
+Content Cards come in four display types plus a control variant for A/B testing:
+
+- `Card` — Base class with shared fields (`id`, `title`, `description`, `url`, `extras`, etc.)
+- `ImageOnly` — Card displaying only an image (replaced the deprecated `Banner` card type in v4.9.0)
+- `CaptionedImage` — Image with headline and description text
+- `ClassicCard` — Text-focused card with an optional small image
+- `ControlCard` — Control variant that is never displayed; used for measuring lift
+
+### Card Instance Methods
+
+Each card instance provides methods to programmatically dismiss it and subscribe to click/dismiss events. Use these when building a custom Content Cards UI:
+
+```typescript
+card.dismissCard(): void
+card.subscribeToClickedEvent(callback): string
+card.subscribeToDismissedEvent(callback): string
+```
+
+### Logging Content Card Analytics
+
+When implementing a custom Content Cards UI (not using the built-in feed), you must log impressions, clicks, and dismissals manually so Braze can track card performance:
+
+```typescript
+braze.logContentCardClick(card: Card): void
+braze.logContentCardImpressions(cards: Card[]): void
+braze.logCardDismissal(card: Card): void
+```
+
+### ContentCards Collection
+
+The `ContentCards` object returned by `subscribeToContentCardsUpdates()` provides a method to get the count of cards the user has not yet viewed:
+
+```typescript
+contentCards.getUnviewedCardCount(): number
+```
+
+## Feature Flags
+
+### Getting Feature Flags
+
+Retrieve a single feature flag by ID, or get all feature flags at once. `getFeatureFlag()` returns `null` if the flag does not exist or if feature flags are disabled, and returns `undefined` if the SDK has not been initialized:
+
+```typescript
+braze.getFeatureFlag(id: string): FeatureFlag | null | undefined
+braze.getAllFeatureFlags(): FeatureFlag[] | undefined
+```
+
+### Subscribing and Refreshing
+
+Register a callback to receive feature flag updates. The callback always fires (even on failure, with the most recently cached flags). Call `refreshFeatureFlags()` to manually trigger a refresh:
+
+```typescript
+braze.subscribeToFeatureFlagsUpdates(
+  callback: (featureFlags: FeatureFlag[]) => void
+): string | undefined
+
+braze.refreshFeatureFlags(): void
+```
+
+### Feature Flag Properties
+
+Access typed properties attached to a feature flag. Each method returns `undefined` if the property does not exist:
+
+```typescript
+featureFlag.getStringProperty(key: string): string | undefined
+featureFlag.getNumberProperty(key: string): number | undefined
+featureFlag.getBooleanProperty(key: string): boolean | undefined
+featureFlag.getImageProperty(key: string): ImageProperty | undefined
+featureFlag.getJsonProperty(key: string): JsonProperty | undefined
+featureFlag.getTimestampProperty(key: string): TimestampProperty | undefined
+```
+
+### Logging Feature Flag Impressions
+
+Log that a user was exposed to a feature controlled by a feature flag. Impressions are limited to once per session per flag ID:
+
+```typescript
+braze.logFeatureFlagImpression(id: string): void
+```
+
+## Banners
+
+### Banner Management
+
+Banners are a campaign type that renders HTML content in a designated placement within your page. Use `insertBanner()` to render a banner into a DOM element — this method automatically handles impression and click tracking (since v6.0.0). Use the subscribe and refresh methods to manage banner data programmatically:
+
+```typescript
+braze.insertBanner(placementId: string, parentNode: HTMLElement): void
+braze.getAllBanners(): Record<string, Banner | null> | undefined
+braze.requestBannersRefresh(): void
+braze.subscribeToBannersUpdates(
+  callback: (banners: Record<string, Banner | null>) => void
+): string | undefined
+```
+
+### Banner Properties
+
+Like feature flags, banners can have typed properties attached. Access them with these getter methods on the `Banner` instance:
+
+```typescript
+banner.getStringProperty(key: string): string | undefined
+banner.getNumberProperty(key: string): number | undefined
+banner.getBooleanProperty(key: string): boolean | undefined
+banner.getImageProperty(key: string): ImageProperty | undefined
+banner.getJsonProperty(key: string): JsonProperty | undefined
+banner.getTimestampProperty(key: string): TimestampProperty | undefined
+```
+
+## SDK Control
+
+### Session and Lifecycle
+
+These methods manage the SDK's lifecycle. Call `openSession()` to start tracking a session. Use `isInitialized()` (v5.4.0+) to check whether `initialize()` has been called. Call `destroy()` to tear down the SDK instance and release resources:
+
+```typescript
+braze.openSession(): void
+braze.isInitialized(): boolean
+braze.destroy(): void
+```
+
+A custom DOM event named `braze.initialized` is dispatched on the `window` object when initialization completes (v5.4.0+). You can listen for this event if you need to coordinate SDK-dependent logic.
+
+### Enable/Disable SDK
+
+These methods provide user opt-out functionality. When the SDK is disabled, no data is collected or sent. This state persists across page loads:
+
+```typescript
+braze.enableSDK(): void
+braze.disableSDK(): void
+braze.isDisabled(): boolean
+```
+
+### Data Management
+
+`wipeData()` clears all locally stored SDK data (cookies, localStorage, IndexedDB). After calling this, the user appears as a new anonymous user. `requestImmediateDataFlush()` forces queued analytics data to be sent to the backend right away:
+
+```typescript
+braze.wipeData(): void
+braze.requestImmediateDataFlush(): void
+```
+
+### SDK Authentication
+
+If your app uses SDK Authentication, call `setSdkAuthenticationSignature()` to provide or update the JWT signature. Subscribe to authentication failures to handle token expiration or invalid signatures:
+
+```typescript
+braze.setSdkAuthenticationSignature(signature: string): void
+braze.subscribeToSdkAuthenticationFailures(callback): string | undefined
+```
+
+### Logging Control
+
+Toggle debug logging at runtime (useful for troubleshooting without changing initialization options), or provide a custom logger function to route SDK logs through your own logging infrastructure. `setLogger()` can be called before `initialize()`:
+
+```typescript
+braze.toggleLogging(): void
+braze.setLogger(logger: Function): void
+```
+
+### Device and Metadata
+
+Retrieve the auto-generated device ID, or add SDK metadata tags that are sent with all backend requests:
+
+```typescript
+braze.getDeviceId(): string | undefined
+braze.addSdkMetadata(metadata: BrazeSdkMetadata[]): void
+```
+
+### Subscription Management
+
+Remove specific subscriptions by ID or clear all subscriptions at once. Subscription IDs are returned by methods like `automaticallyShowInAppMessages()`, `subscribeToContentCardsUpdates()`, etc.:
+
+```typescript
+braze.removeSubscription(subscriptionId: string): void
+braze.removeAllSubscriptions(): void
+```
+
+### Braze Actions
+
+Handle Braze Action deep link URLs when using a custom UI. The built-in UI handles these automatically, but if you're rendering content cards or in-app messages yourself, pass Braze Action URLs through this method:
+
+```typescript
+braze.handleBrazeAction(url: string): void
+```
+
+## Tree-Shaking (v4.0.0+)
+
+The SDK is written as native ES Modules, so modern bundlers like Webpack and Rollup automatically remove unused code. Import only the methods you need to minimize your bundle. These size estimates show the incremental cost of each feature area:
+
+| Feature | Estimated Size (gzipped) |
+|---------|--------------------------|
+| Analytics only (`logCustomEvent`, `setCustomUserAttribute`, `changeUser`) | ~0.9 kB |
+| Push (`requestPushPermission`) | ~2.4 kB |
+| Content Cards without UI | ~4.5 kB |
+| Content Cards with built-in UI | ~12.0 kB |
+| In-App Messages with built-in UI | ~12.7 kB |
+
+For features not needed at initial page load (like push registration), use dynamic imports with the `webpackExports` magic comment to create a separate chunk that only includes the specified exports:
+
+```typescript
+const {
+  requestPushPermission,
+  logCustomEvent,
+  requestImmediateDataFlush
+} = await import(
+  /* webpackExports: ["requestPushPermission", "logCustomEvent", "requestImmediateDataFlush"] */
+  "@braze/web-sdk"
+);
+```
+
+## Integration with Third-Party Tools
+
+### Segment Integration
+
+When using Segment as your customer data platform, events are routed to Braze through Segment's server-side destination — no direct `@braze/web-sdk` dependency is needed. This pattern from `sample-builds/segment/src/App.tsx` shows the Segment analytics.js calls that translate to Braze user identification, event tracking, and purchase logging:
+
+```typescript
+// Map a Segment user to a Braze user profile
+window.analytics.identify('user-id', {
+  name: 'John Doe',
+  email: 'jdoe@example.com'
+});
+
+// Track a custom event (maps to braze.logCustomEvent)
+window.analytics.track('Signed Up', {
+  plan: 'Enterprise'
+});
+
+// Log a purchase using Segment's "Order Completed" spec event
+window.analytics.track('Order Completed', {
+  products: [{ product_id: "testProductID", price: "2.0" }]
+});
+```
+
+### Google Tag Manager Integration
+
+When using Google Tag Manager, events are pushed to the GTM `dataLayer` and processed by Braze's GTM template — no direct `@braze/web-sdk` dependency is needed. This pattern from `sample-builds/google-tag-manager/src/App.tsx` shows the dataLayer events for user identification, custom events, purchases, and GA4-style e-commerce:
+
+```typescript
+// Identify a user (maps to braze.changeUser)
+window.dataLayer.push({ event: "identify", userId: "abc" });
+
+// Log a custom event (maps to braze.logCustomEvent)
+window.dataLayer.push({ event: "add to cart" });
+
+// Log a purchase (maps to braze.logPurchase)
+window.dataLayer.push({
+  event: "purchase",
+  productId: "abc",
+  price: 100,
+  currency: "usd",
+  quantity: 1
+});
+
+// GA4-style e-commerce purchase with multiple items
+window.dataLayer.push({ ecommerce: null }); // Clear previous ecommerce data
+window.dataLayer.push({
+  event: "ecommerce",
+  ecommerce: {
+    transaction_id: "T_12345",
+    value: 25.42,
+    currency: "USD",
+    items: [
+      { item_id: "SKU_12345", item_name: "Product Name", price: 9.99, quantity: 1 }
+    ]
+  }
+});
+
+// Disable/Enable the SDK via GTM events
+window.dataLayer.push({ event: "disable" });
+window.dataLayer.push({ event: "enable" });
+```
+
+## Debugging and Troubleshooting
+
+### Enable Logging
+
+Pass `enableLogging: true` in the initialization options to see detailed SDK activity in the browser console. Logs are prefixed with `Braze` (changed from `Appboy` in v4.0.0). Always remove this option before deploying to production since log output is visible to all users:
+
+```typescript
+braze.initialize('YOUR-API-KEY', {
+  baseUrl: 'sdk.iad-01.braze.com',
+  enableLogging: true
+});
+```
+
+### Runtime Logging Toggle
+
+Toggle logging on or off at runtime without changing initialization options. This is useful for debugging in production environments where you can't redeploy:
+
+```typescript
+braze.toggleLogging();
+```
+
+### Custom Logger
+
+Route SDK log output through your own logging infrastructure by providing a custom logger function. This can be called before `initialize()`, which is useful for capturing initialization-related logs:
+
+```typescript
+braze.setLogger(function(message) {
+  console.log("Braze SDK:", message);
+});
+```
+
+### Common Issues
+
+- **Session-start IAMs not showing:** `automaticallyShowInAppMessages()` was called after `openSession()`. Move it before.
+- **Content Cards not auto-refreshing:** `subscribeToContentCardsUpdates()` was called after `openSession()`. Move it before.
+- **TypeScript compile errors after upgrading to v6:** Some methods now return `undefined` when the SDK is not initialized. Add optional chaining (`?.`) or null checks.
+- **Push notifications not working:** Verify that `service-worker.js` is accessible at the configured path and that it imports the Braze service worker script.
+- **Push scope limited:** Setting `serviceWorkerLocation` to a subdirectory path limits push scope to that directory. Use the default `/service-worker.js` location when possible.
+- **HTML in-app messages not rendering:** Set `allowUserSuppliedJavascript: true` in initialization options.
+- **Cross-subdomain identification failing:** The `noCookies: true` option disables cookies, which prevents cross-subdomain user identification.
+- **SDK methods called before initialization:** Since v5.0.0, the SDK logs a warning instead of throwing errors. Check `braze.isInitialized()` if you need to guard calls.
+
+## AI-Assisted Development with Context7
+
+### Connecting to the Braze Docs MCP Server
+
+Context7 provides AI coding assistants with direct access to the full Braze documentation library, enabling accurate code generation and technical answers based on the latest SDK references. This repository includes a `context7.json` configuration that links to the Braze Web SDK documentation:
+
+```json
+{
+  "url": "https://context7.com/braze-inc/braze-web-sdk",
+  "public_key": "pk_dR0a8BboWId4FeaBmJnJC"
+}
+```
+
+Context7 is different from the Braze MCP server. Context7 provides access to **Braze documentation**, while the Braze MCP server provides read-only access to **your Braze workspace data** (campaigns, segments, analytics). You can use both together for a more complete AI-assisted development experience.
+
+### Setting Up Context7 in Your IDE
+
+**Cursor:** Go to **Settings > Tools and Integrations > MCP Tools > Add Custom MCP**, then add the following configuration. Save and restart Cursor. Include `use context7` in your prompts to pull in Braze documentation:
+
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+**VS Code:** Add the following to your VS Code `settings.json` or `.vscode/mcp.json` file. Save and restart VS Code:
+
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+**Claude Desktop:** Go to **Settings > Developer > Edit Config**, then add the following to your `claude_desktop_config.json` file. Save and restart Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+### Example Prompts for AI-Assisted Development
+
+These prompts demonstrate how to get accurate, documentation-backed answers from your AI assistant. The `use context7` suffix signals the assistant to query Braze documentation for its response:
+
+```
+Using the Braze Web SDK, show me how to initialize the SDK with
+braze.initialize(), including the API key, base URL, and options
+for enabling logging and automatic in-app message display.
+Use context7.
+```
+
+```
+Using the Braze Web SDK, create a JavaScript module that logs a
+custom event called "VideoPlayed" with properties for video_id,
+duration_seconds, and completion_percentage. Also show how to log
+a purchase with product ID, price, currency code, and quantity.
+Use context7.
+```
+
+```
+Using the Braze Web SDK, provide the HTML and JavaScript needed to
+register a user for web push notifications after they click a
+"Subscribe to updates" button. Include the service worker setup.
+Use context7.
+```
+
+```
+Using the Braze Web SDK, show me how to set standard user attributes
+(first name, email, country) and custom user attributes
+(favorite_genre, subscription_tier) for the current user.
+Use context7.
+```
+
+### Plain Text Documentation for LLMs
+
+Braze provides AI-optimized documentation files that follow the `llms.txt` standard for making documentation accessible to AI tools. You can reference these files directly in prompts or paste their contents into an LLM for additional context:
+
+- `llms.txt` — Index of Braze developer documentation pages with titles and descriptions
+- `llms-full.txt` — Complete Braze developer documentation in a single plain text file
+
+## Best Practices
+
+### Initialization
+- ALWAYS provide `baseUrl` when calling `initialize()` — it has been required since v3.0.0
+- Call `automaticallyShowInAppMessages()` BEFORE `openSession()` for session-start triggered messages
+- Call `subscribeToContentCardsUpdates()` BEFORE `openSession()` for automatic Content Cards refresh
+- Use `enableLogging: true` during development, but ALWAYS remove it before production deployment
+
+### Security
+- The web SDK API key is designed for client-side use and is safe to include in frontend code
+- Use SDK Authentication (`enableSdkAuthentication: true`) with backend JWT generation for additional security
+- Use `allowUserSuppliedJavascript: true` (not the deprecated `enableHtmlInAppMessages`) for HTML in-app messages
+- Use `contentSecurityNonce` if your site has a Content Security Policy
+- Always validate `event.origin` in `postMessage` handlers (see the alternate push domain pattern)
+
+### Performance
+- Use named imports for tree-shaking: `import { initialize, openSession } from "@braze/web-sdk"`
+- Use dynamic imports with `webpackExports` magic comments for on-demand features like push registration
+- The Full library is recommended over Core — bundlers automatically remove unused UI code
+- Initialize the SDK only when needed; clean up with `destroy()` when done
+- Call `requestImmediateDataFlush()` before critical navigations to ensure data is sent
+
+### TypeScript
+- The SDK ships with TypeScript definitions since v3.0.0 — these provide documentation and autocomplete in IDEs
+- Many methods return `undefined` when the SDK is not initialized — always use optional chaining (`?.`)
+- The `User` object from `getUser()` may be `undefined` — always check before calling methods
+- Refer to `UPGRADE_GUIDE.md` before upgrading major versions, as TypeScript types may change
+
+### Data Storage
+- The SDK uses both cookies and localStorage by default for cross-subdomain identification
+- Cookies expire after 400 days (per HTTP Working Group draft RFC 6265) and are stored with `path=/`
+- Set `noCookies: true` to use only localStorage (but this prevents cross-subdomain identification)
+- Call `wipeData()` to clear all locally stored SDK data
+
+## External References
+
+- **TSDoc API Reference:** https://js.appboycdn.com/web-sdk/6.5/doc/modules/braze.html
+- **Braze Developer Guide:** https://www.braze.com/docs/developer_guide/sdk_integration/?sdktab=web
+- **Braze User Guide:** https://www.braze.com/docs/user_guide/introduction/
+- **Context7:** https://context7.com/braze-inc/braze-web-sdk
+- **Support:** support@braze.com
