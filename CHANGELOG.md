@@ -1,3 +1,8 @@
+## 6.6.0
+
+##### Added
+- Added a [`cookieExpiryInDays`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#initializationoptions) initialization option to configure cookie duration from the default of 400 days.
+
 ## 6.5.0
 
 ##### Added
