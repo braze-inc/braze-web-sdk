@@ -1,3 +1,14 @@
+## 6.7.0
+
+##### Added
+- Added `brazeBridge.closeMessage()` support for Banners. Calling this method will remove the Banner from the page and log a dismissal event.
+- [`braze.requestBannersRefresh()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestbannersrefresh) no longer requires the `allowUserSuppliedJavascript` initialization option to be enabled.
+- Added a new [`cookieExpiryInDays`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#initializationoptions) to configure cookie duration from the default of 400 days.
+
+##### Fixed
+- Fixed an issue with the CDN integration on Safari 26+ that could cause messaging sync requests to fail in certain scenarios.
+- Fixed an issue where the Braze SDK would attempt to display push notifications sent from other push providers
+
 ## 6.6.0
 
 ##### Added
