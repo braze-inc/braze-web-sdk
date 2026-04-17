@@ -1,4 +1,9 @@
-## 6.7.0
+## 6.7.1
+
+##### Fixed
+- Fixed an issue where Braze pushes were not displayed properly.
+
+## 6.7.0 - DEPRECATED
 
 ##### Added
 - Added `brazeBridge.closeMessage()` support for Banners. Calling this method will remove the Banner from the page and log a dismissal event.
