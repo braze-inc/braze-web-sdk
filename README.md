@@ -3,7 +3,7 @@
   <img width="480" alt="Braze Logo" src=".github/assets/logo-dark.png#gh-dark-mode-only" />
 </p>
 
-# Braze Web SDK [![latest](https://img.shields.io/github/v/tag/braze-inc/braze-web-sdk?label=latest%20release&color=300266)](https://github.com/braze-inc/braze-web-sdk/releases) [![Static Badge](https://img.shields.io/badge/TSDoc-801ed7)](https://js.appboycdn.com/web-sdk/6.3/doc/modules/braze.html) ![lighthouse score](.github/assets/lighthouse-score.svg)
+# Braze Web SDK [![latest](https://img.shields.io/github/v/tag/braze-inc/braze-web-sdk?label=latest%20release&color=300266)](https://github.com/braze-inc/braze-web-sdk/releases) [![Static Badge](https://img.shields.io/badge/TSDoc-801ed7)](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html) ![lighthouse score](.github/assets/lighthouse-score.svg)
 
 - [Braze User Guide](https://www.braze.com/docs/user_guide/introduction/ "Braze User Guide")
 - [Braze Developer Guide](https://www.braze.com/docs/developer_guide/sdk_integration/?sdktab=web "Braze Developer Guide")
@@ -208,10 +208,10 @@ const user = getUser();
 if (user) {
     // Add alias
     user.addAlias('external_id', '12345');
-    
+
     // Add to subscription group
     user.addToSubscriptionGroup('newsletter_subscribers');
-    
+
     // Remove from subscription group
     user.removeFromSubscriptionGroup('old_subscribers');
 }
@@ -266,10 +266,10 @@ subscribeToInAppMessage((inAppMessage) => {
 #### Log In-App Message Interactions
 
 ```typescript
-import { 
-    logInAppMessageClick, 
+import {
+    logInAppMessageClick,
     logInAppMessageImpression,
-    logInAppMessageButtonClick 
+    logInAppMessageButtonClick
 } from "@braze/web-sdk";
 
 // Log when user sees the message
@@ -302,9 +302,9 @@ subscribeToInAppMessage((inAppMessage) => {
 
     // Define your own HTML structure, using messageData
     const customHTML = ` <!-- Add your custom styling and structure -->`;
-    
+
     /* Render the In-App Message here */
-    
+
     // Here we naively log an impression once the message is rendered.
     // Be precise about exactly when you want to log an impression (ie. only the first time it enters the view port).
     logInAppMessageImpression(inAppMessage);
@@ -346,10 +346,10 @@ subscribeToContentCardsUpdates((cards) => {
 #### Log Content Card Interactions
 
 ```typescript
-import { 
-    logContentCardClick, 
+import {
+    logContentCardClick,
     logContentCardImpressions,
-    logCardDismissal 
+    logCardDismissal
 } from "@braze/web-sdk";
 
 // Log card impressions
@@ -399,7 +399,7 @@ subscribeToContentCardsUpdates((cards) => {
     cards.getCards().forEach(card => {
         // Skip control cards
         if (card.getIsControl()) return;
-        
+
         // Extract card data
         const cardData = {
             id: card.getId(),
@@ -409,12 +409,12 @@ subscribeToContentCardsUpdates((cards) => {
             url: card.getUrl(),
             extras: card.getExtras()
         };
-        
+
         // Define your own HTML structure, using cardData
         const customHTML = ` <!-- Add your custom styling and structure -->`;
-        
+
         /* Render each card here */
-        
+
         // Basic observer for impression logging.
         // Be precise about exactly when you want to log an impression (ie. only the first time it enters the view port).
         const observer = new IntersectionObserver((entries) => {
@@ -424,7 +424,7 @@ subscribeToContentCardsUpdates((cards) => {
                 }
             });
         });
-        
+
         // Observe card element when rendered
         // observer.observe(cardElement);
     });
@@ -487,7 +487,7 @@ const featureFlag = getFeatureFlag('new_checkout_flow');
 if (featureFlag) {
     const isEnabled = featureFlag.getBooleanProperty('enabled', false);
     const rolloutPercentage = featureFlag.getNumberProperty('rollout_percentage', 0);
-    
+
     if (isEnabled) {
         // Enable new checkout flow
     }
@@ -629,7 +629,7 @@ import { isInitialized, isDisabled } from "@braze/web-sdk";
 
 if (isInitialized()) {
     console.log('SDK is initialized');
-    
+
     if (isDisabled()) {
         console.log('SDK is disabled');
     }
@@ -831,9 +831,9 @@ Braze may also be compatible with other tag management solutions by following ou
 
 | Name | Description | npm | CDN URL
 | ---- | ----------- | --- | -------
-| Full | Full SDK with UI. When using the npm version, Javascript bundlers will remove any unused code including the UI. | `@braze/web-sdk` | https://js.appboycdn.com/web-sdk/6.7/braze.min.js
-| Core | Contains the SDK without UI. You will need to implement your own UI for In-App Messaging and Content Cards when using this version of the SDK. Our UI elements are fully customizable via css, so we generally recommend integration of the full library instead. | N/A | https://js.appboycdn.com/web-sdk/6.7/braze.core.min.js
-| No-AMD | Contains the full SDK without AMD support. This is useful if your site uses RequireJS or another AMD module-loader, but you prefer to load the SDK through the CDN. | N/A | https://js.appboycdn.com/web-sdk/6.7/braze.no-amd.min.js
+| Full | Full SDK with UI. When using the npm version, Javascript bundlers will remove any unused code including the UI. | `@braze/web-sdk` | https://js.appboycdn.com/web-sdk/6.8/braze.min.js
+| Core | Contains the SDK without UI. You will need to implement your own UI for In-App Messaging and Content Cards when using this version of the SDK. Our UI elements are fully customizable via css, so we generally recommend integration of the full library instead. | N/A | https://js.appboycdn.com/web-sdk/6.8/braze.core.min.js
+| No-AMD | Contains the full SDK without AMD support. This is useful if your site uses RequireJS or another AMD module-loader, but you prefer to load the SDK through the CDN. | N/A | https://js.appboycdn.com/web-sdk/6.8/braze.no-amd.min.js
 
 ## Supported Browsers
 
@@ -843,7 +843,7 @@ Braze may also be compatible with other tag management solutions by following ou
 
 ## Debugging & Troubleshooting
 
-Pass the option `enableLogging: true` to the initialize function (`braze.initialize('YOUR-API-KEY-HERE', { baseUrl: 'YOUR-SDK-ENDPOINT', enableLogging: true });`) to cause Braze to log to the javascript console. This is valuable for development but is visible to all users, so remove this option or [provide an alternate logger](https://js.appboycdn.com/web-sdk/6.7/doc/modules/braze.html#setlogger) before you release your page to production.
+Pass the option `enableLogging: true` to the initialize function (`braze.initialize('YOUR-API-KEY-HERE', { baseUrl: 'YOUR-SDK-ENDPOINT', enableLogging: true });`) to cause Braze to log to the javascript console. This is valuable for development but is visible to all users, so remove this option or [provide an alternate logger](https://js.appboycdn.com/web-sdk/6.8/doc/modules/braze.html#setlogger) before you release your page to production.
 
 ## Font Awesome
 

@@ -1,3 +1,11 @@
+## 6.8.0
+
+##### Added
+- Added [`braze.logEcommerceEvent()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logecommerceevent) to log eCommerce lifecycle events such as product viewed, cart updated, checkout started, and order placed.
+
+##### Fixed
+- Fixed an issue where a new Banner impression would not be logged for a placement ID if the underlying Banner changed mid-session.
+
 ## 6.7.1
 
 ##### Fixed
