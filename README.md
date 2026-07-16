@@ -875,9 +875,9 @@ The following table describes the available Braze Web SDK distributions.
 
 | Name | Description | npm | CDN URL
 | ---- | ----------- | --- | -------
-| Full | Full SDK with UI. When using the npm version, JavaScript bundlers remove unused code, including UI code. | `@braze/web-sdk` | https://js.appboycdn.com/web-sdk/6.9/braze.min.js
-| Core | Contains the SDK without UI. Implement your own UI for In-App Messages and Content Cards when using this version of the SDK. Use the full library for most integrations because it provides customizable UI elements through CSS. | N/A | https://js.appboycdn.com/web-sdk/6.9/braze.core.min.js
-| No-AMD | Contains the full SDK without AMD support. This is useful if your site uses RequireJS or another AMD module-loader, but you prefer to load the SDK through the CDN. | N/A | https://js.appboycdn.com/web-sdk/6.9/braze.no-amd.min.js
+| Full | Full SDK with UI. When using the npm version, JavaScript bundlers remove unused code, including UI code. | `@braze/web-sdk` | https://js.appboycdn.com/web-sdk/6.10/braze.min.js
+| Core | Contains the SDK without UI. Implement your own UI for In-App Messages and Content Cards when using this version of the SDK. Use the full library for most integrations because it provides customizable UI elements through CSS. | N/A | https://js.appboycdn.com/web-sdk/6.10/braze.core.min.js
+| No-AMD | Contains the full SDK without AMD support. This is useful if your site uses RequireJS or another AMD module-loader, but you prefer to load the SDK through the CDN. | N/A | https://js.appboycdn.com/web-sdk/6.10/braze.no-amd.min.js
 
 ## Supported Browsers
 
@@ -887,7 +887,7 @@ The following table describes the available Braze Web SDK distributions.
 
 ## Debugging & Troubleshooting
 
-Pass the option `enableLogging: true` to the initialize function (`braze.initialize('YOUR-API-KEY-HERE', { baseUrl: 'YOUR-SDK-ENDPOINT', enableLogging: true });`) to cause Braze to log to the javascript console. This is valuable for development but is visible to all users, so remove this option or [provide an alternate logger](https://js.appboycdn.com/web-sdk/6.9/doc/modules/braze.html#setlogger) before you release your page to production.
+Pass the option `enableLogging: true` to the initialize function (`braze.initialize('YOUR-API-KEY-HERE', { baseUrl: 'YOUR-SDK-ENDPOINT', enableLogging: true });`) to cause Braze to log to the javascript console. This is valuable for development but is visible to all users, so remove this option or [provide an alternate logger](https://js.appboycdn.com/web-sdk/6.10/doc/modules/braze.html#setlogger) before you release your page to production.
 
 ## Font Awesome
 

@@ -1,3 +1,11 @@
+## 6.10.0
+
+##### Added
+- Added [`braze.logout()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logout), which unregisters push for the current browser and, on success, wipes locally stored SDK data and disables the SDK.
+
+##### Fixed
+- Fixed an issue where [`unregisterPush()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#unregisterpush) invoked the `errorCallback` instead of the `successCallback` when push notifications are not supported in the browser.
+
 ## 6.9.0
 
 ##### Added
@@ -8,8 +16,6 @@
 ##### Fixed
 - Fixed an issue where the optional `type` field for the `ecommerce.product_viewed` eCommerce event was on the `metadata` object instead of the root object. The `metadata` object still accepts the `type` field, but integrators will need to move it to the root object in order for back-in-stock notifications to work properly.
 - Fixed an issue where validation for the `discounts` field on the `ecommerce.order_placed` eCommerce event allowed non-array values.
-
-##### Fixed
 - Improved crawler bot detection.
 
 ## 6.8.0
