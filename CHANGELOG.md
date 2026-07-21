@@ -1,3 +1,8 @@
+## 6.10.1
+
+##### Fixed
+- Fixed an issue where subscribing to Banner or Content Card updates after a session had already started could trigger redundant refresh requests.
+
 ## 6.10.0
 
 ##### Added
