@@ -1,3 +1,8 @@
+## 6.10.2
+
+##### Fixed
+- Fixed a scenario where rate-limiting would not work as intended for the push unregistration endpoint.
+
 ## 6.10.1
 
 ##### Fixed
