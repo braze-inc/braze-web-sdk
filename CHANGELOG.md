@@ -1,3 +1,13 @@
+## 6.11.0
+
+##### Added
+- Added [`braze.registerPush()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#registerpush), which performs the same push registration steps as [`braze.requestPushPermission()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestpushpermission) but never prompts the user for permission. It no-ops if push permission has not already been granted.
+
+##### Fixed
+- Fixed an issue where some SDK data could remain in storage after calling [`braze.logout()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#logout).
+- Fixed a bug where in-app message click events could be logged twice on iOS under certain circumstances.
+- Fixed a bug where in-app message impression events could be logged twice under certain circumstances.
+
 ## 6.10.2
 
 ##### Fixed
