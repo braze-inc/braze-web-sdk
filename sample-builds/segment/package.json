@@ -17,7 +17,10 @@
   "resolutions": {
     "error-ex": "1.3.2",
     "is-arrayish": "0.3.2",
-    "debug": "4.4.1"
+    "debug": "4.4.1",
+    "fast-uri": "3.1.5",
+    "shell-quote": "1.9.0",
+    "websocket-driver": "0.7.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,7 +37,8 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "not op_mob 80"
     ],
     "development": [
       "last 1 chrome version",

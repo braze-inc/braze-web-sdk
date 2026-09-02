@@ -1,3 +1,11 @@
+## 6.12.0
+
+##### Added
+- Added additional optional metadata fields on `ecommerce.checkout_started` and `ecommerce.order_placed`, only applicable to Shopify integrations.
+
+##### Changed
+- Null values for optional eCommerce event fields are now treated as absent rather than invalid.
+
 ## 6.11.0
 
 ##### Added
