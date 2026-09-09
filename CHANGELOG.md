@@ -1,3 +1,8 @@
+## 6.12.1
+
+##### Fixed
+- Fixed an issue where an in-app message with multiple buttons could be displayed even when one of its buttons used a `javascript:` or `data:` URI and the `allowUserSuppliedJavascript` initialization option was disabled.
+
 ## 6.12.0
 
 ##### Added
