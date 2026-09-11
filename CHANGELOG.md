@@ -1,3 +1,8 @@
+## 6.13.0
+
+##### Added
+- Adds support for an upcoming feature.
+
 ## 6.12.1
 
 ##### Fixed
