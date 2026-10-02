@@ -1,5 +1,42 @@
 # Upgrade Guide
 
+## V6 to V7
+
+Version 7 of the Braze Web SDK (`@braze/web-sdk`) changes how the Banner cache is refreshed and how cached Banners are returned. A refresh now updates only the placements it asked for, expired Banners are dropped from the cache rather than surfaced as `null`, and the banners map typings have been corrected to match.
+
+It also changes when refresh callbacks are called for Banners, Content Cards, and Feature Flags, and adds new `subscribeTo*Events()` methods that replace the `subscribeTo*Updates()` methods.
+
+### V7 Breaking Changes
+
+#### Behavioral Changes
+
+- [`requestBannersRefresh()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestbannersrefresh) no longer replaces the entire Banner cache. Previously each refresh discarded the cache and kept only the placements in that request. A refresh now updates only the placements it asked for and leaves every other placement in place, so [`getAllBanners()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getallbanners) can return placements from earlier requests rather than only the most recent one. If you were treating its result as "the placements from my last refresh", read the placements you need by ID, either from the map or with [`getBanner()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getbanner).
+- [`getAllBanners()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getallbanners) no longer includes expired Banners. Previously an expired Banner's placement ID mapped to `null`; those placement IDs are now absent from the map entirely. Update code that iterates the returned keys, or that treats a `null` entry differently from a missing one. Reading a placement directly and checking for a falsy value continues to work unchanged.
+- The success and error callbacks of [`requestBannersRefresh()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestbannersrefresh), [`requestContentCardsRefresh()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestcontentcardsrefresh), and [`refreshFeatureFlags()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#refreshfeatureflags) are now called at most once per call, with the first result:
+  - If the channel is not enabled, including before the first server config is received, the error callback is called right away. Previously, Banners and Content Cards waited for the server config and then called the callbacks with the refresh result.
+  - If the SDK refreshes again later, such as on an automatic retry or once the channel is enabled, the callbacks are not called again.
+
+  If your code waits for the success callback to know when fresh data is available, use [`subscribeToBannersEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetobannersevents), [`subscribeToContentCardsEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetocontentcardsevents), or [`subscribeToFeatureFlagsEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsevents) instead. They receive every refresh result, including retries.
+- Banners, Content Cards, and Feature Flags refreshes no longer retry automatically after a client error (an HTTP 4xx response other than 429). HTTP 429, 5xx, and network failures are still retried. The `subscribeTo*Events()` methods report this as an error with a `DO_NOT_RETRY` retry state.
+
+#### Typing Changes
+
+- The banners map returned by [`getAllBanners()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getallbanners), and passed to the [`subscribeToBannersUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetobannersupdates) callback, is now typed `Record<string, Banner | undefined>` instead of `Record<string, Banner | null>`. The map never contains a `null` value and reading an uncached placement yields `undefined`. Truthiness checks such as `if (banners[placementId])` are unaffected. Two cases need attention:
+  - A check for `=== null` will never match. Use a falsy check instead.
+  - TypeScript code that explicitly annotates the `subscribeToBannersUpdates` callback parameter will fail to compile until the annotation is updated. Callbacks that rely on inference need no change.
+
+#### Deprecated APIs
+
+The following methods still work, but will be removed in a future major version:
+
+| API | Replacement |
+| --- | --- |
+| [`subscribeToBannersUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetobannersupdates) | [`subscribeToBannersEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetobannersevents) |
+| [`subscribeToContentCardsUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetocontentcardsupdates) | [`subscribeToContentCardsEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetocontentcardsevents) |
+| [`subscribeToFeatureFlagsUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsupdates) | [`subscribeToFeatureFlagsEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsevents) |
+
+---
+
 ## V5 to V6
 
 Version 6 of the Braze Web SDK (`@braze/web-sdk`) removes the legacy News Feed feature and deprecated banner APIs, introduces stricter typings, and makes small rendering changes for improved accessibility.

@@ -1,3 +1,28 @@
+## 7.0.0
+
+##### ⚠️ Breaking
+- [`braze.getAllBanners()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getallbanners) no longer returns expired Banners. Previously an expired Banner's placement ID mapped to `null`; those placement IDs are now absent from the map entirely. Code that iterates the returned keys, or that distinguishes a `null` entry from a missing one, will need to be updated.
+- The banners map returned by [`braze.getAllBanners()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#getallbanners) and passed to [`braze.subscribeToBannersUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetobannersupdates) is now typed `Record<string, Banner | undefined>` instead of `Record<string, Banner | null>`, matching the runtime behavior above. TypeScript integrations that explicitly annotate their `subscribeToBannersUpdates` callback parameter will need to update that annotation.
+- [`braze.requestBannersRefresh()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestbannersrefresh) no longer clears cached Banners for placements it was not asked to refresh. A refresh now updates only the placements it requested and leaves the rest of the cache in place.
+- The success and error callbacks of [`braze.requestBannersRefresh()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestbannersrefresh), [`braze.requestContentCardsRefresh()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#requestcontentcardsrefresh) and [`braze.refreshFeatureFlags()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#refreshfeatureflags) are now called at most once per call. If the channel is not enabled, the error callback is called right away. See the [upgrade guide](https://github.com/braze-inc/braze-web-sdk/blob/master/UPGRADE_GUIDE.md#v6-to-v7) for details.
+- Feature Flags, Banners, and Content Cards refreshes no longer automatically retry after a client error (an HTTP 4xx response other than 429), instead stopping after the first failure. HTTP 429, 5xx, and network failures are still retried. [`braze.subscribeToFeatureFlagsEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsevents), [`braze.subscribeToBannersEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetobannersevents), and [`braze.subscribeToContentCardsEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetocontentcardsevents) report this as an error with a `DO_NOT_RETRY` retry state.
+
+##### Added
+- Added [`braze.subscribeToFeatureFlagsEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsevents), which replaces `subscribeToFeatureFlagsUpdates()` and also reports refresh reasons, analytics events, and errors.
+- Added [`braze.subscribeToBannersEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetobannersevents), which replaces `subscribeToBannersUpdates()` and also reports refresh reasons, analytics events, and errors.
+- Added [`braze.subscribeToContentCardsEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetocontentcardsevents), which replaces `subscribeToContentCardsUpdates()` and also reports refresh reasons, analytics events, and errors.
+
+##### Changed
+- When a Banner refresh would exceed the max cache size, Banner storage now drops previously cached Banners largest-first until the incoming payload fits under the max cache size. Incoming Banners from that refresh are always kept.
+- [`braze.subscribeToBannersUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetobannersupdates) is deprecated. Use [`braze.subscribeToBannersEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetobannersevents) instead. 
+- [`braze.subscribeToContentCardsUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetocontentcardsupdates) is deprecated. Use [`braze.subscribeToContentCardsEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetocontentcardsevents) instead.
+- [`braze.subscribeToFeatureFlagsUpdates()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsupdates) is deprecated. Use [`braze.subscribeToFeatureFlagsEvents()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#subscribetofeatureflagsevents) instead.
+
+##### Fixed
+- Fixed an issue where refreshing one Banner placement rebuilt the Banners displayed for other placements, causing them to flicker and lose their height.
+- Fixed an issue where a Banner that had been replaced by an update could not be removed from the page.
+- Fixed an issue where a Banner refresh for some placements canceled a pending retry of a failed refresh for other placements, so those placements were not refreshed again until the next session.
+
 ## 6.13.0
 
 ##### Added
