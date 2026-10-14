@@ -1,3 +1,12 @@
+## 7.1.0
+
+##### Added
+- Added support for Banners Web Targeting
+  - See the [developer guide](https://www.braze.com/docs/developer_guide/banners/web_targeting) and [user guide](https://www.braze.com/docs/user_guide/channels/banners/web_targeting) for setup instructions.
+  - Added [`braze.insertWebTargetingBanners()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#insertwebtargetingbanners), which automatically inserts cached Banners that have Web Targeting data into the page at their configured DOM locations and URL scope. 
+  - Added [`braze.automaticallyInsertWebTargetingBanners()`](https://js.appboycdn.com/web-sdk/latest/doc/modules/braze.html#automaticallyinsertwebtargetingbanners), which subscribes to future banner syncs so that incoming Banners with targeting data are auto-inserted as they arrive.
+  - Added `enableWebTargetingBannerRetryLoop` initialization option, defaulting to `true`. When `true`, the SDK periodically retries inserting Web Targeting Banners associated with elements not yet loaded on the page. Set to `false` to disable that retry loop behavior.
+
 ## 7.0.0
 
 ##### ⚠️ Breaking
